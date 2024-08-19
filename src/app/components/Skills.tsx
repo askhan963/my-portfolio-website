@@ -11,7 +11,14 @@ import {
   SiMysql, SiFirebase, SiGraphql, SiPostgresql 
 } from 'react-icons/si';
 
-const skillCategories = {
+type Category = 'Frontend' | 'Backend' | 'Languages' | 'Tools';
+
+interface Skill {
+  name: string;
+  icon: JSX.Element;
+}
+
+const skillCategories: Record<Category, Skill[]> = {
   Frontend: [
     { name: "React.js", icon: <FaReact size={40} /> },
     { name: "Angular", icon: <FaAngular size={40} /> },
@@ -50,10 +57,10 @@ const skillCategories = {
 };
 
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState("Frontend");
+  const [activeCategory, setActiveCategory] = useState<Category>("Frontend");
 
   return (
-    <section id='skills' className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 p-6">
+    <section className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 p-6">
       <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-12">
         Skills
       </h1>
@@ -66,7 +73,7 @@ export default function Skills() {
               key={category}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveCategory(category)}
+              onClick={() => setActiveCategory(category as Category)}
               className={`text-lg font-medium px-4 py-2 rounded-lg transition-colors text-left ${
                 activeCategory === category
                   ? "bg-blue-500 text-white"
