@@ -58,7 +58,7 @@ export default function Skills() {
   const [activeCategory, setActiveCategory] = useState<Category>("Frontend");
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 p-6">
+    <section id='skills' className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 p-6">
       <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-12">
         Skills
       </h1>

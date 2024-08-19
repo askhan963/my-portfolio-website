@@ -157,7 +157,7 @@ function ProjectCard({
 
 export default function Projects() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
+    <section id='projects' className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
       <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-12">
         Projects
       </h1>

@@ -52,7 +52,7 @@ export default function Honors() {
   const isInView = useInView(ref, { once: true }); // Trigger animation once when the section comes into view
 
   return (
-    <section
+    <section id='honors'
       ref={ref}
       className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 p-6"
     >
