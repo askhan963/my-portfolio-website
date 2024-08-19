@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   FaReact, FaNodeJs, FaGitAlt, FaDocker, FaJava, FaPython, FaHtml5, FaCss3, FaGithub, 
-   FaJsSquare, FaDatabase, FaAngular, FaVuejs 
+   FaJsSquare, FaDatabase,
 } from 'react-icons/fa';
 import { 
   SiMongodb, SiRedux, SiTailwindcss, SiTypescript, SiIntellijidea, SiCsharp, 
@@ -21,8 +21,6 @@ interface Skill {
 const skillCategories: Record<Category, Skill[]> = {
   Frontend: [
     { name: "React.js", icon: <FaReact size={40} /> },
-    { name: "Angular", icon: <FaAngular size={40} /> },
-    { name: "Vue.js", icon: <FaVuejs size={40} /> },
     { name: "Tailwind CSS", icon: <SiTailwindcss size={40} /> },
     { name: "HTML5", icon: <FaHtml5 size={40} /> },
     { name: "CSS3", icon: <FaCss3 size={40} /> },
