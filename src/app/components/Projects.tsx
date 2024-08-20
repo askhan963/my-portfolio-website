@@ -111,7 +111,7 @@ function ProjectCard({
           {tags.map((tag, index) => (
             <span
               key={index}
-              className="bg-teal-600 dark:bg-teal-700 text-sm px-3 py-1 rounded-full text-white"
+              className="bg-teal-600 dark:bg-teal-700 mt-1 md:mt-0 text-sm px-3 py-1 rounded-full text-white"
             >
               {tag}
             </span>

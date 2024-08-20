@@ -72,7 +72,7 @@ export default function Skills() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(category as Category)}
-              className={`text-lg font-medium px-4 py-2 rounded-lg transition-colors text-left ${
+              className={`text-xs md:text-lg font-medium px-4 py-2 rounded-lg transition-colors text-start ${
                 activeCategory === category
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300"
