@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaSun, FaMoon } from "react-icons/fa";
+import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
+  const [isVisible, setIsVisible] = useState(true); // State for navbar visibility
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   // Check localStorage for the theme preference on initial load
   useEffect(() => {
@@ -31,8 +34,41 @@ export default function Navbar() {
     }
   };
 
+  // Toggle mobile menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  // Handle scroll behavior to show/hide navbar
+  const controlNavbar = () => {
+    if (typeof window !== "undefined") {
+      if (window.scrollY > lastScrollY) {
+        // If scroll down, hide the navbar
+        setIsVisible(false);
+      } else {
+        // If scroll up, show the navbar
+        setIsVisible(true);
+      }
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", controlNavbar);
+
+      return () => {
+        window.removeEventListener("scroll", controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
+
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
+    <nav
+      className={`${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      } fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800 shadow-md transition-transform duration-300 ease-in-out`}
+    >
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo with Pacifico Font */}
@@ -40,6 +76,13 @@ export default function Navbar() {
             <h1 className="text-3xl font-bold text-gray-800 dark:text-white font-logo">
               ASKHAN
             </h1>
+          </div>
+
+          {/* Hamburger button for mobile */}
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className="text-gray-600 dark:text-gray-300">
+              {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </button>
           </div>
 
           {/* Links for larger screens */}
@@ -68,11 +111,68 @@ export default function Navbar() {
           </div>
 
           {/* Dark Mode Toggle */}
-          <div className="flex items-center space-x-4">
+          <div className="mr-8 md:mr-0 md:flex items-center space-x-4">
             <button onClick={toggleDarkMode} className="text-gray-600 dark:text-gray-300">
               {darkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
             </button>
           </div>
+        </div>
+
+        {/* Mobile menu */}
+        <div
+          className={`${
+            isMenuOpen ? "block" : "hidden"
+          } md:hidden bg-white dark:bg-gray-800 shadow-md`}
+        >
+          <a
+            href="#profile"
+            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
+            onClick={toggleMenu}
+          >
+            Profile
+          </a>
+          <a
+            href="#skills"
+            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
+            onClick={toggleMenu}
+          >
+            Skills
+          </a>
+          <a
+            href="#honors"
+            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
+            onClick={toggleMenu}
+          >
+            Honors
+          </a>
+          <a
+            href="#projects"
+            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
+            onClick={toggleMenu}
+          >
+            Projects
+          </a>
+          <a
+            href="#experience"
+            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
+            onClick={toggleMenu}
+          >
+            Experience
+          </a>
+          <a
+            href="#cv"
+            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
+            onClick={toggleMenu}
+          >
+            My CVs
+          </a>
+          <a
+            href="#contact"
+            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
+            onClick={toggleMenu}
+          >
+            Contact
+          </a>
         </div>
       </div>
     </nav>
