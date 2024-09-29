@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# My Portfolio Website
 
-First, run the development server:
+Welcome to my personal portfolio website! This project showcases my skills, experience, projects, and more. I built it using modern web technologies, with a focus on creating an engaging, aesthetically pleasing, and responsive experience for visitors.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Live at:** [awaiskhanniazi.netlify.app](https://awaiskhanniazi.netlify.app/)
+- **GitHub Repository:** [my-portfolio-website](https://github.com/askhan963/my-portfolio-website)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌟 Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This portfolio website is a one-stop showcase of my skills, projects, honors, experience, and more. The site is designed to offer an interactive experience, allowing potential clients or employers to get a comprehensive view of my professional background and technical capabilities.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The website is highly responsive, offering an optimized user experience across all devices.
 
-## Learn More
+## ✨ Features
 
-To learn more about Next.js, take a look at the following resources:
+- **Responsive Design:** Works well on all devices, including desktops, tablets, and mobiles.
+- **Modern User Interface:** Uses Next.js and Tailwind CSS for an elegant, consistent look and feel.
+- **Dynamic Sections:**
+  - **Profile:** Displays an overview of who I am and my professional focus.
+  - **Skills:** Categorized skills (Frontend, Backend, Languages, Tools) with animations.
+  - **Projects:** List of my key projects with GitHub and live links.
+  - **Honors:** Certifications and awards, displayed with hover effects and animation.
+  - **Experience:** Detailed professional experience, including company logos and links.
+  - **Contact Form:** Visitors can contact me directly by filling out a form or via social media links.
+  - **CV Downloads:** Easy access to download my CVs.
+  - **Footer:** Developed with love and coffee ☕❤️
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Frontend:**
+  - [React.js](https://reactjs.org/)
+  - [Next.js](https://nextjs.org/)
+  - [Tailwind CSS](https://tailwindcss.com/)
 
-## Deploy on Vercel
+- **Animations:**
+  - [Framer Motion](https://www.framer.com/motion/) for animations
+  - [react-icons](https://react-icons.github.io/react-icons/) for icons
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Form Handling:**
+  - [Formspree](https://formspree.io/) to handle contact form submissions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Deployment:**
+  - [Netlify](https://www.netlify.com/) for live deployment
+
+## 🔧 Installation & Setup
+
+To run this project locally, follow these steps:
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- **Node.js** (v14 or higher)
+- **npm** or **yarn**
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/askhan963/my-portfolio-website.git
+   cd my-portfolio-website
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Run the development server:**
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) in your browser to see the site.
+
+4. **Build the project for production:**
+
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+
+5. **Start the production server:**
+
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+## 📁 Project Structure
+
+- **`/components`**: Contains reusable UI components such as Navbar, Footer, Skills, etc.
+- **`/pages`**: Contains all the pages of the website like `index.js`, `projects.js`, `contact.js`, etc.
+- **`/public`**: Contains public assets like images and PDFs (including CVs and logos).
+- **`/styles`**: Contains global CSS and other style-related files.
+
+<!-- ## 📸 Screenshots
+
+![Portfolio Screenshot](https://user-images.githubusercontent.com/yourusername/yourproject.png)  
+_(Replace the above URL with an actual screenshot of your website)_ -->
+
+## ✉️ Contact
+
+If you’d like to get in touch, feel free to send a message through the contact form on the website or connect with me on social media:
+
+- [LinkedIn](https://pk.linkedin.com/in/askhan963)
+- [Twitter](https://twitter.com/as_khan963)
+- [GitHub](https://github.com/askhan963)
+
+## 📜 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## ❤️ Acknowledgments
+
+- **Icons**: [react-icons](https://react-icons.github.io/react-icons/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Deployment**: [Netlify](https://www.netlify.com/)
+
+---
+
+_Developed with ❤️ and ☕ by [Muhammad Awais Khan](https://github.com/askhan963)_
+
+
