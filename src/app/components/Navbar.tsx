@@ -93,14 +93,15 @@ export default function Navbar() {
             <a href="#skills" className="text-gray-600 dark:text-gray-300 hover:underline">
               Skills
             </a>
-            <a href="#honors" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Honors
+            <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:underline">
+              Experience
             </a>
             <a href="#projects" className="text-gray-600 dark:text-gray-300 hover:underline">
               Projects
             </a>
-            <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Experience
+            
+            <a href="#honors" className="text-gray-600 dark:text-gray-300 hover:underline">
+              Honors
             </a>
             <a href="#cv" className="text-gray-600 dark:text-gray-300 hover:underline">
               My CVs
@@ -139,11 +140,11 @@ export default function Navbar() {
             Skills
           </a>
           <a
-            href="#honors"
+            href="#experience"
             className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
             onClick={toggleMenu}
           >
-            Honors
+            Experience
           </a>
           <a
             href="#projects"
@@ -152,12 +153,13 @@ export default function Navbar() {
           >
             Projects
           </a>
+          
           <a
-            href="#experience"
+            href="#honors"
             className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
             onClick={toggleMenu}
           >
-            Experience
+            Honors
           </a>
           <a
             href="#cv"

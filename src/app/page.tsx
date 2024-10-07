@@ -13,9 +13,9 @@ export default function Home() {
       <Navbar />
       <Profile />
       <Skills />
-      <Honors />
-      <Projects />
       <Experience />
+      <Projects />
+      <Honors />
       <MyCVs />
       <Contact />
       <Footer/>

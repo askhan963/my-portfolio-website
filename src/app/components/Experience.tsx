@@ -5,11 +5,23 @@ import Image from 'next/image';
 export default function Experience() {
   const experiences = [
     {
+      title: "MERN Stack Developer",
+      company: "Chromadesignhub",
+      companyLink: "https://chromadesignhub.com/",
+      logo: "/Logos/chroma.png", // Replace with actual logo path
+      period: "2023-2024",
+      description: [
+        "Developed full-stack applications using MERN Stack, including TypeScript and Next.js for enhanced functionality.",
+        "Collaborated with the team to deliver high-quality, responsive websites, improving user engagement.",
+        "Utilized Tailwind CSS to create modern, scalable designs that boosted overall user satisfaction.",
+      ],
+    },
+    {
       title: "Team Lead - Web Development",
       company: "Comsats University, Abbottabad",
       companyLink: "https://gdsc.community.dev/comsats-university-islamabad-abbottabad-pakistan/",
       logo: "/Logos/GDSC.png", // Replace with actual logo path
-      period: "2023-2024",
+      period: "2022-2023",
       description: [
         "Oversaw the creation of various websites throughout 2023-2024.",
         "Led and coordinated a team to successfully deliver multiple projects, demonstrating strong team management and coordination skills.",
