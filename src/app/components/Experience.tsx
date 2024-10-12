@@ -9,7 +9,7 @@ export default function Experience() {
       company: "Chromadesignhub",
       companyLink: "https://chromadesignhub.com/",
       logo: "/Logos/chroma.png", // Replace with actual logo path
-      period: "2023-2024",
+      period: "Aug 2023 – Sep 2024 | Remote",
       description: [
         "Developed full-stack applications using MERN Stack, including TypeScript and Next.js for enhanced functionality.",
         "Collaborated with the team to deliver high-quality, responsive websites, improving user engagement.",
@@ -17,11 +17,11 @@ export default function Experience() {
       ],
     },
     {
-      title: "Team Lead - Web Development",
-      company: "Comsats University, Abbottabad",
+      title: " Web Development Lead",
+      company: "Google Developer Student Club - GDSC CUI-ATD (COMSATS University) ",
       companyLink: "https://gdsc.community.dev/comsats-university-islamabad-abbottabad-pakistan/",
       logo: "/Logos/GDSC.png", // Replace with actual logo path
-      period: "2022-2023",
+      period: "September 2022 –August 2023 | Onsite",
       description: [
         "Oversaw the creation of various websites throughout 2023-2024.",
         "Led and coordinated a team to successfully deliver multiple projects, demonstrating strong team management and coordination skills.",
@@ -34,7 +34,7 @@ export default function Experience() {
       company: "EssayShark",
       companyLink: "https://assignmentshark.com/expert.html?id=askhan963",
       logo: "/Logos/Shark.jpg", // Replace with actual logo path
-      period: "2023 - Present",
+      period: "March 2023 - Present | Remote",
       description: [
         "Crafting detailed and accurate technical content for Java, C#, Python, and C/C++ projects.",
         "Consistently delivering high-quality documentation and guides, helping students and professionals enhance their coding skills and technical knowledge.",

@@ -54,7 +54,7 @@ const Contact = () => {
       {/* Mail me now button */}
       <div className="mb-12">
         <a
-          href="mailto:youremail@example.com"
+          href="mailto:awaiskhanniazi963@gmail.com"
           className="inline-flex items-center bg-teal-600 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-teal-500 transition duration-300"
         >
           <FaEnvelope className="mr-2 text-xl" />
