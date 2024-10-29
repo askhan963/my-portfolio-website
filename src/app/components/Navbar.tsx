@@ -72,11 +72,11 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo with Pacifico Font */}
-          <div>
+          <a  href="/">
             <h1 className="text-3xl font-bold text-gray-800 dark:text-white font-logo">
               ASKHAN
             </h1>
-          </div>
+          </a >
 
           {/* Hamburger button for mobile */}
           <div className="md:hidden">
@@ -93,13 +93,15 @@ export default function Navbar() {
             <a href="#skills" className="text-gray-600 dark:text-gray-300 hover:underline">
               Skills
             </a>
+            <a href="#education" className="text-gray-600 dark:text-gray-300 hover:underline">
+              Education
+            </a>
             <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:underline">
               Experience
             </a>
             <a href="#projects" className="text-gray-600 dark:text-gray-300 hover:underline">
               Projects
             </a>
-            
             <a href="#honors" className="text-gray-600 dark:text-gray-300 hover:underline">
               Honors
             </a>
@@ -140,6 +142,13 @@ export default function Navbar() {
             Skills
           </a>
           <a
+            href="#education"
+            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
+            onClick={toggleMenu}
+          >
+            Education
+          </a>
+          <a
             href="#experience"
             className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
             onClick={toggleMenu}
@@ -153,7 +162,6 @@ export default function Navbar() {
           >
             Projects
           </a>
-          
           <a
             href="#honors"
             className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"

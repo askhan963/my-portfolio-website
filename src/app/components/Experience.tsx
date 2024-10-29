@@ -5,15 +5,27 @@ import Image from 'next/image';
 export default function Experience() {
   const experiences = [
     {
-      title: "MERN Stack Developer",
+      title: "React JS Developer",
       company: "Chromadesignhub",
       companyLink: "https://chromadesignhub.com/",
       logo: "/Logos/chroma.png", // Replace with actual logo path
-      period: "Aug 2023 – Sep 2024 | Remote",
+      period: "Nov 2024 – Sep 2024 | Remote",
       description: [
-        "Developed full-stack applications using MERN Stack, including TypeScript and Next.js for enhanced functionality.",
-        "Collaborated with the team to deliver high-quality, responsive websites, improving user engagement.",
-        "Utilized Tailwind CSS to create modern, scalable designs that boosted overall user satisfaction.",
+        "Developed responsive front-end applications using React.js, with state management through Redux and RTK for efficient data handling and improved performance. ",
+        "Collaborated with a team to deliver high-quality, interactive websites, enhancing user engagement and ensuring cross-platform compatibility. ",
+        "Utilized Tailwind CSS to create scalable, modern designs that significantly boosted user satisfaction and overall user experience. ",
+      ],
+    },
+    {
+      title: "Freelance Web Developer",
+      company: "Self-Employed",
+      companyLink: "https://www.upwork.com/freelancers/~01ba14073aeac384ea", // No company link for freelance work
+      logo: "/Logos/freelance.jpeg", // Replace with actual logo path
+      period: "July 2021 – Present | Remote",
+      description: [
+        "Successfully completed over 10 full-stack projects using the MERN Stack, helping clients enhance productivity and streamline processes.",
+        "Delivered custom CMS solutions and e-commerce platforms, integrating third-party services such as payment gateways for seamless transactions.",
+        "Consistently received 5-star client ratings for high-quality work delivered within tight deadlines, resulting in a 30% increase in client business productivity.",
       ],
     },
     {
@@ -21,7 +33,7 @@ export default function Experience() {
       company: "Google Developer Student Club - GDSC CUI-ATD (COMSATS University) ",
       companyLink: "https://gdsc.community.dev/comsats-university-islamabad-abbottabad-pakistan/",
       logo: "/Logos/GDSC.png", // Replace with actual logo path
-      period: "September 2022 –August 2023 | Onsite",
+      period: "September 2023 –August 2024 | Onsite",
       description: [
         "Oversaw the creation of various websites throughout 2023-2024.",
         "Led and coordinated a team to successfully deliver multiple projects, demonstrating strong team management and coordination skills.",
