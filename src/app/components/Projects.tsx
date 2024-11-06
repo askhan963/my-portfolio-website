@@ -27,7 +27,7 @@ interface Project {
 
 const projects: ProjectCategory[] = [
   {
-    category: "General Projects",
+    category: "Computer Sciecne",
     projects: [
       {
         title: "VR MathQuest Adventures (FYP)",
@@ -72,7 +72,7 @@ const projects: ProjectCategory[] = [
     ],
   },
   {
-    category: "MERN Stack Projects",
+    category: "MERN Stack",
     projects: [
       {
         title: "BookShelfX",
@@ -231,7 +231,7 @@ const projects: ProjectCategory[] = [
     ],
   },
   {
-    category: "React Native Projects",
+    category: "React Native",
     projects: [
       {
         title: "Installment Management System (IMS)",
