@@ -9,7 +9,7 @@ export default function Experience() {
       company: "Chromadesignhub",
       companyLink: "https://chromadesignhub.com/",
       logo: "/Logos/chroma.png", // Replace with actual logo path
-      period: "Nov 2024 – Sep 2024 | Remote",
+      period: "Aug 2024 – Present | Remote",
       description: [
         "Developed responsive front-end applications using React.js, with state management through Redux and RTK for efficient data handling and improved performance. ",
         "Collaborated with a team to deliver high-quality, interactive websites, enhancing user engagement and ensuring cross-platform compatibility. ",

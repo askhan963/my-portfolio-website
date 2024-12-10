@@ -357,7 +357,7 @@ export default function Projects() {
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 rounded-lg font-semibold ${
+            className={`px-4 py-2 rounded-lg mb-1 font-semibold ${
               selectedCategory === category
                 ? "bg-teal-600 text-white"
                 : "bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200"
