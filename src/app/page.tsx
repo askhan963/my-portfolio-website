@@ -8,6 +8,7 @@ import Experience from "@/app/components/Experience";
 import MyCVs from "@/app/components/MyCVs";
 import Contact from "@/app/components/Contact";
 import Footer from "./components/Footer";
+import ContactMe from "./components/ContactMe";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <MyCVs />
       <Contact />
       <Footer />
+      <ContactMe /> 
     </div>
   );
 }
