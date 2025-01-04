@@ -1,27 +1,27 @@
 "use client";
 
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function Experience() {
   const experiences = [
-    {
-      title: "React JS Developer",
-      company: "Chromadesignhub",
-      companyLink: "https://chromadesignhub.com/",
-      logo: "/Logos/chroma.png", // Replace with actual logo path
-      period: "Aug 2024 – Present | Remote",
-      description: [
-        "Developed responsive front-end applications using React.js, with state management through Redux and RTK for efficient data handling and improved performance. ",
-        "Collaborated with a team to deliver high-quality, interactive websites, enhancing user engagement and ensuring cross-platform compatibility. ",
-        "Utilized Tailwind CSS to create scalable, modern designs that significantly boosted user satisfaction and overall user experience. ",
-      ],
-    },
+    // {
+    //   title: "React JS Developer",
+    //   company: "Chromadesignhub",
+    //   companyLink: "https://chromadesignhub.com/",
+    //   logo: "/Logos/chroma.png", // Replace with actual logo path
+    //   period: "Aug 2024 – Present | Remote",
+    //   description: [
+    //     "Developed responsive front-end applications using React.js, with state management through Redux and RTK for efficient data handling and improved performance. ",
+    //     "Collaborated with a team to deliver high-quality, interactive websites, enhancing user engagement and ensuring cross-platform compatibility. ",
+    //     "Utilized Tailwind CSS to create scalable, modern designs that significantly boosted user satisfaction and overall user experience. ",
+    //   ],
+    // },
     {
       title: "Freelance Web Developer",
       company: "Self-Employed",
       companyLink: "https://www.upwork.com/freelancers/~01ba14073aeac384ea", // No company link for freelance work
       logo: "/Logos/freelance.jpeg", // Replace with actual logo path
-      period: "July 2021 – Present | Remote",
+      period: "Feb 2023 – Present | Remote",
       description: [
         "Successfully completed over 10 full-stack projects using the MERN Stack, helping clients enhance productivity and streamline processes.",
         "Delivered custom CMS solutions and e-commerce platforms, integrating third-party services such as payment gateways for seamless transactions.",
@@ -30,8 +30,10 @@ export default function Experience() {
     },
     {
       title: " Web Development Lead",
-      company: "Google Developer Student Club - GDSC CUI-ATD (COMSATS University) ",
-      companyLink: "https://gdsc.community.dev/comsats-university-islamabad-abbottabad-pakistan/",
+      company:
+        "Google Developer Student Club - GDSC CUI-ATD (COMSATS University) ",
+      companyLink:
+        "https://gdsc.community.dev/comsats-university-islamabad-abbottabad-pakistan/",
       logo: "/Logos/GDSC.png", // Replace with actual logo path
       period: "September 2023 –August 2024 | Onsite",
       description: [
@@ -56,7 +58,10 @@ export default function Experience() {
   ];
 
   return (
-    <section id='experience' className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
+    <section
+      id="experience"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 p-6"
+    >
       <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-12">
         Experience
       </h1>
