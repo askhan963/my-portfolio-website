@@ -4,18 +4,32 @@ import Image from "next/image";
 
 export default function Experience() {
   const experiences = [
-    // {
-    //   title: "React JS Developer",
-    //   company: "Chromadesignhub",
-    //   companyLink: "https://chromadesignhub.com/",
-    //   logo: "/Logos/chroma.png", // Replace with actual logo path
-    //   period: "Aug 2024 – Present | Remote",
-    //   description: [
-    //     "Developed responsive front-end applications using React.js, with state management through Redux and RTK for efficient data handling and improved performance. ",
-    //     "Collaborated with a team to deliver high-quality, interactive websites, enhancing user engagement and ensuring cross-platform compatibility. ",
-    //     "Utilized Tailwind CSS to create scalable, modern designs that significantly boosted user satisfaction and overall user experience. ",
-    //   ],
-    // },
+    {
+      "title": "Senior Associate Software Engineer",
+      "company": "Tech Avenue Pvt Ltd",
+      "companyLink": "https://techavenue.biz/",
+      "logo": "/Logos/tech-avenue.jpeg", // Replace with actual logo path
+      "period": "Jan 2024 – Present | Onsite",
+      "description": [
+        "Developed and maintained full-stack web applications using the MERN stack (MongoDB, Express.js, React.js, and Node.js), ensuring robust performance and scalability.",
+        "Built dynamic mobile applications with React Native, delivering high-quality user experiences across both iOS and Android platforms.",
+        "Implemented state management using Redux and RTK for both web and mobile applications to streamline data flow and enhance performance.",
+        "Collaborated with cross-functional teams to design and deliver modern, interactive user interfaces, ensuring seamless cross-platform compatibility.",
+        // "Utilized Tailwind CSS for responsive, scalable, and visually appealing web designs, significantly improving user engagement and satisfaction."
+      ]
+    },    
+    {
+      title: "React JS Developer",
+      company: "Chromadesignhub",
+      companyLink: "https://chromadesignhub.com/",
+      logo: "/Logos/chroma.png", // Replace with actual logo path
+      period: "Aug 2024 – Present | Remote",
+      description: [
+        "Developed responsive front-end applications using React.js, with state management through Redux and RTK for efficient data handling and improved performance. ",
+        "Collaborated with a team to deliver high-quality, interactive websites, enhancing user engagement and ensuring cross-platform compatibility. ",
+        "Utilized Tailwind CSS to create scalable, modern designs that significantly boosted user satisfaction and overall user experience. ",
+      ],
+    },
     {
       title: "Freelance Web Developer",
       company: "Self-Employed",
