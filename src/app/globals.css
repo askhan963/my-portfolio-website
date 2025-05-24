@@ -8,16 +8,29 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap'); /* Corrected font import */
+/* Import modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 *{
   scroll-behavior: smooth;
   text-decoration: none;
 }
-/* Set default font */
+
+/* Base font styles */
 body {
-  font-family: 'Inter', sans-serif;
+  @apply font-body;
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading;
+}
+
+/* Special section styles */
+.display-text {
+  @apply font-display;
 }
 
 /* Set font for logo */

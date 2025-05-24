@@ -12,7 +12,7 @@ export default function Profile() {
       />
 
       {/* Name */}
-      <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 dark:text-gray-100 mt-6">
+      <h1 className="text-5xl sm:text-6xl font-heading font-bold text-gray-800 dark:text-gray-100 tracking-tight mt-6">
         Muhammad Awais Khan
       </h1>
 
@@ -28,16 +28,16 @@ export default function Profile() {
           'Problem Solver', // Fourth text
           2000, // Waits 2 seconds
           'Tech Innovator', // Fifth text
-          2000, // Waits 2 seconds
+          2000 // Waits 2 seconds
         ]}
         wrapper="p"
         cursor={true}
         repeat={Infinity}
-        className="text-lg sm:text-2xl font-mono text-gray-600 dark:text-gray-400 mt-4 h-8"
+        className="text-lg sm:text-2xl font-display text-gray-600 dark:text-gray-400 mt-4 h-8"
       />
 
       {/* Description */}
-      <p className="mt-6 text-base sm:text-lg text-gray-500 dark:text-gray-300 max-w-xl">
+      <p className="mt-6 text-base sm:text-lg font-body text-gray-500 dark:text-gray-300 max-w-xl leading-relaxed">
         Passionate about creating web solutions that solve real-world problems. Let's build something great together!
       </p>
     </section>

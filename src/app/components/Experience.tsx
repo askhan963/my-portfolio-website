@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from 'framer-motion';
 
 export default function Experience() {
   const experiences = [
@@ -76,53 +77,55 @@ export default function Experience() {
       id="experience"
       className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 p-6"
     >
-      <h1 className="text-3xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-12">
-        Experience
+      <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
+        Professional Experience
       </h1>
 
       <div className="space-y-8 max-w-5xl w-full">
         {experiences.map((experience, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-gray-200 dark:bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg transition duration-300 hover:shadow-2xl flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-gradient-to-br from-gray-50 dark:from-gray-800/50 to-transparent dark:to-gray-700/50 p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6"
           >
             {/* Logo Section */}
             <div className="w-16 h-16 flex-shrink-0 mx-auto sm:mx-0">
-              <Image
-                src={experience.logo}
-                alt={`${experience.company} Logo`}
-                width={64}
-                height={64}
-                className="rounded-full"
-              />
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full opacity-20"></div>
+                <Image
+                  src={experience.logo}
+                  alt={`${experience.company} Logo`}
+                  width={64}
+                  height={64}
+                  className="relative rounded-full shadow-xl"
+                />
+              </div>
             </div>
 
             {/* Experience Details */}
             <div className="flex-1">
-              <a
-                href={experience.companyLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block text-center sm:text-left"
-              >
-                <h2 className="text-xl sm:text-2xl font-semibold text-teal-600 dark:text-teal-400">
+              <a href={experience.companyLink} target="_blank" rel="noopener noreferrer" className="block">
+                <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-blue-400 mb-2 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200">
                   {experience.title}
                 </h2>
-                <h3 className="text-lg text-gray-700 dark:text-gray-300 mt-1">
+                <p className="text-lg sm:text-xl font-heading font-medium text-gray-800 dark:text-gray-200 mb-1">
                   {experience.company}
-                </h3>
+                </p>
               </a>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 sm:mt-0 text-center sm:text-left">
+              <p className="text-sm sm:text-base font-body text-gray-600 dark:text-gray-400 mb-4">
                 {experience.period}
               </p>
-
-              <ul className="mt-4 space-y-2 text-gray-600 dark:text-gray-400 list-disc pl-5">
-                {experience.description.map((point, idx) => (
-                  <li key={idx}>{point}</li>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-400 list-disc pl-5 font-body">
+                {experience.description.map((desc, idx) => (
+                  <li key={idx} className="text-sm sm:text-base">
+                    {desc}
+                  </li>
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
