@@ -6,7 +6,7 @@ import { FiLinkedin, FiGithub, FiMail } from 'react-icons/fi';
 
 const ContactMe: React.FC = () => {
   return (
-    <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 shadow-lg rounded-xl p-3 space-y-3 hidden sm:block">
+    <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 shadow-lg rounded-xl p-3 space-y-3 hidden sm:block">
       <motion.a
         href="https://www.linkedin.com/in/askhan963/"
         target="_blank"

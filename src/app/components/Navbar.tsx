@@ -11,7 +11,7 @@ export default function Navbar() {
 
   // Navbar styles with modern fonts
   const navbarStyles = {
-    base: 'fixed w-full z-50 transition-all duration-300 ease-in-out',
+    base: 'fixed w-full z-50 transition-all duration-300 ease-in-out bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800',
     visible: 'top-0',
     hidden: '-top-full',
     container: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',

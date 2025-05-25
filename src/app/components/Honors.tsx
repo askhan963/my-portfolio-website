@@ -65,7 +65,7 @@ export default function Honors() {
   return (
     <section id='honors'
       ref={ref}
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6"
     >
       <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
         Honors & Certifications
@@ -75,7 +75,7 @@ export default function Honors() {
         {honors.map((honor, index) => (
           <motion.div
             key={index}
-            className="relative group overflow-hidden rounded-xl shadow-lg bg-gradient-to-br from-gray-50 dark:from-gray-800/50 to-transparent dark:to-gray-700/50 transition-all duration-300"
+            className="relative group overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800 transition-all duration-300"
             whileHover={{ scale: 1.05, y: -5 }}
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}

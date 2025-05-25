@@ -3,7 +3,7 @@ import { TypeAnimation } from 'react-type-animation';
 
 export default function Profile() {
   return (
-    <section id='profile' className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 text-center p-6">
+    <section id='profile' className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 text-center p-6">
       {/* Profile Picture */}
       <img
         src="/profile-picture.jpeg"

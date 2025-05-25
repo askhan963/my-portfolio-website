@@ -377,7 +377,7 @@ export default function Projects() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-gray-50 dark:from-gray-800/50 to-transparent dark:to-gray-700/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8"
+            className="bg-white dark:bg-gray-800/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8"
           >
             <div className="lg:w-1/2 space-y-4">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-blue-400 mb-3">

@@ -46,7 +46,7 @@ const Education = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row items-start bg-gradient-to-br from-gray-50 dark:from-gray-800/50 to-transparent dark:to-gray-700/50 p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+            className="flex flex-col md:flex-row items-start bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
           >
             {/* Logo Section */}
             <div className="w-24 h-24 mr-0 md:mr-6 mb-4 md:mb-0 flex-shrink-0 flex items-center justify-center">

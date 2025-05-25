@@ -75,7 +75,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6"
     >
       <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
         Professional Experience
@@ -88,7 +88,7 @@ export default function Experience() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-gray-50 dark:from-gray-800/50 to-transparent dark:to-gray-700/50 p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6"
+            className="bg-white dark:bg-gray-800/50 p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6"
           >
             {/* Logo Section */}
             <div className="w-16 h-16 flex-shrink-0 mx-auto sm:mx-0">

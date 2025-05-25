@@ -52,7 +52,7 @@ const Contact = () => {
   return (
     <section
       id='contact'
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6"
     >
       <div
         className="text-center mb-12"
@@ -147,7 +147,7 @@ const Contact = () => {
         }}
       >
         {formSuccess ? (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 text-center">
+          <div className="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
             <FiCheck className="text-4xl text-teal-600 dark:text-teal-400 mb-4 mx-auto" />
             <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
               Message Sent Successfully!
