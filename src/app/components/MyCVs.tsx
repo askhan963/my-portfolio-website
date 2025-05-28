@@ -1,57 +1,77 @@
 "use client";
 
 import { FaDownload } from "react-icons/fa";
+import { motion } from 'framer-motion';
+import { FiDownload } from 'react-icons/fi';
 
 const MyCVs = () => {
   const cvs = [
-    // {
-    //   title: "Software Engineer CV",
-    //   description: "This is my CV tailored for software engineering roles.",
-    //   downloadLink: "/path/to/software-engineer-cv.pdf", // Replace with actual file path
-    // },
     {
       title: "Web Developer CV",
-      description: "This is my CV focused on web development projects.",
-      downloadLink: "/CV/Awais_Khan_Resume.pdf", // Replace with actual file path
+      description: "My professional resume highlighting my web development experience and skills.",
+      downloadLink: "/CV/Awais_Khan_Resume.pdf",
+      techStack: ["Web Development", "Full Stack", "Frontend", "Backend"],
+      icon: FiDownload
     },
-    // {
-    //   title: "Full Stack Developer CV",
-    //   description: "This CV highlights my full-stack development experience.",
-    //   downloadLink: "/path/to/fullstack-developer-cv.pdf", // Replace with actual file path
-    // },
+    {
+      title: "Technical CV",
+      description: "My technical resume focused on software engineering and technical projects.",
+      downloadLink: "/CV/Awais_Khan_Resume.pdf",
+      techStack: ["Software Engineering", "Technical Skills", "Problem Solving"],
+      icon: FiDownload
+    }
   ];
 
   return (
-    <section id="cv" className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 p-6">
-      <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-12">
+    <section id="cv" className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 p-6">
+      <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
         My Resume
       </h1>
 
       <div className="space-y-8 max-w-4xl w-full">
         {cvs.map((cv, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-gray-200 dark:bg-gray-800 p-6 rounded-lg shadow-lg flex items-center justify-between transition duration-300 hover:shadow-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-gradient-to-br from-gray-50 dark:from-gray-800/50 to-transparent dark:to-gray-700/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
           >
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                {cv.title}
-              </h2>
-              <p className="text-gray-700 dark:text-gray-400 mt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-between">
+              <div className="flex-1">
+                <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-blue-400 mb-3">
+                  {cv.title}
+                </h2>
+              </div>
+              <div className="flex items-center">
+                <a
+                  href={cv.downloadLink}
+                  download
+                  className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2 px-4 rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+                >
+                  <FiDownload className="mr-2 text-lg" />
+                  <span className="font-body">Download</span>
+                </a>
+              </div>
+
+            </div>
+            <div className="flex-1">
+              <p className="text-lg sm:text-xl font-body text-gray-700 dark:text-gray-300">
                 {cv.description}
               </p>
+              <div className="flex flex-wrap gap-3 mt-4">
+                {cv.techStack.map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="px-4 py-2 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-700 dark:to-gray-600 rounded-full text-sm font-body text-blue-600 dark:text-gray-200"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div>
-              <a
-                href={cv.downloadLink}
-                download
-                className="inline-flex items-center bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-500 transition duration-300"
-              >
-                <FaDownload className="mr-2 text-xl" />
-                Download
-              </a>
-            </div>
-          </div>
+
+          </motion.div>
         ))}
       </div>
     </section>

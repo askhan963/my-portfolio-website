@@ -58,9 +58,9 @@ export default function Skills() {
   const [activeCategory, setActiveCategory] = useState<Category>("Frontend");
 
   return (
-    <section id='skills' className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 p-6">
-      <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-12">
-        Skills
+    <section id='skills' className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900 p-6">
+      <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-800 dark:text-gray-100 mb-16 tracking-tight">
+        Skills & Expertise
       </h1>
 
       <div className="flex w-full max-w-6xl">
@@ -69,16 +69,16 @@ export default function Skills() {
           {Object.keys(skillCategories).map((category) => (
             <motion.button
               key={category}
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.1, y: -5 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(category as Category)}
-              className={`text-xs md:text-lg font-medium px-4 py-2 rounded-lg transition-colors text-start ${
+              className={`text-sm md:text-lg font-heading font-semibold px-4 py-3 rounded-lg transition-all duration-300 text-start ${
                 activeCategory === category
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300"
-              }`}
+                  ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg"
+                  : "bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300"
+              } hover:bg-gray-100 dark:hover:bg-gray-700/70 hover:shadow-md`}
             >
-              {category}
+              <span className="text-sm md:text-lg">{category}</span>
             </motion.button>
           ))}
         </div>
@@ -88,14 +88,16 @@ export default function Skills() {
           {skillCategories[activeCategory].map((skill) => (
             <motion.div
               key={skill.name}
-              whileHover={{ scale: 1.1 }}
-              className="flex flex-col items-center"
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="flex flex-col items-center relative group"
             >
               <div className="relative group">
                 {/* Skill Icon */}
-                {skill.icon}
+                <div className="p-4 bg-white dark:bg-gray-800 rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                  {skill.icon}
+                </div>
                 {/* Skill Name on Hover */}
-                <span className="absolute opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 text-white text-sm px-2 py-1 rounded-lg -bottom-10 left-1/2 transform -translate-x-1/2">
+                <span className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-body px-4 py-2 rounded-lg -bottom-12 left-1/2 transform -translate-x-1/2 shadow-md">
                   {skill.name}
                 </span>
               </div>

@@ -9,6 +9,20 @@ export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true); // State for navbar visibility
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  // Navbar styles with modern fonts
+  const navbarStyles = {
+    base: 'fixed w-full z-50 transition-all duration-300 ease-in-out bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800',
+    visible: 'top-0',
+    hidden: '-top-full',
+    container: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
+    nav: 'flex justify-between items-center h-16',
+    logo: 'text-3xl font-logo font-bold text-gray-800 dark:text-white',
+    menu: 'hidden md:flex space-x-8',
+    menuItem: 'text-lg font-body text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200',
+    mobileMenu: 'md:hidden',
+    themeToggle: 'text-xl text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200'
+  };
+
   // Check localStorage for the theme preference on initial load
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -65,124 +79,61 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      } fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-800 shadow-md transition-transform duration-300 ease-in-out`}
+      className={`${navbarStyles.base} ${isVisible ? navbarStyles.visible : navbarStyles.hidden} bg-white dark:bg-gray-900 shadow-md fixed w-full z-50`} 
+      style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}
     >
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
-          {/* Logo with Pacifico Font */}
-          <a  href="/">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white font-logo">
-              ASKHAN
-            </h1>
-          </a >
+      <div className={navbarStyles.container}>
+        <div className={navbarStyles.nav}>
+          {/* Logo */}
+          <div className="flex items-center">
+            <a href="/" className="flex items-center">
+              <h1 className={navbarStyles.logo}>
+                ASKHAN
+              </h1>
+            </a>
+          </div>
 
-          {/* Hamburger button for mobile */}
-          <div className="md:hidden">
-            <button onClick={toggleMenu} className="text-gray-600 dark:text-gray-300">
-              {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          {/* Desktop Menu */}
+          <div className={navbarStyles.menu}>
+            <a href="#profile" className={navbarStyles.menuItem}>Home</a>
+            <a href="#skills" className={navbarStyles.menuItem}>Skills</a>
+            <a href="#education" className={navbarStyles.menuItem}>Education</a>
+            <a href="#honors" className={navbarStyles.menuItem}>Honors</a>
+            <a href="#projects" className={navbarStyles.menuItem}>Projects</a>
+            <a href="#experience" className={navbarStyles.menuItem}>Experience</a>
+            <a href="#contact" className={navbarStyles.menuItem}>Contact</a>
+          </div>
+
+          {/* Theme Toggle */}
+          <div className="flex items-center space-x-4">
+            <button 
+              onClick={toggleDarkMode}
+              className={navbarStyles.themeToggle}
+            >
+              {darkMode ? <FaSun /> : <FaMoon />}
+            </button>
+
+            {/* Mobile Menu Toggle */}
+            <button 
+              onClick={toggleMenu}
+              className="md:hidden"
+            >
+              {isMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
 
-          {/* Links for larger screens */}
-          <div className="hidden md:flex space-x-8">
-            <a href="#profile" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Profile
-            </a>
-            <a href="#skills" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Skills
-            </a>
-            <a href="#education" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Education
-            </a>
-            <a href="#experience" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Experience
-            </a>
-            <a href="#projects" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Projects
-            </a>
-            <a href="#honors" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Honors
-            </a>
-            <a href="#cv" className="text-gray-600 dark:text-gray-300 hover:underline">
-              My CVs
-            </a>
-            <a href="#contact" className="text-gray-600 dark:text-gray-300 hover:underline">
-              Contact
-            </a>
-          </div>
-
-          {/* Dark Mode Toggle */}
-          <div className="mr-8 md:mr-0 md:flex items-center space-x-4">
-            <button onClick={toggleDarkMode} className="text-gray-600 dark:text-gray-300">
-              {darkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        <div
-          className={`${
-            isMenuOpen ? "block" : "hidden"
-          } md:hidden bg-white dark:bg-gray-800 shadow-md`}
-        >
-          <a
-            href="#profile"
-            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
-            onClick={toggleMenu}
-          >
-            Profile
-          </a>
-          <a
-            href="#skills"
-            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
-            onClick={toggleMenu}
-          >
-            Skills
-          </a>
-          <a
-            href="#education"
-            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
-            onClick={toggleMenu}
-          >
-            Education
-          </a>
-          <a
-            href="#experience"
-            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
-            onClick={toggleMenu}
-          >
-            Experience
-          </a>
-          <a
-            href="#projects"
-            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
-            onClick={toggleMenu}
-          >
-            Projects
-          </a>
-          <a
-            href="#honors"
-            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
-            onClick={toggleMenu}
-          >
-            Honors
-          </a>
-          <a
-            href="#cv"
-            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
-            onClick={toggleMenu}
-          >
-            My CVs
-          </a>
-          <a
-            href="#contact"
-            className="block py-2 px-4 text-gray-600 dark:text-gray-300 hover:underline"
-            onClick={toggleMenu}
-          >
-            Contact
-          </a>
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="md:hidden mt-4">
+              <a href="#profile" className={`${navbarStyles.menuItem} block`}>Home</a>
+              <a href="#skills" className={`${navbarStyles.menuItem} block`}>Skills</a>
+              <a href="#education" className={`${navbarStyles.menuItem} block`}>Education</a>
+              <a href="#honors" className={`${navbarStyles.menuItem} block`}>Honors</a>
+              <a href="#projects" className={`${navbarStyles.menuItem} block`}>Projects</a>
+              <a href="#experience" className={`${navbarStyles.menuItem} block`}>Experience</a>
+              <a href="#contact" className={`${navbarStyles.menuItem} block`}>Contact</a>
+            </div>
+          )}
         </div>
       </div>
     </nav>
