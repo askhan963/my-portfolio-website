@@ -1,23 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function Experience() {
   const experiences = [
     {
-      "title": "Senior Associate Software Engineer",
-      "company": "Tech Avenue Pvt Ltd",
-      "companyLink": "https://techavenue.biz/",
-      "logo": "/Logos/tech-avenue.jpeg", // Replace with actual logo path
-      "period": "Jan 2024 – Present | Onsite",
-      "description": [
+      title: "Senior Associate Software Engineer",
+      company: "Tech Avenue Pvt Ltd",
+      companyLink: "https://techavenue.biz/",
+      logo: "/Logos/tech-avenue.jpeg", // Replace with actual logo path
+      period: "Jan 2024 – Present | Onsite",
+      description: [
         "Developed and maintained full-stack web applications using the MERN stack (MongoDB, Express.js, React.js, and Node.js), ensuring robust performance and scalability.",
         "Built dynamic mobile applications with React Native, delivering high-quality user experiences across both iOS and Android platforms.",
         "Implemented state management using Redux and RTK for both web and mobile applications to streamline data flow and enhance performance.",
         "Collaborated with cross-functional teams to design and deliver modern, interactive user interfaces, ensuring seamless cross-platform compatibility.",
         // "Utilized Tailwind CSS for responsive, scalable, and visually appealing web designs, significantly improving user engagement and satisfaction."
-      ]
+      ],
     },
     {
       title: "React JS Developer",
@@ -82,14 +82,19 @@ export default function Experience() {
       </h1>
 
       <div className="max-w-5xl w-full">
-        <ol className="relative border-s border-blue-200 dark:border-blue-700">
+        <ol className="relative border-s border-blue-200 dark:border-teal-500">
           {experiences.map((experience, index) => (
-            <li key={index} className={`${index !== experiences.length - 1 ? 'mb-10' : ''} ms-6`}>
-              <div className="absolute w-3 h-3 bg-blue-500 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 shadow-lg">
-                <div className="absolute inset-0 bg-blue-500 rounded-full animate-ping opacity-75"></div>
+            <li
+              key={index}
+              className={`${
+                index !== experiences.length - 1 ? "mb-10" : ""
+              } ms-6`}
+            >
+              <div className="absolute w-3 h-3 bg-blue-500 dark:bg-teal-400 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 shadow-lg">
+                <div className="absolute inset-0 bg-blue-500 dark:bg-teal-400 rounded-full animate-ping opacity-75"></div>
               </div>
 
-              <time className="mb-1 text-sm font-normal leading-none text-blue-600 dark:text-blue-400 font-medium">
+              <time className="mb-1 text-sm leading-none text-blue-600 dark:text-teal-400 font-medium">
                 {experience.period}
               </time>
 
@@ -103,7 +108,7 @@ export default function Experience() {
                   {/* Logo Section */}
                   <div className="w-16 h-16 flex-shrink-0 mx-auto sm:mx-0">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full opacity-20"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-teal-500 dark:to-teal-600 rounded-full opacity-20"></div>
                       <Image
                         src={experience.logo}
                         alt={`${experience.company} Logo`}
@@ -116,8 +121,13 @@ export default function Experience() {
 
                   {/* Experience Details */}
                   <div className="flex-1">
-                    <a href={experience.companyLink} target="_blank" rel="noopener noreferrer" className="block">
-                      <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-blue-400 mb-2 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200">
+                    <a
+                      href={experience.companyLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                    >
+                      <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-teal-400 mb-2 hover:text-blue-700 dark:hover:text-teal-300 transition-colors duration-200">
                         {experience.title}
                       </h2>
                       <p className="text-lg sm:text-xl font-heading font-medium text-gray-800 dark:text-gray-200 mb-1">

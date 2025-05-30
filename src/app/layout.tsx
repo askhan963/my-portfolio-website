@@ -1,9 +1,9 @@
-import './globals.css'; // Import Tailwind and global CSS
+import "./globals.css";
 import Head from "next/head";
 
 export const metadata = {
-  title: 'ASKHAN Portfolio',
-  description: 'A portfolio for ASKHAN',
+  title: "ASKHAN Portfolio",
+  description: "A portfolio for ASKHAN",
 };
 
 export default function RootLayout({

@@ -16,7 +16,7 @@ export default function Navbar() {
     hidden: '-top-full',
     container: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
     nav: 'flex justify-between items-center h-16',
-    logo: 'text-3xl font-logo font-bold text-gray-800 dark:text-white',
+    logo: 'text-3xl font-logo font-bold text-gray-800 dark:text-teal-400',
     menu: 'hidden md:flex space-x-8',
     menuItem: 'text-lg font-body text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200',
     mobileMenu: 'md:hidden',

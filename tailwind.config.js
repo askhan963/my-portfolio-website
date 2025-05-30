@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const { white } = require('tailwindcss/colors');
 module.exports = {
   darkMode: 'class', 
   content: [
@@ -9,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+       white: '#fefefe',
+      },
       fontFamily: {
         sans: ['Poppins', 'Inter', 'Space Grotesk', 'sans-serif'],
         heading: ['Poppins', 'Space Grotesk', 'sans-serif'],
@@ -32,5 +36,6 @@ module.exports = {
       }
     },
   },
+  
   plugins: [],
 }

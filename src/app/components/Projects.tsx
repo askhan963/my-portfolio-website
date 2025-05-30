@@ -9,8 +9,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { motion } from 'framer-motion';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { motion } from "framer-motion";
+import { FiGithub, FiExternalLink } from "react-icons/fi";
 
 interface ProjectCategory {
   category: string;
@@ -362,7 +362,7 @@ export default function Projects() {
             whileHover={{ scale: 1.05 }}
             className={`px-6 py-3 rounded-xl mb-1 font-heading text-lg sm:text-xl font-medium transition-all duration-300 ${
               selectedCategory === category
-                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg"
+                ? "bg-gradient-to-r from-blue-600 to-blue-700 dark:from-teal-600 dark:to-teal-700 text-white shadow-lg"
                 : "bg-gradient-to-r from-gray-100 to-white dark:from-gray-800 dark:to-gray-700 text-gray-800 dark:text-gray-200 hover:shadow-lg"
             }`}
           >
@@ -370,6 +370,7 @@ export default function Projects() {
           </motion.button>
         ))}
       </div>
+
       <div className="space-y-12 max-w-6xl w-full">
         {filteredProjects.map((project, index) => (
           <motion.div
@@ -380,7 +381,7 @@ export default function Projects() {
             className="bg-white dark:bg-gray-800/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8"
           >
             <div className="lg:w-1/2 space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-blue-400 mb-3">
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-teal-400 mb-3">
                 {project.title}
               </h2>
               <p className="text-lg sm:text-xl font-body text-gray-700 dark:text-gray-300">
@@ -390,7 +391,7 @@ export default function Projects() {
                 {project.techStack.map((tech, idx) => (
                   <span
                     key={idx}
-                    className="px-4 py-2 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-700 dark:to-gray-600 rounded-full text-sm font-body text-blue-600 dark:text-gray-200"
+                    className="px-4 py-2 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-700 dark:to-gray-600 rounded-full text-sm font-body text-blue-600 dark:text-teal-200"
                   >
                     {tech}
                   </span>
@@ -402,7 +403,7 @@ export default function Projects() {
                     href={project.githubLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-2xl text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-300"
+                    className="text-2xl text-blue-600 dark:text-teal-400 hover:text-blue-700 dark:hover:text-teal-300 transition-colors duration-300"
                   >
                     <FiGithub />
                   </a>
@@ -412,13 +413,14 @@ export default function Projects() {
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-2xl text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-300"
+                    className="text-2xl text-blue-600 dark:text-teal-400 hover:text-blue-700 dark:hover:text-teal-300 transition-colors duration-300"
                   >
                     <FiExternalLink />
                   </a>
                 )}
               </div>
             </div>
+
             <div className="lg:w-1/2 w-full">
               <Swiper
                 modules={[Pagination, Navigation]}
@@ -434,7 +436,7 @@ export default function Projects() {
                       transition={{ duration: 0.5 }}
                       className="relative w-[500px] h-[300px] rounded-lg overflow-hidden"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-10 rounded-lg"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-teal-500 dark:to-teal-600 opacity-10 rounded-lg"></div>
                       <Image
                         src={img}
                         alt={`${project.title} Image ${idx + 1}`}

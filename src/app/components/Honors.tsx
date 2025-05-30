@@ -1,9 +1,9 @@
 "use client";
 
-import Image from 'next/image';
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { FiExternalLink } from 'react-icons/fi';
+import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { FiExternalLink } from "react-icons/fi";
 
 const honors = [
   {
@@ -55,7 +55,7 @@ const honors = [
     image: "/Awards/IntroToGenAI.png",
     title: "Certificate of Intro to Gen AI Studio",
     description: "Google",
-  }
+  },
 ];
 
 export default function Honors() {
@@ -63,7 +63,8 @@ export default function Honors() {
   const isInView = useInView(ref, { once: true }); // Trigger animation once when the section comes into view
 
   return (
-    <section id='honors'
+    <section
+      id="honors"
       ref={ref}
       className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6"
     >
@@ -83,7 +84,7 @@ export default function Honors() {
           >
             {/* Certification Image */}
             <div className="relative w-full h-[350px] rounded-xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-teal-500 dark:to-teal-600 opacity-10 rounded-xl"></div>
               <Image
                 src={honor.image}
                 alt={honor.title}
@@ -108,7 +109,7 @@ export default function Honors() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileHover={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-2 text-white/80"
+                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
               >
                 <FiExternalLink size={20} />
                 <span className="text-sm font-body">View Certificate</span>

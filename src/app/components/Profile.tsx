@@ -12,7 +12,7 @@ export default function Profile() {
       />
 
       {/* Name */}
-      <h1 className="text-5xl sm:text-6xl font-heading font-bold text-gray-800 dark:text-gray-100 tracking-tight mt-6">
+      <h1 className="text-5xl sm:text-6xl font-heading font-bold text-teal-600 dark:text-teal-400 tracking-tight mt-6">
         Muhammad Awais Khan
       </h1>
 
