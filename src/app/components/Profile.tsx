@@ -10,6 +10,8 @@ export default function Profile() {
         src="/profile-picture.jpeg"
         alt="Profile Picture"
         className="mx-auto rounded-full sm:w-48 sm:h-48 lg:w-64 lg:h-64"
+        width={256}
+        height={256}
       />
       {/* <img
         src="/profile-picture.jpeg"
