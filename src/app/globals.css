@@ -20,13 +20,13 @@
 
 /* Base font styles */
 body {
-  @apply font-body;
+  @apply font-poppins;
 }
 
-/* Heading styles */
-h1, h2, h3, h4, h5, h6 {
-  @apply font-heading;
+h1, h2, h3 {
+  @apply font-spaceGrotesk;
 }
+
 
 /* Special section styles */
 .display-text {

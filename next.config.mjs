@@ -9,9 +9,9 @@ const nextConfig = {
     config.resolve.alias["@"] = path.resolve(process.cwd(), "src");
     return config;
   },
-  experimental: {
-    optimizeFonts: true,
-  },
+  // experimental: {
+  //   optimizeFonts: true,
+  // },
 };
 
 export default nextConfig;

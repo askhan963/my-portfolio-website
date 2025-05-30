@@ -12,11 +12,17 @@ module.exports = {
       colors: {
         white: "#fefefe",
       },
+      // fontFamily: {
+      //   sans: ["Poppins", "Inter", "Space Grotesk", "sans-serif"],
+      //   heading: ["Poppins", "Space Grotesk", "sans-serif"],
+      //   body: ["Inter", "sans-serif"],
+      //   display: ["Space Grotesk", "sans-serif"],
+      // },
       fontFamily: {
-        sans: ["Poppins", "Inter", "Space Grotesk", "sans-serif"],
-        heading: ["Poppins", "Space Grotesk", "sans-serif"],
-        body: ["Inter", "sans-serif"],
-        display: ["Space Grotesk", "sans-serif"],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        spaceGrotesk: ['var(--font-space-grotesk)', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
       },
       fontSize: {
         xs: ["0.75rem", { lineHeight: "1.5" }],

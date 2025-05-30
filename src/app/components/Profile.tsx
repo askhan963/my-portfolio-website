@@ -1,15 +1,21 @@
 "use client";
+import Image from 'next/image';
 import { TypeAnimation } from 'react-type-animation';
 
 export default function Profile() {
   return (
     <section id='profile' className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 text-center p-6">
       {/* Profile Picture */}
-      <img
+      <Image
         src="/profile-picture.jpeg"
         alt="Profile Picture"
         className="mx-auto rounded-full sm:w-48 sm:h-48 lg:w-64 lg:h-64"
       />
+      {/* <img
+        src="/profile-picture.jpeg"
+        alt="Profile Picture"
+        className="mx-auto rounded-full sm:w-48 sm:h-48 lg:w-64 lg:h-64"
+      /> */}
 
       {/* Name */}
       <h1 className="text-5xl sm:text-6xl font-heading font-bold text-teal-600 dark:text-teal-400 tracking-tight mt-6">
