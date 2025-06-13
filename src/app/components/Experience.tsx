@@ -20,11 +20,11 @@ export default function Experience() {
       ],
     },
     {
-      title: "React JS Developer",
-      company: "Chromadesignhub",
-      companyLink: "https://chromadesignhub.com/",
-      logo: "/Logos/chroma.png", // Replace with actual logo path
-      period: "Aug 2024 – December 2024 | Remote",
+      title: "Front-End Developer",
+      company: "WEBSTERS",
+      companyLink: "https://websterstech.com/",
+      logo: "/Logos/WEBSTERS.png", // Replace with actual logo path
+      period: "September 2024 – December 2024 | Remote",
       description: [
         "Developed responsive front-end applications using React.js, with state management through Redux and RTK for efficient data handling and improved performance. ",
         "Collaborated with a team to deliver high-quality, interactive websites, enhancing user engagement and ensuring cross-platform compatibility. ",
@@ -35,7 +35,7 @@ export default function Experience() {
       title: "Freelance Web Developer",
       company: "Self-Employed",
       companyLink: "https://www.upwork.com/freelancers/~01ba14073aeac384ea", // No company link for freelance work
-      logo: "/Logos/freelance.jpeg", // Replace with actual logo path
+      logo: "/Logos/freelance.png", // Replace with actual logo path
       period: "Feb 2023 – Present | Remote",
       description: [
         "Successfully completed over 10 full-stack projects using the MERN Stack, helping clients enhance productivity and streamline processes.",

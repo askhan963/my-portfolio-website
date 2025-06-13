@@ -12,11 +12,11 @@ const Footer = () => {
         transition={{ duration: 0.8 }}
         className="text-center"
       >
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 px-4 py-6 text-center">
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center text-gray-700 dark:text-gray-300 text-lg"
+            className="flex flex-wrap items-center justify-center text-gray-700 dark:text-gray-300 text-base sm:text-lg"
           >
             <span className="mr-2">Built with</span>
             <FaHeart className="text-red-600 dark:text-red-400 mx-2 hover:scale-110 transition-transform" />
@@ -31,35 +31,37 @@ const Footer = () => {
             </motion.span>
           </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-4 text-gray-600 dark:text-gray-400"
-          >
-            <a
-              href="https://github.com/askhan963"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-500 dark:hover:text-teal-300 transition-colors"
-            >
-              <span className="sr-only">GitHub</span>
-              <motion.div
-                whileHover={{ rotate: 5 }}
-                className="i-simple-icons-github text-2xl"
-              />
-            </a>
-            <a
-              href="https://linkedin.com/in/askhan963"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-500 dark:hover:text-teal-300 transition-colors"
-            >
-              <span className="sr-only">LinkedIn</span>
-              <motion.div
-                whileHover={{ rotate: 5 }}
-                className="i-simple-icons-linkedin text-2xl"
-              />
-            </a>
-          </motion.div>
+          {/* Optional social icons section (uncomment if needed)
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    className="flex items-center justify-center gap-4 text-gray-600 dark:text-gray-400 mt-4 md:mt-0"
+  >
+    <a
+      href="https://github.com/askhan963"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-blue-500 dark:hover:text-teal-300 transition-colors"
+    >
+      <span className="sr-only">GitHub</span>
+      <motion.div
+        whileHover={{ rotate: 5 }}
+        className="i-simple-icons-github text-2xl"
+      />
+    </a>
+    <a
+      href="https://linkedin.com/in/askhan963"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-blue-500 dark:hover:text-teal-300 transition-colors"
+    >
+      <span className="sr-only">LinkedIn</span>
+      <motion.div
+        whileHover={{ rotate: 5 }}
+        className="i-simple-icons-linkedin text-2xl"
+      />
+    </a>
+  </motion.div>
+  */}
         </div>
 
         <motion.p

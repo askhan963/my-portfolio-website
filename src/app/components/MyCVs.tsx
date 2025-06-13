@@ -44,7 +44,7 @@ const MyCVs = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-gradient-to-br from-gray-50 dark:from-gray-800/50 to-transparent dark:to-gray-700/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+            className="bg-gradient-to-br from-white dark:from-gray-800/50 to-transparent dark:to-gray-700/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
           >
             <div className="flex flex-col sm:flex-row items-center justify-between">
               <div className="flex-1">

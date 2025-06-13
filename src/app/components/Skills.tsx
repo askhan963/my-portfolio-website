@@ -91,7 +91,7 @@ export default function Skills() {
 
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-10">
         {/* Sidebar */}
-        <div className="md:w-1/4 flex md:flex-col justify-center md:items-start items-center gap-4">
+        <div className="md:w-1/4 flex flex-col md:flex-col justify-center md:items-start items-center gap-4">
           {Object.keys(skillCategories).map((category) => (
             <motion.button
               key={category}
