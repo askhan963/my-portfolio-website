@@ -7,25 +7,25 @@ import { FiDownload } from "react-icons/fi";
 const MyCVs = () => {
   const cvs = [
     {
-      title: "Web Developer CV",
+      title: "MY Resume Web Developer",
       description:
         "My professional resume highlighting my web development experience and skills.",
       downloadLink: "/CV/Awais_Khan_Resume.pdf",
       techStack: ["Web Development", "Full Stack", "Frontend", "Backend"],
       icon: FiDownload,
     },
-    {
-      title: "Technical CV",
-      description:
-        "My technical resume focused on software engineering and technical projects.",
-      downloadLink: "/CV/Awais_Khan_Resume.pdf",
-      techStack: [
-        "Software Engineering",
-        "Technical Skills",
-        "Problem Solving",
-      ],
-      icon: FiDownload,
-    },
+    // {
+    //   title: "Technical CV",
+    //   description:
+    //     "My technical resume focused on software engineering and technical projects.",
+    //   downloadLink: "/CV/Awais_Khan_Resume.pdf",
+    //   techStack: [
+    //     "Software Engineering",
+    //     "Technical Skills",
+    //     "Problem Solving",
+    //   ],
+    //   icon: FiDownload,
+    // },
   ];
 
   return (
