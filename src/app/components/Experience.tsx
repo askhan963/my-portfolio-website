@@ -2,24 +2,40 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FaBriefcase, FaArrowUp } from "react-icons/fa"; // Added FaArrowUp for the promotion icon
 
 export default function Experience() {
   const experiences = [
     {
-      title: "Senior Associate Software Engineer",
       company: "Tech Avenue Pvt Ltd",
       companyLink: "https://techavenue.biz/",
-      logo: "/Logos/tech-avenue.jpeg", // Replace with actual logo path
+      logo: "/Logos/tech-avenue.jpeg",
+      // The overall period you've been with the company
       period: "Jan 2024 – Present | Onsite",
-      description: [
-        "Developed and maintained full-stack web applications using the MERN stack (MongoDB, Express.js, React.js, and Node.js), ensuring robust performance and scalability.",
-        "Built dynamic mobile applications with React Native, delivering high-quality user experiences across both iOS and Android platforms.",
-        "Implemented state management using Redux and RTK for both web and mobile applications to streamline data flow and enhance performance.",
-        "Collaborated with cross-functional teams to design and deliver modern, interactive user interfaces, ensuring seamless cross-platform compatibility.",
-        // "Utilized Tailwind CSS for responsive, scalable, and visually appealing web designs, significantly improving user engagement and satisfaction."
+      roles: [
+        {
+          title: "Software Engineer",
+          period: "April 2024 – Present",
+          description: [
+            "Promoted from Senior Associate to Software Engineer in recognition of consistent performance and delivery.",
+            "Leading complex full-stack development projects using the MERN stack with a focus on scalability and maintainability.",
+            "Mentoring junior developers and reviewing code to ensure adherence to best practices.",
+            "Contributing to architectural decisions and long-term technical planning with cross-functional teams.",
+          ],
+        },
+        {
+          title: "Senior Associate Software Engineer",
+          period: "January 2024 – March 2024",
+          description: [
+            "Developed and maintained full-stack web applications using the MERN stack, ensuring robust performance and scalability.",
+            "Built dynamic mobile applications with React Native, delivering high-quality user experiences across both iOS and Android platforms.",
+            "Implemented state management using Redux and RTK to streamline data flow and enhance performance.",
+            "Collaborated with cross-functional teams to design and deliver modern, interactive user interfaces.",
+          ],
+        },
       ],
     },
-    {
+  {
       title: "Front-End Developer",
       company: "WEBSTERS",
       companyLink: "https://websterstech.com/",
@@ -36,7 +52,7 @@ export default function Experience() {
       company: "Self-Employed",
       companyLink: "https://www.upwork.com/freelancers/~01ba14073aeac384ea", // No company link for freelance work
       logo: "/Logos/freelance.png", // Replace with actual logo path
-      period: "Feb 2023 – Present | Remote",
+      period: "Febuary 2023 – Present | Remote",
       description: [
         "Successfully completed over 10 full-stack projects using the MERN Stack, helping clients enhance productivity and streamline processes.",
         "Delivered custom CMS solutions and e-commerce platforms, integrating third-party services such as payment gateways for seamless transactions.",
@@ -75,74 +91,104 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6 sm:p-12"
     >
-      <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-16 text-center"
+      >
         Professional Experience
-      </h1>
+      </motion.h1>
 
-      <div className="max-w-5xl w-full">
-        <ol className="relative border-s border-blue-200 dark:border-teal-500">
+      <div className="w-full max-w-4xl mx-auto">
+        <ol className="relative border-s border-gray-200 dark:border-gray-700">
           {experiences.map((experience, index) => (
-            <li
-              key={index}
-              className={`${
-                index !== experiences.length - 1 ? "mb-10" : ""
-              } ms-6`}
-            >
-              <div className="absolute w-3 h-3 bg-blue-500 dark:bg-teal-400 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 shadow-lg">
-                <div className="absolute inset-0 bg-blue-500 dark:bg-teal-400 rounded-full animate-ping opacity-75"></div>
-              </div>
-
-              <time className="mb-1 text-sm leading-none text-blue-600 dark:text-teal-400 font-medium">
-                {experience.period}
-              </time>
+            <li key={index} className="mb-12 ms-8">
+              <span className="absolute flex items-center justify-center w-8 h-8 bg-indigo-100 rounded-full -start-4 ring-8 ring-white dark:bg-indigo-900 dark:ring-gray-900">
+                <FaBriefcase className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              </span>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white dark:bg-gray-800/50 p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] mt-2"
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-transparent dark:border-gray-700/50"
               >
-                <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
-                  {/* Logo Section */}
-                  <div className="w-16 h-16 flex-shrink-0 mx-auto sm:mx-0">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-teal-500 dark:to-teal-600 rounded-full opacity-20"></div>
-                      <Image
-                        src={experience.logo}
-                        alt={`${experience.company} Logo`}
-                        width={64}
-                        height={64}
-                        className="relative rounded-full shadow-xl"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Experience Details */}
+                {/* Shared Company Header */}
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  <Image
+                    src={experience.logo}
+                    alt={`${experience.company} Logo`}
+                    width={56}
+                    height={56}
+                    className="rounded-lg shadow-sm flex-shrink-0"
+                  />
                   <div className="flex-1">
                     <a
                       href={experience.companyLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block"
+                      className="inline-block"
                     >
-                      <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-teal-400 mb-2 hover:text-blue-700 dark:hover:text-teal-300 transition-colors duration-200">
-                        {experience.title}
-                      </h2>
-                      <p className="text-lg sm:text-xl font-heading font-medium text-gray-800 dark:text-gray-200 mb-1">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                         {experience.company}
-                      </p>
+                      </h3>
                     </a>
-                    <ul className="space-y-2 text-gray-600 dark:text-gray-400 list-disc pl-5 font-body mt-4">
+                    <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500 mt-1">
+                      {experience.period}
+                    </time>
+                  </div>
+                </div>
+
+                {/* Conditional Rendering for Roles */}
+                {experience.roles ? (
+                  <div className="mt-4 space-y-6">
+                    {experience.roles.map((role, roleIndex) => (
+                      <div key={role.title}>
+                        {/* Promotion Separator */}
+                        {roleIndex < experience.roles.length - 1 && roleIndex !== 0 && (
+                          <div className="flex items-center text-center my-6">
+                            <div className="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
+                            <span className="flex-shrink mx-4 inline-flex items-center gap-2 text-xs font-semibold uppercase text-indigo-500 dark:text-indigo-400">
+                              <FaArrowUp />
+                              Promotion
+                            </span>
+                            <div className="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
+                          </div>
+                        )}
+
+                        {/* Role Details */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100">{role.title}</h4>
+                          <time className="block mb-2 text-xs font-normal text-gray-400 dark:text-gray-500">{role.period}</time>
+                          <ul className="mt-2 space-y-2 text-gray-600 dark:text-gray-400 list-disc pl-5">
+                            {role.description.map((desc, idx) => (
+                              <li key={idx} className="text-sm sm:text-base leading-relaxed">
+                                {desc}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  // Fallback for single-role experiences
+                  <div className="mt-2">
+                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">{experience.title}</h3>
+                    <ul className="mt-2 space-y-2 text-gray-600 dark:text-gray-400 list-disc pl-5">
                       {experience.description.map((desc, idx) => (
-                        <li key={idx} className="text-sm sm:text-base">
+                        <li key={idx} className="text-sm sm:text-base leading-relaxed">
                           {desc}
                         </li>
                       ))}
                     </ul>
                   </div>
-                </div>
+                )}
               </motion.div>
             </li>
           ))}

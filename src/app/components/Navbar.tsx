@@ -2,28 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
-  const [isVisible, setIsVisible] = useState(true); // State for navbar visibility
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // Navbar styles with modern fonts
-  const navbarStyles = {
-    base: 'fixed w-full z-50 transition-all duration-300 ease-in-out bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800',
-    visible: 'top-0',
-    hidden: '-top-full',
-    container: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
-    nav: 'flex justify-between items-center h-16',
-    logo: 'text-3xl font-logo font-bold text-gray-800 dark:text-teal-400',
-    menu: 'hidden md:flex space-x-8',
-    menuItem: 'text-lg font-body text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200',
-    mobileMenu: 'md:hidden',
-    themeToggle: 'text-xl text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors duration-200'
-  };
-
-  // Check localStorage for the theme preference on initial load
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme === "dark") {
@@ -33,109 +18,123 @@ export default function Navbar() {
       document.documentElement.classList.remove("dark");
       setDarkMode(false);
     }
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Toggle theme and save preference in localStorage
   const toggleDarkMode = () => {
-    if (darkMode) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setDarkMode(true);
-    }
+    setDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      if (newMode) {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+      return newMode;
+    });
   };
 
-  // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Handle scroll behavior to show/hide navbar
-  const controlNavbar = () => {
-    if (typeof window !== "undefined") {
-      if (window.scrollY > lastScrollY) {
-        // If scroll down, hide the navbar
-        setIsVisible(false);
-      } else {
-        // If scroll up, show the navbar
-        setIsVisible(true);
-      }
-      setLastScrollY(window.scrollY);
-    }
-  };
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", controlNavbar);
-
-      return () => {
-        window.removeEventListener("scroll", controlNavbar);
-      };
-    }
-  }, [lastScrollY]);
+  const navLinks = [
+    { title: "Home", href: "#home" },
+    { title: "Experience", href: "#experience" },
+    { title: "Projects", href: "#projects" },
+    { title: "Skills", href: "#skills" },
+    { title: "Education", href: "#education" },
+    { title: "Honors", href: "#honors" },
+    { title: "My CVs", href: "#my-cvs" },
+    { title: "Contact", href: "#contact" },
+  ];
 
   return (
-    <nav
-      className={`${navbarStyles.base} ${isVisible ? navbarStyles.visible : navbarStyles.hidden} bg-white dark:bg-gray-900 shadow-md fixed w-full z-50`} 
-      style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }}
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-md" : "bg-transparent"
+      }`}
     >
-      <div className={navbarStyles.container}>
-        <div className={navbarStyles.nav}>
-          {/* Logo */}
-          <div className="flex items-center">
-            <a href="/" className="flex items-center">
-              <h1 className={navbarStyles.logo}>
-                ASKHAN
-              </h1>
-            </a>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <motion.a
+            href="/"
+            className="text-3xl font-bold text-primary dark:text-primary-dark"
+            whileHover={{ scale: 1.05 }}
+          >
+            ASKHAN
+          </motion.a>
 
           {/* Desktop Menu */}
-          <div className={navbarStyles.menu}>
-            <a href="#profile" className={navbarStyles.menuItem}>Home</a>
-            <a href="#skills" className={navbarStyles.menuItem}>Skills</a>
-            <a href="#education" className={navbarStyles.menuItem}>Education</a>
-            <a href="#honors" className={navbarStyles.menuItem}>Honors</a>
-            <a href="#projects" className={navbarStyles.menuItem}>Projects</a>
-            <a href="#experience" className={navbarStyles.menuItem}>Experience</a>
-            <a href="#contact" className={navbarStyles.menuItem}>Contact</a>
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <motion.a
+                key={link.href}
+                href={link.href}
+                className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+                whileHover={{ y: -2 }}
+              >
+                {link.title}
+              </motion.a>
+            ))}
           </div>
 
-          {/* Theme Toggle */}
           <div className="flex items-center space-x-4">
-            <button 
+            <motion.button
               onClick={toggleDarkMode}
-              className={navbarStyles.themeToggle}
+              className="text-2xl text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+              whileHover={{ scale: 1.2, rotate: 15 }}
             >
               {darkMode ? <FaSun /> : <FaMoon />}
-            </button>
+            </motion.button>
 
-            {/* Mobile Menu Toggle */}
-            <button 
-              onClick={toggleMenu}
-              className="md:hidden"
-            >
-              {isMenuOpen ? <FaTimes /> : <FaBars />}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden mt-4">
-              <a href="#profile" className={`${navbarStyles.menuItem} block`}>Home</a>
-              <a href="#skills" className={`${navbarStyles.menuItem} block`}>Skills</a>
-              <a href="#education" className={`${navbarStyles.menuItem} block`}>Education</a>
-              <a href="#honors" className={`${navbarStyles.menuItem} block`}>Honors</a>
-              <a href="#projects" className={`${navbarStyles.menuItem} block`}>Projects</a>
-              <a href="#experience" className={`${navbarStyles.menuItem} block`}>Experience</a>
-              <a href="#contact" className={`${navbarStyles.menuItem} block`}>Contact</a>
+            <div className="md:hidden">
+              <motion.button
+                onClick={toggleMenu}
+                className="text-2xl text-gray-600 dark:text-gray-300"
+                whileHover={{ scale: 1.1 }}
+              >
+                {isMenuOpen ? <FaTimes /> : <FaBars />}
+              </motion.button>
             </div>
-          )}
+          </div>
         </div>
       </div>
-    </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white dark:bg-gray-900"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={toggleMenu}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
+                  {link.title}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/zoom";
@@ -262,81 +261,6 @@ const categories = [
   ...projects.map((projectCategory) => projectCategory.category),
 ];
 
-function ProjectCard({
-  title,
-  description,
-  techStack,
-  githubLink,
-  liveLink,
-  images,
-}: Project) {
-  return (
-    <div className="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 p-8 rounded-lg shadow-lg flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8 transition duration-300 hover:shadow-2xl">
-      <div className="lg:w-1/2 space-y-4">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-          {title}
-        </h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
-          {description}
-        </p>
-        <div className="flex flex-wrap space-x-2 mt-4">
-          {techStack.map((tech, index) => (
-            <span
-              key={index}
-              className="bg-teal-600 dark:bg-teal-700 my-2 md:mt-0 text-sm px-3 py-1 rounded-full text-white"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        <div className="flex space-x-4 mt-6">
-          {githubLink && (
-            <a
-              href={githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-2xl text-teal-500 dark:text-teal-400 hover:text-teal-300 transition duration-300"
-            >
-              <FaGithub />
-            </a>
-          )}
-          {liveLink && (
-            <a
-              href={liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-2xl text-teal-500 dark:text-teal-400 hover:text-teal-300 transition duration-300"
-            >
-              <FaExternalLinkAlt />
-            </a>
-          )}
-        </div>
-      </div>
-      <div className="lg:w-1/2 w-full">
-        <Swiper
-          modules={[Pagination, Navigation]}
-          pagination={{ clickable: true }}
-          navigation={true}
-          className="rounded-lg shadow-lg w-full max-w-full"
-        >
-          {images.map((img, index) => (
-            <SwiperSlide key={index}>
-              <div className="relative w-[500px] h-[300px]">
-                <Image
-                  src={img}
-                  alt={`${title} Image ${index + 1}`}
-                  fill
-                  className="rounded-lg object-cover transition duration-300 hover:scale-105"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </div>
-  );
-}
-
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
@@ -349,108 +273,119 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6"
     >
-      <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+      >
         My Projects
-      </h1>
-      <div className="flex flex-wrap justify-center mb-8 space-x-4">
-        {categories.map((category) => (
-          <motion.button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            whileHover={{ scale: 1.05 }}
-            className={`px-6 py-3 rounded-xl mb-1 font-heading text-lg sm:text-xl font-medium transition-all duration-300 ${
-              selectedCategory === category
-                ? "bg-gradient-to-r from-blue-600 to-blue-700 dark:from-teal-600 dark:to-teal-700 text-white shadow-lg"
-                : "bg-gradient-to-r from-gray-100 to-white dark:from-gray-800 dark:to-gray-700 text-gray-800 dark:text-gray-200 hover:shadow-lg"
-            }`}
-          >
-            {category}
-          </motion.button>
-        ))}
-      </div>
+      </motion.h1>
 
-      <div className="space-y-12 max-w-6xl w-full">
-        {filteredProjects.map((project, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white dark:bg-gray-800/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8"
-          >
-            <div className="lg:w-1/2 space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-teal-400 mb-3">
-                {project.title}
-              </h2>
-              <p className="text-lg sm:text-xl font-body text-gray-700 dark:text-gray-300">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-3 mt-4">
-                {project.techStack.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="px-4 py-2 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-700 dark:to-gray-600 rounded-full text-sm font-body text-blue-600 dark:text-teal-200"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="flex space-x-4 mt-6">
-                {project.githubLink && (
-                  <a
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-2xl text-blue-600 dark:text-teal-400 hover:text-blue-700 dark:hover:text-teal-300 transition-colors duration-300"
-                  >
-                    <FiGithub />
-                  </a>
-                )}
-                {project.liveLink && (
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-2xl text-blue-600 dark:text-teal-400 hover:text-blue-700 dark:hover:text-teal-300 transition-colors duration-300"
-                  >
-                    <FiExternalLink />
-                  </a>
-                )}
-              </div>
-            </div>
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="flex justify-center flex-wrap gap-4 mb-12">
+          {categories.map((category) => (
+            <motion.button
+              key={category}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
+                selectedCategory === category
+                  ? "bg-primary text-white shadow-lg"
+                  : "bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+              }`}
+            >
+              {category}
+            </motion.button>
+          ))}
+        </div>
 
-            <div className="lg:w-1/2 w-full">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                className="rounded-lg shadow-lg w-full max-w-full"
-              >
-                {project.images.map((img, idx) => (
-                  <SwiperSlide key={idx}>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="relative w-[500px] h-[300px] rounded-lg overflow-hidden"
+        <div className="space-y-12 max-w-6xl w-full">
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white dark:bg-gray-800/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8"
+            >
+              <div className="lg:w-1/2 space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary dark:text-primary-dark mb-3">
+                  {project.title}
+                </h2>
+                <p className="text-lg sm:text-xl font-body text-gray-700 dark:text-gray-300">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-3 mt-4">
+                  {project.techStack.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-body text-primary dark:text-primary-dark"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-teal-500 dark:to-teal-600 opacity-10 rounded-lg"></div>
-                      <Image
-                        src={img}
-                        alt={`${project.title} Image ${idx + 1}`}
-                        fill
-                        className="rounded-lg object-cover transition duration-300 hover:scale-105"
-                      />
-                    </motion.div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </motion.div>
-        ))}
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex space-x-4 mt-6">
+                  {project.githubLink && (
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-2xl text-primary dark:text-primary-dark hover:text-opacity-80 transition-colors duration-300"
+                    >
+                      <FiGithub />
+                    </a>
+                  )}
+                  {project.liveLink && (
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-2xl text-primary dark:text-primary-dark hover:text-opacity-80 transition-colors duration-300"
+                    >
+                      <FiExternalLink />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div className="lg:w-1/2 w-full">
+                <Swiper
+                  modules={[Pagination, Navigation]}
+                  pagination={{ clickable: true }}
+                  navigation={true}
+                  className="rounded-lg shadow-lg w-full max-w-full"
+                >
+                  {project.images.map((img, idx) => (
+                    <SwiperSlide key={idx}>
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="relative w-full h-80 rounded-lg overflow-hidden"
+                      >
+                        <Image
+                          src={img}
+                          alt={`${project.title} Image ${idx + 1}`}
+                          fill
+                          className="rounded-lg object-cover transition duration-300 hover:scale-105"
+                        />
+                      </motion.div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
+

@@ -1,10 +1,10 @@
 import Navbar from "@/app/components/Navbar";
 import Profile from "@/app/components/Profile";
+import Experience from "@/app/components/Experience";
+import Projects from "@/app/components/Projects";
 import Skills from "@/app/components/Skills";
 import Education from "@/app/components/Education"; 
 import Honors from "@/app/components/Honors";
-import Projects from "@/app/components/Projects";
-import Experience from "@/app/components/Experience";
 import MyCVs from "@/app/components/MyCVs";
 import Contact from "@/app/components/Contact";
 import Footer from "./components/Footer";
@@ -15,10 +15,10 @@ export default function Home() {
     <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
       <Navbar />
       <Profile />
-      <Skills />
-      <Education /> 
       <Experience />
       <Projects />
+      <Skills />
+      <Education /> 
       <Honors />
       <MyCVs />
       <Contact />

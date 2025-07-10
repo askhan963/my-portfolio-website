@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FaGraduationCap } from "react-icons/fa"; // Correct icon for education
 
 const Education = () => {
   const educationData = [
     {
-      institution:
-        "COMSATS University Islamabad, Abbottabad Campus, KPK, Pakistan",
+      institution: "COMSATS University Islamabad, Abbottabad Campus",
       degree: "BS Computer Science",
       period: "2020 - 2024",
       cgpa: "3.37",
@@ -37,88 +37,87 @@ const Education = () => {
   return (
     <section
       id="education"
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6 sm:p-12"
     >
-      <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-16 tracking-tight">
-        Education & Academic Journey
-      </h1>
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-16 text-center"
+      >
+        Education & Academics
+      </motion.h1>
 
-      <div className="max-w-4xl w-full">
-        <ol className="relative border-s border-blue-500 dark:border-teal-500">
+      <div className="w-full max-w-4xl mx-auto">
+        <ol className="relative border-s border-gray-200 dark:border-gray-700">
           {educationData.map((edu, index) => (
-            <li
-              key={index}
-              className={`${
-                index !== educationData.length - 1 ? "mb-10" : ""
-              } ms-6`}
-            >
-              <div className="absolute w-3 h-3 bg-blue-500 dark:bg-teal-400 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 shadow-lg">
-                <div className="absolute inset-0 bg-blue-500 dark:bg-teal-400 rounded-full animate-ping opacity-75"></div>
-              </div>
-
-              <time className="mb-1 text-sm leading-none text-blue-600 dark:text-teal-400 font-medium">
-                {edu.period}
-              </time>
+            <li key={index} className="mb-12 ms-8">
+              <span className="absolute flex items-center justify-center w-8 h-8 bg-indigo-100 rounded-full -start-4 ring-8 ring-white dark:bg-indigo-900 dark:ring-gray-900">
+                <FaGraduationCap className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              </span>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] mt-2"
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-transparent dark:border-gray-700/50"
               >
-                <div className="flex flex-col md:flex-row items-start">
-                  {/* Logo Section */}
-                  <div className="w-24 h-24 mr-0 md:mr-6 mb-4 md:mb-0 flex-shrink-0 flex items-center justify-center">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-teal-500 dark:to-teal-600 rounded-full opacity-20"></div>
-
-                      <Image
-                        src={edu.logo}
-                        alt={`${edu.institution} Logo`}
-                        width={96}
-                        height={96}
-                        className="relative rounded-full shadow-xl"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Education Details */}
-                  <div className="flex-grow">
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  <Image
+                    src={edu.logo}
+                    alt={`${edu.institution} Logo`}
+                    width={56}
+                    height={56}
+                    className="rounded-lg shadow-sm flex-shrink-0"
+                  />
+                  <div className="flex-1">
                     <a
                       href={edu.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-2xl sm:text-3xl font-heading font-bold text-blue-600 dark:text-teal-400 hover:text-blue-700 dark:hover:text-teal-300 transition-colors duration-200"
+                      className="inline-block"
                     >
-                      {edu.degree}
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                        {edu.institution}
+                      </h3>
                     </a>
-                    <p className="text-lg sm:text-xl font-heading font-medium text-gray-800 dark:text-gray-200 mt-1">
-                      {edu.institution}
+                    <p className="text-md font-semibold text-gray-700 dark:text-gray-300">
+                      {edu.degree}
                     </p>
+                    <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500 mt-1">
+                      {edu.period}
+                    </time>
+                  </div>
+                </div>
 
-                    {/* CGPA */}
-                    {edu.cgpa && (
-                      <p className="text-sm sm:text-base font-body text-gray-700 dark:text-gray-300 mb-4 mt-2">
-                        <span className="font-heading font-medium">CGPA:</span>{" "}
-                        {edu.cgpa}
-                      </p>
-                    )}
-
-                    {/* Core Courses / Subjects */}
-                    <div className="mt-4">
-                      <p className="font-heading text-lg sm:text-xl font-medium mb-2 text-gray-900 dark:text-gray-100">
-                        {edu.coreCourses ? "Core Courses" : "Core Subjects"}
-                      </p>
-                      <ul className="space-y-1 text-gray-600 dark:text-gray-400 list-disc pl-5 font-body">
-                        {(edu.coreCourses || edu.coreSubjects)?.map(
-                          (course, idx) => (
-                            <li key={idx} className="text-sm sm:text-base">
-                              {course}
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
+                <div className="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+                  {edu.cgpa && (
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">
+                        Final CGPA:
+                      </span>{" "}
+                      {edu.cgpa} / 4.0
+                    </p>
+                  )}
+                  
+                  <div>
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                      {edu.coreCourses ? "Core Courses" : "Core Subjects"}
+                    </h4>
+                    <ul className="space-y-2 text-gray-600 dark:text-gray-400 list-disc pl-5">
+                      {(edu.coreCourses || edu.coreSubjects)?.map(
+                        (item, idx) => (
+                          <li
+                            key={idx}
+                            className="text-sm sm:text-base leading-relaxed"
+                          >
+                            {item}
+                          </li>
+                        )
+                      )}
+                    </ul>
                   </div>
                 </div>
               </motion.div>

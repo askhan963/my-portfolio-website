@@ -2,38 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Modern color palette */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background: #f0f2f5; /* Light gray background */
+  --foreground: #1a1a1a; /* Dark text color */
+  --primary: #007bff; /* Vibrant blue for accents */
+  --card-background: #ffffff; /* White card background */
+  --border-color: #e5e7eb; /* Light border color */
 }
 
-/* Import modern fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+[data-theme="dark"] {
+  --background: #121212; /* Dark background */
+  --foreground: #e5e5e5; /* Light text color */
+  --primary: #1e90ff; /* Brighter blue for dark mode */
+  --card-background: #1e1e1e; /* Dark card background */
+  --border-color: #2c2c2c; /* Darker border color */
+}
 
-*{
+/* Smooth scrolling and base styles */
+html {
   scroll-behavior: smooth;
-  text-decoration: none;
 }
 
-/* Base font styles */
 body {
-  @apply font-poppins;
+  @apply bg-background text-foreground font-sans;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-h1, h2, h3 {
-  @apply font-spaceGrotesk;
+/* Responsive typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold tracking-tight;
 }
 
-
-/* Special section styles */
-.display-text {
-  @apply font-display;
+h1 {
+  @apply text-4xl sm:text-5xl lg:text-6xl;
 }
 
-/* Set font for logo */
-.font-logo {
-  font-family: 'Playfair Display', cursive;
+h2 {
+  @apply text-3xl sm:text-4xl;
+}
+
+h3 {
+  @apply text-2xl sm:text-3xl;
+}
+
+p {
+  @apply text-base sm:text-lg;
+}
+
+/* Hide scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
