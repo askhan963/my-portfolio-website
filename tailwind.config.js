@@ -7,16 +7,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#007bff",
-        "primary-dark": "#1e90ff",
-        background: "#f0f2f5",
-        foreground: "#1a1a1a",
-        "card-background": "#ffffff",
-        "border-color": "#e5e7eb",
-        "dark-background": "#121212",
-        "dark-foreground": "#e5e5e5",
-        "dark-card-background": "#1e1e1e",
-        "dark-border-color": "#2c2c2c",
+        primary: 'var(--primary)',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        card: {
+          DEFAULT: 'var(--card-background)',
+          foreground: 'var(--foreground)',
+        },
+        border: 'var(--border-color)',
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],

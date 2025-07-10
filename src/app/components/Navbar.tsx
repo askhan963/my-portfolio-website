@@ -8,6 +8,7 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
@@ -19,8 +20,20 @@ export default function Navbar() {
       setDarkMode(false);
     }
 
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 10);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down
+        setIsHidden(true);
+      } else {
+        // Scrolling up
+        setIsHidden(false);
+      }
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -58,11 +71,13 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ y: 0 }}
+      animate={{ y: isHidden ? -100 : 0 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-md" : "bg-transparent"
+        isScrolled
+          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-md"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
