@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { FiAward } from "react-icons/fi";
 
 const honors = [
-  {
+   {
     image: "/Awards/freeCodeCamp.png",
     title: "Relational Database",
     description: "freeCodeCamp",
@@ -23,6 +23,36 @@ const honors = [
   {
     image: "/Awards/generativeAI.png",
     title: "Generative AI Fundamentals",
+    description: "Google",
+  },
+  {
+    image: "/Awards/simplilearn.png",
+    title: "Introduction to Front End Development",
+    description: "Simplilearn",
+  },
+  {
+    image: "/Awards/futureTech.png",
+    title: "Certificate of Appreciation",
+    description: "Future Tech",
+  },
+  {
+    image: "/Awards/gitGithubParticipation.png",
+    title: "Certificate of Participation in Git & GitHub for Developers",
+    description: "GitHub",
+  },
+  {
+    image: "/Awards/IntroductionToAI.png",
+    title: "Certificate of Introduction to AI & ML using Cloud",
+    description: "Google",
+  },
+  {
+    image: "/Awards/IntroToMERN.png",
+    title: "Certificate of Introduction to MERN Stack",
+    description: "Google",
+  },
+  {
+    image: "/Awards/IntroToGenAI.png",
+    title: "Certificate of Intro to Gen AI Studio",
     description: "Google",
   },
 ];
