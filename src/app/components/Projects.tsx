@@ -28,7 +28,7 @@ interface Project {
 
 const projects: ProjectCategory[] = [
   {
-    category: "Computer Sciecne",
+    category: "Computer Science",
     projects: [
       {
         title: "VR MathQuest Adventures (FYP)",
