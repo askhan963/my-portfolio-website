@@ -2,34 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FaReact,
-  FaNodeJs,
-  FaGitAlt,
-  FaDocker,
-  FaJava,
-  FaPython,
-  FaHtml5,
-  FaCss3,
-  FaGithub,
-  FaJsSquare,
-  FaDatabase,
-  FaTerminal,
-} from "react-icons/fa";
-import {
-  SiMongodb,
-  SiRedux,
-  SiTailwindcss,
-  SiTypescript,
-  SiIntellijidea,
-  SiMysql,
-  SiFirebase,
-  SiGraphql,
-  SiPostgresql,
-  SiPostman,
-  SiPrisma,
-  SiVite,
-} from "react-icons/si";
+import { FaReact, FaNodeJs, FaGitAlt, FaDocker, FaJava, FaPython, FaHtml5, FaCss3, FaGithub, FaJsSquare, FaDatabase, FaTerminal } from "react-icons/fa";
+import { SiMongodb, SiRedux, SiTailwindcss, SiTypescript, SiIntellijidea, SiMysql, SiFirebase, SiGraphql, SiPostgresql, SiPostman, SiPrisma, SiVite } from "react-icons/si";
 
 type Category = "Frontend" | "Backend" | "Languages" | "Tools";
 
@@ -56,7 +30,6 @@ const skillCategories: Record<Category, Skill[]> = {
     { name: "MySQL", icon: <SiMysql size={40} /> },
     { name: "PostgreSQL", icon: <SiPostgresql size={40} /> },
     { name: "Firebase", icon: <SiFirebase size={40} /> },
-    // { name: "GraphQL", icon: <SiGraphql size={40} /> },
     { name: "RESTful APIs", icon: <FaDatabase size={40} /> },
     { name: "Prisma ORM", icon: <SiPrisma size={40} /> },
   ],
@@ -70,7 +43,6 @@ const skillCategories: Record<Category, Skill[]> = {
     { name: "Git", icon: <FaGitAlt size={40} /> },
     { name: "GitHub", icon: <FaGithub size={40} /> },
     { name: "Docker", icon: <FaDocker size={40} /> },
-    // { name: "VS Code", icon: <SiVisualstudiocode size={40} /> },
     { name: "IntelliJ IDEA", icon: <SiIntellijidea size={40} /> },
     { name: "Postman", icon: <SiPostman size={40} /> },
     { name: "Terminal", icon: <FaTerminal size={40} /> },
@@ -83,25 +55,30 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6"
     >
-      <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-800 dark:text-gray-100 mb-16 tracking-tight">
+      <motion.h1 
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+      >
         Skills & Expertise
-      </h1>
+      </motion.h1>
 
-      <div className="w-full max-w-6xl flex flex-col md:flex-row gap-10">
-        {/* Sidebar */}
-        <div className="md:w-1/4 flex flex-col md:flex-col justify-center md:items-start items-center gap-4">
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="flex justify-center flex-wrap gap-4 mb-12">
           {Object.keys(skillCategories).map((category) => (
             <motion.button
               key={category}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(category as Category)}
-              className={`w-full text-center md:text-left px-4 py-2 rounded-lg text-base font-medium transition-all ${
+              className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
                 activeCategory === category
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                  ? "bg-primary text-white shadow-lg"
+                  : "bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`}
             >
               {category}
@@ -109,23 +86,30 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Skills */}
-        <div className="md:w-3/4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
-          {skillCategories[activeCategory].map((skill) => (
+        <motion.div 
+          key={activeCategory}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8"
+        >
+          {skillCategories[activeCategory].map((skill, index) => (
             <motion.div
               key={skill.name}
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="flex flex-col items-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="p-4 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-xl transition-shadow">
+              <div className="text-primary dark:text-primary-dark mb-3">
                 {skill.icon}
               </div>
-              <span className="mt-2 text-sm font-medium text-gray-700 dark:text-gray-200 text-center">
+              <span className="text-md font-medium text-gray-700 dark:text-gray-200 text-center">
                 {skill.name}
               </span>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

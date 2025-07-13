@@ -6,15 +6,20 @@ import { FiLinkedin, FiGithub, FiMail } from 'react-icons/fi';
 
 const ContactMe: React.FC = () => {
   return (
-    <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 bg-gradient-to-b from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 shadow-lg rounded-xl p-3 space-y-3 hidden sm:block">
+    <motion.div 
+      initial={{ x: 100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.7, delay: 1, ease: "easeOut" }}
+      className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden sm:flex flex-col items-center space-y-4"
+    >
       <motion.a
         href="https://www.linkedin.com/in/askhan963/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-110"
-        title="LinkedIn"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
+        className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+        title="LinkedIn"
       >
         <FiLinkedin className="w-6 h-6" />
       </motion.a>
@@ -22,10 +27,10 @@ const ContactMe: React.FC = () => {
         href="https://github.com/askhan963"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-110"
-        title="GitHub"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
+        className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+        title="GitHub"
       >
         <FiGithub className="w-6 h-6" />
       </motion.a>
@@ -33,14 +38,14 @@ const ContactMe: React.FC = () => {
         href="mailto:awaiskhanniazi963@gmail.com"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-teal-600 to-teal-700 text-white rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-110"
-        title="Email"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
+        className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+        title="Email"
       >
         <FiMail className="w-6 h-6" />
       </motion.a>
-    </div>
+    </motion.div>
   );
 };
 

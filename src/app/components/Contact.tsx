@@ -2,28 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FiLinkedin,
-  FiFacebook,
-  FiTwitter,
-  FiGithub,
-  FiMail,
-  FiCheck,
-} from "react-icons/fi";
+import { FiLinkedin, FiFacebook, FiTwitter, FiGithub, FiMail, FiCheckCircle } from "react-icons/fi";
 
 const Contact = () => {
-  // Form state
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -34,20 +20,14 @@ const Contact = () => {
     try {
       const response = await fetch("https://formspree.io/f/mkgwvrll", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-        });
+        setFormData({ name: "", email: "", message: "" });
         setFormSuccess(true);
-        setTimeout(() => setFormSuccess(false), 3000);
+        setTimeout(() => setFormSuccess(false), 5000);
       } else {
         alert("There was an error sending your message. Please try again.");
       }
@@ -61,170 +41,83 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6"
     >
-      <div
-        className="text-center mb-12"
-        style={{
-          opacity: 1,
-          transform: "translateY(0px)",
-          transition: "all 0.8s ease",
-        }}
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 text-center"
       >
-        <h1 className="text-5xl sm:text-6xl font-display font-bold text-gray-900 dark:text-gray-100 mb-6 tracking-tight">
-          Contact Me
-        </h1>
-        <p className="text-xl sm:text-2xl font-body text-gray-700 dark:text-gray-300 mb-12 max-w-3xl">
-          I'm always open to discussing new projects, creative ideas, or
-          opportunities to be part of your visions.
-        </p>
-      </div>
+        Get in Touch
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="text-lg text-gray-600 dark:text-gray-400 mb-12 text-center max-w-2xl"
+      >
+        I'm currently available for freelance work and open to discussing new projects. Feel free to reach out!
+      </motion.p>
 
-      {/* Mail me now button */}
-      <div
-        className="mb-12"
-        style={{
-          opacity: 1,
-          transform: "translateY(0px)",
-          transition: "all 0.8s ease 0.2s",
-        }}
-      >
-        <a
-          href="mailto:awaiskhanniazi963@gmail.com"
-          className="inline-flex items-center bg-gradient-to-r from-blue-400 to-teal-800 text-white py-4 px-8 rounded-xl text-lg font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
+      <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-12">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          viewport={{ once: true }}
         >
-          <FiMail className="mr-3 text-xl" />
-          Mail me now
-        </a>
-      </div>
-
-      {/* Social Links */}
-      <div
-        className="mb-12"
-        style={{
-          opacity: 1,
-          transform: "translateY(0px)",
-          transition: "all 0.8s ease 0.4s",
-        }}
-      >
-        <div className="flex space-x-8 justify-center">
-          {[
-            {
-              href: "https://pk.linkedin.com/in/askhan963",
-              icon: <FiLinkedin />,
-            },
-            {
-              href: "https://www.facebook.com/awaisknas963/",
-              icon: <FiFacebook />,
-            },
-            {
-              href: "https://twitter.com/as_khan963",
-              icon: <FiTwitter />,
-            },
-            {
-              href: "https://github.com/askhan963",
-              icon: <FiGithub />,
-            },
-          ].map((link, idx) => (
-            <a
-              key={idx}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-4xl text-blue-400 dark:text-teal-400 hover:text-blue-500 dark:hover:text-teal-300 transition duration-300 hover:scale-110 hover:rotate-6"
-            >
-              {link.icon}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* Contact Form */}
-      <div
-        className="w-full max-w-2xl mx-auto"
-        style={{
-          opacity: 1,
-          transform: "translateY(0px)",
-          transition: "all 0.8s ease 0.6s",
-        }}
-      >
-        {formSuccess ? (
-          <div className="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
-            <FiCheck className="text-4xl text-blue-400 dark:text-teal-400 mb-4 mx-auto" />
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-              Message Sent Successfully!
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Thank you for reaching out! I'll get back to you as soon as
-              possible.
-            </p>
-          </div>
-        ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          {formSuccess ? (
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center justify-center text-center h-full">
+              <FiCheckCircle className="text-5xl text-green-500 mb-4" />
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Message Sent!</h3>
+              <p className="text-gray-600 dark:text-gray-300">Thank you for your message. I'll get back to you shortly.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full px-6 py-4 rounded-xl border border-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400 dark:focus:border-teal-400 dark:focus:ring-teal-400 text-gray-900 dark:text-gray-100 dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500"
-                  placeholder="Your Name"
-                  required
-                />
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
+                <input id="name" name="name" value={formData.name} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" required />
               </div>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-6 py-4 rounded-xl border border-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400 dark:focus:border-teal-400 dark:focus:ring-teal-400 text-gray-900 dark:text-gray-100 dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500"
-                  placeholder="Your Email"
-                  required
-                />
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                <input id="email" type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" required />
               </div>
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="w-full px-6 py-4 rounded-xl border border-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-2 focus:ring-blue-400 dark:focus:border-teal-400 dark:focus:ring-teal-400 text-gray-900 dark:text-gray-100 dark:bg-gray-800 placeholder-gray-400 dark:placeholder-gray-500"
-                  placeholder="Enter your message"
-                  required
-                />
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" required />
               </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-400 to-teal-800 text-white py-4 px-6 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
+              <button type="submit" disabled={isSubmitting} className="w-full py-3 px-6 bg-primary text-white font-bold rounded-lg shadow-md hover:bg-primary/90 transition-all duration-300 disabled:opacity-50">
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </form>
+          )}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="space-y-6"
+        >
+          <a href="mailto:awaiskhanniazi963@gmail.com" className="flex items-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <FiMail className="text-3xl text-primary dark:text-primary-dark mr-6" />
+            <div>
+              <h4 className="text-xl font-bold text-gray-900 dark:text-white">Email</h4>
+              <p className="text-gray-600 dark:text-gray-400">awaiskhanniazi963@gmail.com</p>
+            </div>
+          </a>
+          <div className="flex justify-center space-x-6 pt-4">
+            {[ { href: "https://pk.linkedin.com/in/askhan963", icon: <FiLinkedin size={28}/> }, { href: "https://www.facebook.com/awaisknas963/", icon: <FiFacebook size={28}/> }, { href: "https://twitter.com/as_khan963", icon: <FiTwitter size={28}/> }, { href: "https://github.com/askhan963", icon: <FiGithub size={28}/> } ].map((link, idx) => (
+              <a key={idx} href={link.href} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300">
+                {link.icon}
+              </a>
+            ))}
           </div>
-        )}
+        </motion.div>
       </div>
     </section>
   );
