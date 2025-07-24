@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
@@ -87,7 +88,13 @@ export default function Navbar() {
             className="text-3xl font-bold text-primary dark:text-primary-dark"
             whileHover={{ scale: 1.05 }}
           >
-            ASKHAN
+            <Image
+              src="/Logos/ASKHAN_LOGO.png"
+              alt="Logo"
+              width={50}
+              height={50}
+              className="mr-2 dark:invert dark:brightness-0 dark:sepia dark:hue-rotate-[180deg] dark:saturate-200"
+            />
           </motion.a>
 
           {/* Desktop Menu */}
