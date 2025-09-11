@@ -18,7 +18,7 @@ const ContactMe: React.FC = () => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+        className="w-12 h-12 bg-card text-card-foreground rounded-full shadow-lg flex items-center justify-center hover:text-primary transition-colors duration-300 border border-border"
         title="LinkedIn"
       >
         <FiLinkedin className="w-6 h-6" />
@@ -29,7 +29,7 @@ const ContactMe: React.FC = () => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+        className="w-12 h-12 bg-card text-card-foreground rounded-full shadow-lg flex items-center justify-center hover:text-primary transition-colors duration-300 border border-border"
         title="GitHub"
       >
         <FiGithub className="w-6 h-6" />
@@ -40,7 +40,7 @@ const ContactMe: React.FC = () => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        className="w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+        className="w-12 h-12 bg-card text-card-foreground rounded-full shadow-lg flex items-center justify-center hover:text-primary transition-colors duration-300 border border-border"
         title="Email"
       >
         <FiMail className="w-6 h-6" />

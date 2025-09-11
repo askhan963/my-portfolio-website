@@ -273,14 +273,14 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
     >
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+        className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
       >
         My Projects
       </motion.h1>
@@ -296,7 +296,7 @@ export default function Projects() {
               className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
                 selectedCategory === category
                   ? "bg-primary text-white shadow-lg"
-                  : "bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  : "bg-card text-card-foreground border border-border hover:bg-primary/10"
               }`}
             >
               {category}
@@ -311,20 +311,20 @@ export default function Projects() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white dark:bg-gray-800/50 p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8"
+              className="bg-card text-card-foreground p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8 border border-border"
             >
               <div className="lg:w-1/2 space-y-4">
-                <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary dark:text-primary-dark mb-3">
+                <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary mb-3">
                   {project.title}
                 </h2>
-                <p className="text-lg sm:text-xl font-body text-gray-700 dark:text-gray-300">
+                <p className="text-lg sm:text-xl font-body text-foreground/70">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-3 mt-4">
                   {project.techStack.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-body text-primary dark:text-primary-dark"
+                      className="px-4 py-2 bg-background rounded-full text-sm font-body text-primary border border-border"
                     >
                       {tech}
                     </span>
@@ -336,7 +336,7 @@ export default function Projects() {
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-2xl text-primary dark:text-primary-dark hover:text-opacity-80 transition-colors duration-300"
+                      className="text-2xl text-primary hover:text-opacity-80 transition-colors duration-300"
                     >
                       <FiGithub />
                     </a>
@@ -346,7 +346,7 @@ export default function Projects() {
                       href={project.liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-2xl text-primary dark:text-primary-dark hover:text-opacity-80 transition-colors duration-300"
+                      className="text-2xl text-primary hover:text-opacity-80 transition-colors duration-300"
                     >
                       <FiExternalLink />
                     </a>

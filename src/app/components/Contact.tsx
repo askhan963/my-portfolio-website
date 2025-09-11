@@ -41,14 +41,14 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
     >
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4 text-center"
+        className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-center"
       >
         Get in Touch
       </motion.h1>
@@ -57,7 +57,7 @@ const Contact = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
         viewport={{ once: true }}
-        className="text-lg text-gray-600 dark:text-gray-400 mb-12 text-center max-w-2xl"
+        className="text-lg text-foreground/70 mb-12 text-center max-w-2xl"
       >
         I'm currently available for freelance work and open to discussing new projects. Feel free to reach out!
       </motion.p>
@@ -70,24 +70,24 @@ const Contact = () => {
           viewport={{ once: true }}
         >
           {formSuccess ? (
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center justify-center text-center h-full">
-              <FiCheckCircle className="text-5xl text-green-500 mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Message Sent!</h3>
-              <p className="text-gray-600 dark:text-gray-300">Thank you for your message. I'll get back to you shortly.</p>
+            <div className="bg-card text-card-foreground p-8 rounded-xl shadow-lg flex flex-col items-center justify-center text-center h-full border border-border">
+              <FiCheckCircle className="text-5xl text-primary mb-4" />
+              <h3 className="text-2xl font-bold text-foreground mb-2">Message Sent!</h3>
+              <p className="text-foreground/70">Thank you for your message. I'll get back to you shortly.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+            <form onSubmit={handleSubmit} className="space-y-6 bg-card text-card-foreground p-8 rounded-xl shadow-lg border border-border">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
-                <input id="name" name="name" value={formData.name} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" required />
+                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">Name</label>
+                <input id="name" name="name" value={formData.name} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-border focus:ring-2 focus:ring-primary bg-background text-foreground" required />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
-                <input id="email" type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" required />
+                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">Email</label>
+                <input id="email" type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-border focus:ring-2 focus:ring-primary bg-background text-foreground" required />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
-                <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary dark:focus:ring-primary-dark bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" required />
+                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">Message</label>
+                <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} rows={4} className="w-full px-4 py-3 rounded-lg border border-border focus:ring-2 focus:ring-primary bg-background text-foreground" required />
               </div>
               <button type="submit" disabled={isSubmitting} className="w-full py-3 px-6 bg-primary text-white font-bold rounded-lg shadow-md hover:bg-primary/90 transition-all duration-300 disabled:opacity-50">
                 {isSubmitting ? "Sending..." : "Send Message"}
@@ -103,16 +103,16 @@ const Contact = () => {
           viewport={{ once: true }}
           className="space-y-6"
         >
-          <a href="mailto:awaiskhanniazi963@gmail.com" className="flex items-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <FiMail className="text-3xl text-primary dark:text-primary-dark mr-6" />
+          <a href="mailto:awaiskhanniazi963@gmail.com" className="flex items-center p-6 bg-card text-card-foreground rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-border">
+            <FiMail className="text-3xl text-primary mr-6" />
             <div>
-              <h4 className="text-xl font-bold text-gray-900 dark:text-white">Email</h4>
-              <p className="text-gray-600 dark:text-gray-400">awaiskhanniazi963@gmail.com</p>
+              <h4 className="text-xl font-bold text-foreground">Email</h4>
+              <p className="text-foreground/70">awaiskhanniazi963@gmail.com</p>
             </div>
           </a>
           <div className="flex justify-center space-x-6 pt-4">
             {[ { href: "https://pk.linkedin.com/in/askhan963", icon: <FiLinkedin size={28}/> }, { href: "https://www.facebook.com/awaisknas963/", icon: <FiFacebook size={28}/> }, { href: "https://twitter.com/as_khan963", icon: <FiTwitter size={28}/> }, { href: "https://github.com/askhan963", icon: <FiGithub size={28}/> } ].map((link, idx) => (
-              <a key={idx} href={link.href} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300">
+              <a key={idx} href={link.href} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-primary transition-colors duration-300">
                 {link.icon}
               </a>
             ))}

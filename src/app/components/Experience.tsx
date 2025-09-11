@@ -91,24 +91,24 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6 sm:p-12"
+      className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
     >
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-16 text-center"
+        className="text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center"
       >
         Professional Experience
       </motion.h1>
 
       <div className="w-full max-w-4xl mx-auto">
-        <ol className="relative border-s border-gray-200 dark:border-gray-700">
+        <ol className="relative border-s border-border">
           {experiences.map((experience, index) => (
             <li key={index} className="mb-12 ms-8">
-              <span className="absolute flex items-center justify-center w-8 h-8 bg-indigo-100 rounded-full -start-4 ring-8 ring-white dark:bg-indigo-900 dark:ring-gray-900">
-                <FaBriefcase className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              <span className="absolute flex items-center justify-center w-8 h-8 bg-primary/15 rounded-full -start-4 ring-8 ring-card">
+                <FaBriefcase className="w-4 h-4 text-primary" />
               </span>
 
               <motion.div
@@ -116,7 +116,7 @@ export default function Experience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-transparent dark:border-gray-700/50"
+                className="p-6 bg-card text-card-foreground rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-border"
               >
                 {/* Shared Company Header */}
                 <div className="flex flex-col sm:flex-row items-start gap-4">
@@ -134,11 +134,11 @@ export default function Experience() {
                       rel="noopener noreferrer"
                       className="inline-block"
                     >
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                      <h3 className="text-xl font-bold text-foreground hover:text-primary transition-colors">
                         {experience.company}
                       </h3>
                     </a>
-                    <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500 mt-1">
+                    <time className="block mb-2 text-sm font-normal leading-none text-foreground/60 mt-1">
                       {experience.period}
                     </time>
                   </div>
@@ -152,20 +152,20 @@ export default function Experience() {
                         {/* Promotion Separator */}
                         {roleIndex < experience.roles.length - 1 && roleIndex !== 0 && (
                           <div className="flex items-center text-center my-6">
-                            <div className="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
-                            <span className="flex-shrink mx-4 inline-flex items-center gap-2 text-xs font-semibold uppercase text-indigo-500 dark:text-indigo-400">
+                            <div className="flex-grow border-t border-border"></div>
+                            <span className="flex-shrink mx-4 inline-flex items-center gap-2 text-xs font-semibold uppercase text-primary">
                               <FaArrowUp />
                               Promotion
                             </span>
-                            <div className="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
+                            <div className="flex-grow border-t border-border"></div>
                           </div>
                         )}
 
                         {/* Role Details */}
                         <div>
-                          <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100">{role.title}</h4>
-                          <time className="block mb-2 text-xs font-normal text-gray-400 dark:text-gray-500">{role.period}</time>
-                          <ul className="mt-2 space-y-2 text-gray-600 dark:text-gray-400 list-disc pl-5">
+                          <h4 className="text-lg font-semibold text-foreground">{role.title}</h4>
+                          <time className="block mb-2 text-xs font-normal text-foreground/60">{role.period}</time>
+                          <ul className="mt-2 space-y-2 text-foreground/70 list-disc pl-5">
                             {role.description.map((desc, idx) => (
                               <li key={idx} className="text-sm sm:text-base leading-relaxed">
                                 {desc}
@@ -179,8 +179,8 @@ export default function Experience() {
                 ) : (
                   // Fallback for single-role experiences
                   <div className="mt-2">
-                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">{experience.title}</h3>
-                    <ul className="mt-2 space-y-2 text-gray-600 dark:text-gray-400 list-disc pl-5">
+                     <h3 className="text-xl font-bold text-foreground">{experience.title}</h3>
+                    <ul className="mt-2 space-y-2 text-foreground/70 list-disc pl-5">
                       {experience.description.map((desc, idx) => (
                         <li key={idx} className="text-sm sm:text-base leading-relaxed">
                           {desc}

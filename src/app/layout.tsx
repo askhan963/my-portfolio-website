@@ -1,5 +1,4 @@
 import "./globals.css";
-import Head from "next/head";
 import { Poppins, Inter, Space_Grotesk } from "next/font/google";
 
 const poppins = Poppins({
@@ -34,12 +33,6 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} ${inter.variable} ${spaceGrotesk.variable}`}
     >
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
       <body>{children}</body>
     </html>
   );
