@@ -185,7 +185,10 @@ export default function HonorsPage() {
               key={honor.id}
               honor={honor}
               onEdit={handleEdit}
-              onDelete={handleDeleteClick}
+              onDelete={(id) => {
+                const honor = honors.find(h => h.id === id)
+                if (honor) handleDeleteClick(honor)
+              }}
               onView={handleView}
             />
           ))}

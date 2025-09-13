@@ -7,11 +7,12 @@ import { honorSchema } from '@/lib/validations'
 // GET /api/honors/[id] - Get single honor
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const honor = await prisma.honor.findUnique({
-      where: { id: params.id },
+      where: { id },
     })
 
     if (!honor) {
@@ -31,7 +32,7 @@ export async function GET(
 // PUT /api/honors/[id] - Update honor
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -40,11 +41,12 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
     const body = await request.json()
     const validatedData = honorSchema.parse(body)
 
     const honor = await prisma.honor.update({
-      where: { id: params.id },
+      where: { id },
       data: validatedData,
     })
 
@@ -67,7 +69,7 @@ export async function PUT(
 // DELETE /api/honors/[id] - Delete honor
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -76,8 +78,9 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
     await prisma.honor.delete({
-      where: { id: params.id },
+      where: { id },
     })
 
     return NextResponse.json({ success: true })

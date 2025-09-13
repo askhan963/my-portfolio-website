@@ -7,11 +7,12 @@ import { experienceSchema } from '@/lib/validations'
 // GET /api/experience/[id] - Get single experience
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const experience = await prisma.experience.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         roles: {
           orderBy: { createdAt: 'asc' }
@@ -36,7 +37,7 @@ export async function GET(
 // PUT /api/experience/[id] - Update experience
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -45,6 +46,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
     const body = await request.json()
     const validatedData = experienceSchema.parse(body)
 
@@ -52,12 +54,12 @@ export async function PUT(
     const experience = await prisma.$transaction(async (tx) => {
       // Delete existing roles
       await tx.experienceRole.deleteMany({
-        where: { experienceId: params.id }
+        where: { experienceId: id }
       })
 
       // Update experience and create new roles
       return await tx.experience.update({
-        where: { id: params.id },
+        where: { id },
         data: {
           company: validatedData.company,
           companyLink: validatedData.companyLink,
@@ -96,7 +98,7 @@ export async function PUT(
 // DELETE /api/experience/[id] - Delete experience
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -105,9 +107,10 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
     // Delete experience (roles will be deleted automatically due to cascade)
     await prisma.experience.delete({
-      where: { id: params.id },
+      where: { id },
     })
 
     return NextResponse.json({ success: true })

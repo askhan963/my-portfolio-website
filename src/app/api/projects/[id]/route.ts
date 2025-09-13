@@ -7,11 +7,12 @@ import { projectSchema } from '@/lib/validations'
 // GET /api/projects/[id] - Get single project
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const project = await prisma.project.findUnique({
-      where: { id: params.id },
+      where: { id },
     })
 
     if (!project) {
@@ -31,7 +32,7 @@ export async function GET(
 // PUT /api/projects/[id] - Update project
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -40,11 +41,12 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
     const body = await request.json()
     const validatedData = projectSchema.parse(body)
 
     const project = await prisma.project.update({
-      where: { id: params.id },
+      where: { id },
       data: validatedData,
     })
 
@@ -67,7 +69,7 @@ export async function PUT(
 // DELETE /api/projects/[id] - Delete project
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -76,8 +78,9 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
     await prisma.project.delete({
-      where: { id: params.id },
+      where: { id },
     })
 
     return NextResponse.json({ success: true })

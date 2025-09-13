@@ -186,7 +186,10 @@ export default function ExperiencePage() {
               key={experience.id}
               experience={experience}
               onEdit={handleEdit}
-              onDelete={handleDeleteClick}
+              onDelete={(id) => {
+                const experience = experiences.find(e => e.id === id)
+                if (experience) handleDeleteClick(experience)
+              }}
               onView={handleView}
             />
           ))}

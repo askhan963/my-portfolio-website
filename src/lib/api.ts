@@ -34,7 +34,7 @@ apiClient.interceptors.response.use(
     } else if (error.response?.status === 403) {
       // Handle forbidden access
       console.error('Forbidden access')
-    } else if (error.response?.status >= 500) {
+    } else if (error.response?.status && error.response.status >= 500) {
       // Handle server errors
       console.error('Server error:', error.response.status)
     }
