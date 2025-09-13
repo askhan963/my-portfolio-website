@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react'
 
 interface ImageUploadProps {
   onUpload: (url: string, publicId: string) => void
+  onError?: (error: string) => void
   folder?: string
   className?: string
   disabled?: boolean
@@ -12,6 +13,7 @@ interface ImageUploadProps {
 
 export default function ImageUpload({
   onUpload,
+  onError,
   folder = 'portfolio',
   className = '',
   disabled = false,
@@ -29,14 +31,18 @@ export default function ImageUpload({
     // Validate file type
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
     if (!allowedTypes.includes(file.type)) {
-      setError('Please select a valid image file (JPEG, PNG, WebP, or GIF)')
+      const errorMsg = 'Please select a valid image file (JPEG, PNG, WebP, or GIF)'
+      setError(errorMsg)
+      onError?.(errorMsg)
       return
     }
 
     // Validate file size (5MB max)
     const maxSize = 5 * 1024 * 1024 // 5MB
     if (file.size > maxSize) {
-      setError('File size must be less than 5MB')
+      const errorMsg = 'File size must be less than 5MB'
+      setError(errorMsg)
+      onError?.(errorMsg)
       return
     }
 
@@ -53,7 +59,9 @@ export default function ImageUpload({
 
   const uploadFile = async (file: File) => {
     if (!session) {
-      setError('You must be logged in to upload files')
+      const errorMsg = 'You must be logged in to upload files'
+      setError(errorMsg)
+      onError?.(errorMsg)
       return
     }
 
@@ -83,7 +91,9 @@ export default function ImageUpload({
       }
     } catch (error) {
       console.error('Upload error:', error)
-      setError(error instanceof Error ? error.message : 'Upload failed')
+      const errorMsg = error instanceof Error ? error.message : 'Upload failed'
+      setError(errorMsg)
+      onError?.(errorMsg)
     } finally {
       setIsUploading(false)
     }

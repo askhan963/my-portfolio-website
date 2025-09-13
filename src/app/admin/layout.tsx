@@ -1,9 +1,10 @@
 "use client"
 
-import { useSession, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { useRouter, usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import Link from "next/link"
+import Sidebar from "@/components/admin/Sidebar"
+import Header from "@/components/admin/Header"
 
 export default function AdminLayout({
   children,
@@ -14,6 +15,8 @@ export default function AdminLayout({
   const router = useRouter()
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -30,93 +33,78 @@ export default function AdminLayout({
     }
   }, [session, status, router, pathname, mounted])
 
+  const toggleSidebar = () => {
+    setSidebarCollapsed(!sidebarCollapsed)
+  }
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
   if (!mounted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <p className="text-gray-900 dark:text-white">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="text-gray-900 dark:text-white mt-2">Loading...</p>
+        </div>
       </div>
     )
   }
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <p className="text-gray-900 dark:text-white">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="text-gray-900 dark:text-white mt-2">Loading...</p>
+        </div>
       </div>
     )
   }
 
-  // If not authenticated and not on login page, show nothing (will redirect)
+  // If not authenticated and not on login page, show redirecting message
   if (!session || session.user.role !== "ADMIN") {
     if (pathname.includes('/admin/login')) {
       return <>{children}</>
     }
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <div className="text-gray-900 dark:text-white">Redirecting...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="text-gray-900 dark:text-white mt-2">Redirecting...</div>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Admin Header */}
-      <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600 dark:text-gray-400">
-                Welcome, {session.user.name || session.user.email}
-              </span>
-              <button
-                onClick={() => signOut({ callbackUrl: "/" })}
-                className="text-sm text-blue-600 hover:text-blue-500 dark:text-blue-400"
-              >
-                Sign Out
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="flex">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex h-screen">
         {/* Sidebar */}
-        <nav className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 min-h-screen">
-          <div className="p-4 space-y-2">
-            <Link
-              href="/admin"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900/20"
-            >
-              Dashboard
-            </Link>
-            <Link
-              href="/admin/projects"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900/20"
-            >
-              Projects
-            </Link>
-            <Link
-              href="/admin/honors"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900/20"
-            >
-              Honors
-            </Link>
-            <Link
-              href="/admin/experience"
-              className="block px-3 py-2 rounded-md text-sm font-medium text-gray-900 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900/20"
-            >
-              Experience
-            </Link>
-          </div>
-        </nav>
+        <Sidebar
+          isCollapsed={sidebarCollapsed}
+          onToggle={toggleSidebar}
+          isMobileOpen={mobileMenuOpen}
+          onMobileToggle={toggleMobileMenu}
+        />
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
-          {children}
-        </main>
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Header */}
+          <Header
+            onMobileMenuToggle={toggleMobileMenu}
+            isCollapsed={sidebarCollapsed}
+            onToggle={toggleSidebar}
+          />
+
+          {/* Main Content */}
+          <main className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900">
+            <div className="p-4 lg:p-6">
+              {children}
+            </div>
+          </main>
+        </div>
       </div>
     </div>
   )
