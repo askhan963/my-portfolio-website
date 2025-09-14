@@ -113,9 +113,15 @@ export default function PasswordChangeForm({
         />
         <button
           type="button"
-          onClick={() => togglePasswordVisibility(field as keyof typeof showPasswords)}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            togglePasswordVisibility(field as keyof typeof showPasswords)
+          }}
+          onMouseDown={(e) => e.preventDefault()}
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none"
           disabled={isSubmitting}
+          tabIndex={-1}
         >
           {showPasswords[field as keyof typeof showPasswords] ? (
             <EyeSlashIcon className="h-5 w-5" />
