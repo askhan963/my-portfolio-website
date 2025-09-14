@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Image from 'next/image'
 import { XMarkIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 import ImageUpload from '@/components/ImageUpload'
 import { ExperienceFormData } from '@/hooks/useExperience'
@@ -113,9 +114,11 @@ export default function ExperienceForm({
             
             {formData.logo && (
               <div className="relative group max-w-xs">
-                <img
+                <Image
                   src={formData.logo}
                   alt="Company logo preview"
+                  width={64}
+                  height={64}
                   className="w-16 h-16 object-cover rounded-lg"
                 />
                 <button

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Image from 'next/image'
 import { PencilIcon, TrashIcon, EyeIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Experience } from '@/hooks/useExperience'
 import { formatDate } from '@/lib/utils'
@@ -20,9 +21,11 @@ export default function ExperienceCard({ experience, onEdit, onDelete, onView }:
           {/* Company Logo */}
           <div className="flex-shrink-0">
             {experience.logo && !imageError ? (
-              <img
+              <Image
                 src={experience.logo}
                 alt={`${experience.company} logo`}
+                width={48}
+                height={48}
                 className="w-12 h-12 object-cover rounded-lg"
                 onError={() => setImageError(true)}
               />

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 import { uploadApi } from '@/lib/api'
 
 interface ImageUploadProps {
@@ -128,9 +129,11 @@ export default function ImageUpload({
 
         {preview ? (
           <div className="space-y-2">
-            <img
+            <Image
               src={preview}
               alt="Preview"
+              width={128}
+              height={128}
               className="mx-auto h-32 w-32 object-cover rounded-lg"
             />
             <p className="text-sm text-gray-600">Click to change image</p>

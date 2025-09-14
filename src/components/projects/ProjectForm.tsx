@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Image from 'next/image'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import ImageUpload from '@/components/ImageUpload'
 import { ProjectFormData } from '@/hooks/useProjects'
@@ -166,9 +167,11 @@ export default function ProjectForm({
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {formData.images.map((image, index) => (
                 <div key={index} className="relative group">
-                  <img
+                  <Image
                     src={image}
                     alt={`Project ${index + 1}`}
+                    width={96}
+                    height={96}
                     className="w-full h-24 object-cover rounded-md"
                   />
                   <button

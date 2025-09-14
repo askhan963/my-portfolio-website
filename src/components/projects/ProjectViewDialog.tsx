@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Project } from '@/hooks/useProjects'
 import { formatDate } from '@/lib/utils'
 import Dialog from '../ui/Dialog'
@@ -24,9 +25,11 @@ export default function ProjectViewDialog({ project, isOpen, onClose }: ProjectV
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {project.images.map((image, index) => (
               <div key={index} className="relative">
-                <img
+                <Image
                   src={image}
                   alt={`${project.title} - Image ${index + 1}`}
+                  width={400}
+                  height={192}
                   className="w-full h-48 object-cover rounded-lg"
                 />
               </div>

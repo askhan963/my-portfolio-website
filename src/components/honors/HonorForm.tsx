@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Image from 'next/image'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import ImageUpload from '@/components/ImageUpload'
 import { HonorFormData } from '@/hooks/useHonors'
@@ -117,9 +118,11 @@ export default function HonorForm({
           
           {formData.image && (
             <div className="relative group max-w-xs">
-              <img
+              <Image
                 src={formData.image}
                 alt="Certificate preview"
+                width={128}
+                height={128}
                 className="w-full h-32 object-cover rounded-md"
               />
               <button

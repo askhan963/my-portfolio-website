@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Honor } from '@/hooks/useHonors'
 import { formatDate } from '@/lib/utils'
 import Dialog from '../ui/Dialog'
@@ -22,9 +23,11 @@ export default function HonorViewDialog({ honor, isOpen, onClose }: HonorViewDia
         {/* Image */}
         {honor.image && (
           <div className="relative">
-            <img
+            <Image
               src={honor.image}
               alt={honor.title}
+              width={400}
+              height={256}
               className="w-full h-64 object-cover rounded-lg"
             />
           </div>

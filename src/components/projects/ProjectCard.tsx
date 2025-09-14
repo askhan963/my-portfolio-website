@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Image from 'next/image'
 import { PencilIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { Project } from '@/hooks/useProjects'
 import { formatDate } from '@/lib/utils'
@@ -17,9 +18,11 @@ export default function ProjectCard({ project, onEdit, onDelete, onView }: Proje
     <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-lg transition-shadow duration-200">
       {project.images.length > 0 && !imageError && (
         <div className="relative h-48 overflow-hidden">
-          <img
+          <Image
             src={project.images[0]}
             alt={project.title}
+            width={400}
+            height={192}
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
             onError={() => setImageError(true)}
           />

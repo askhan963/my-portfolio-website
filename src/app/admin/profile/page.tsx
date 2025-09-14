@@ -8,6 +8,7 @@ import PasswordChangeForm from '@/components/profile/PasswordChangeForm'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
 import Dialog from '@/components/ui/Dialog'
 import { formatDate } from '@/lib/utils'
+import Image from 'next/image'
 
 export default function ProfilePage() {
   const { profile, loading, error, updateProfile, changePassword } = useProfile()
@@ -96,9 +97,11 @@ export default function ProfilePage() {
           {/* Profile Image */}
           <div className="flex-shrink-0">
             {profile.image ? (
-              <img
+              <Image
                 src={profile.image}
                 alt={profile.name || 'Profile'}
+                width={80}
+                height={80}
                 className="w-20 h-20 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
               />
             ) : (

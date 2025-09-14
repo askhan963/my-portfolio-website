@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Experience } from '@/hooks/useExperience'
 import { formatDate } from '@/lib/utils'
 import Dialog from '../ui/Dialog'
@@ -22,9 +23,11 @@ export default function ExperienceViewDialog({ experience, isOpen, onClose }: Ex
         {/* Company Header */}
         <div className="flex items-start space-x-4">
           {experience.logo && (
-            <img
+            <Image
               src={experience.logo}
               alt={`${experience.company} logo`}
+              width={64}
+              height={64}
               className="w-16 h-16 object-cover rounded-lg"
             />
           )}
