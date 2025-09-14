@@ -4,6 +4,16 @@ import path from "path";
 /** @type {import('next').NextConfig} */
 const baseConfig = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   async headers() {
     return [
       {

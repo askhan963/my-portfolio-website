@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
 import { TOAST_MESSAGES } from '@/lib/constants'
+import { profileApi } from '@/lib/api'
 
 export interface UserProfile {
   id: string
@@ -37,12 +38,7 @@ export function useProfile() {
       setLoading(true)
       setError(null)
       
-      const response = await fetch('/api/profile')
-      if (!response.ok) {
-        throw new Error('Failed to fetch profile')
-      }
-      
-      const data = await response.json()
+      const data = await profileApi.get()
       setProfile(data)
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to fetch profile'
@@ -59,20 +55,7 @@ export function useProfile() {
       setLoading(true)
       setError(null)
       
-      const response = await fetch('/api/profile', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to update profile')
-      }
-
-      const updatedProfile = await response.json()
+      const updatedProfile = await profileApi.update(formData)
       setProfile(updatedProfile)
       
       // Update session with new data
@@ -104,19 +87,7 @@ export function useProfile() {
       setLoading(true)
       setError(null)
       
-      const response = await fetch('/api/profile/change-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(passwordData),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to change password')
-      }
-
+      await profileApi.changePassword(passwordData)
       toast.success(TOAST_MESSAGES.PROFILE.PASSWORD_CHANGE_SUCCESS)
       return true
     } catch (err) {

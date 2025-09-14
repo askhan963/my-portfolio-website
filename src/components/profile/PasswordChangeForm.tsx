@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from 'react'
-import { LockClosedIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
-import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import Button from '@/components/ui/Button'
+import PasswordInput from '@/components/ui/PasswordInput'
 import { PasswordChangeData } from '@/hooks/useProfile'
 
 interface PasswordChangeFormProps {
@@ -22,11 +22,6 @@ export default function PasswordChangeForm({
     confirmPassword: '',
   })
   const [errors, setErrors] = useState<Partial<PasswordChangeData>>({})
-  const [showPasswords, setShowPasswords] = useState({
-    current: false,
-    new: false,
-    confirm: false,
-  })
 
   const handleInputChange = (field: keyof PasswordChangeData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -36,9 +31,6 @@ export default function PasswordChangeForm({
     }
   }
 
-  const togglePasswordVisibility = (field: keyof typeof showPasswords) => {
-    setShowPasswords(prev => ({ ...prev, [field]: !prev[field] }))
-  }
 
   const validateForm = (): boolean => {
     const newErrors: Partial<PasswordChangeData> = {}
@@ -85,79 +77,40 @@ export default function PasswordChangeForm({
     }
   }
 
-  const PasswordInput = ({ 
-    field, 
-    label, 
-    placeholder 
-  }: { 
-    field: keyof PasswordChangeData
-    label: string
-    placeholder: string
-  }) => (
-    <div>
-      <label htmlFor={field} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-        <LockClosedIcon className="h-4 w-4 inline mr-2" />
-        {label}
-      </label>
-      <div className="relative">
-        <input
-          type={showPasswords[field as keyof typeof showPasswords] ? 'text' : 'password'}
-          id={field}
-          value={formData[field]}
-          onChange={(e) => handleInputChange(field, e.target.value)}
-          className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white ${
-            errors[field] ? 'border-red-500' : 'border-gray-300'
-          }`}
-          placeholder={placeholder}
-          disabled={isSubmitting}
-        />
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            togglePasswordVisibility(field as keyof typeof showPasswords)
-          }}
-          onMouseDown={(e) => e.preventDefault()}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none"
-          disabled={isSubmitting}
-          tabIndex={-1}
-        >
-          {showPasswords[field as keyof typeof showPasswords] ? (
-            <EyeSlashIcon className="h-5 w-5" />
-          ) : (
-            <EyeIcon className="h-5 w-5" />
-          )}
-        </button>
-      </div>
-      {errors[field] && (
-        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors[field]}</p>
-      )}
-    </div>
-  )
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
         {/* Current Password */}
         <PasswordInput
-          field="currentPassword"
+          id="currentPassword"
           label="Current Password"
           placeholder="Enter your current password"
+          value={formData.currentPassword}
+          onChange={(value) => handleInputChange('currentPassword', value)}
+          error={errors.currentPassword}
+          disabled={isSubmitting}
         />
 
         {/* New Password */}
         <PasswordInput
-          field="newPassword"
+          id="newPassword"
           label="New Password"
           placeholder="Enter your new password"
+          value={formData.newPassword}
+          onChange={(value) => handleInputChange('newPassword', value)}
+          error={errors.newPassword}
+          disabled={isSubmitting}
         />
 
         {/* Confirm Password */}
         <PasswordInput
-          field="confirmPassword"
+          id="confirmPassword"
           label="Confirm New Password"
           placeholder="Confirm your new password"
+          value={formData.confirmPassword}
+          onChange={(value) => handleInputChange('confirmPassword', value)}
+          error={errors.confirmPassword}
+          disabled={isSubmitting}
         />
 
         {/* Password Requirements */}
@@ -174,24 +127,24 @@ export default function PasswordChangeForm({
 
         {/* Action Buttons */}
         <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <button
+          <Button
             type="button"
+            variant="secondary"
             onClick={onCancel}
-            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
             disabled={isSubmitting}
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
             type="submit"
-            className="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+            variant="danger"
+            isLoading={isSubmitting}
+            loadingText="Changing..."
             disabled={isSubmitting}
           >
-            {isSubmitting && <LoadingSpinner size="sm" />}
-            <span>{isSubmitting ? 'Changing...' : 'Change Password'}</span>
-          </button>
+            Change Password
+          </Button>
         </div>
       </form>
-    </div>
   )
 }

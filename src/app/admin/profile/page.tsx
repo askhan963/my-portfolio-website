@@ -6,6 +6,7 @@ import { useProfile, ProfileFormData } from '@/hooks/useProfile'
 import ProfileForm from '@/components/profile/ProfileForm'
 import PasswordChangeForm from '@/components/profile/PasswordChangeForm'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import Dialog from '@/components/ui/Dialog'
 import { formatDate } from '@/lib/utils'
 
 export default function ProfilePage() {
@@ -164,67 +165,37 @@ export default function ProfilePage() {
       </div>
 
       {/* Profile Form Modal */}
-      {showProfileForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                  Edit Profile
-                </h3>
-                <button
-                  onClick={handleCancel}
-                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                >
-                  <span className="sr-only">Close</span>
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              <ProfileForm
-                initialData={{
-                  name: profile.name || '',
-                  email: profile.email,
-                  image: profile.image || '',
-                }}
-                onSubmit={handleProfileUpdate}
-                onCancel={handleCancel}
-                isSubmitting={isSubmitting}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <Dialog
+        isOpen={showProfileForm}
+        onClose={handleCancel}
+        title="Edit Profile"
+        size="lg"
+      >
+        <ProfileForm
+          initialData={{
+            name: profile.name || '',
+            email: profile.email,
+            image: profile.image || '',
+          }}
+          onSubmit={handleProfileUpdate}
+          onCancel={handleCancel}
+          isSubmitting={isSubmitting}
+        />
+      </Dialog>
 
       {/* Password Change Form Modal */}
-      {showPasswordForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                  Change Password
-                </h3>
-                <button
-                  onClick={handleCancel}
-                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                >
-                  <span className="sr-only">Close</span>
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              <PasswordChangeForm
-                onSubmit={handlePasswordChange}
-                onCancel={handleCancel}
-                isSubmitting={isSubmitting}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <Dialog
+        isOpen={showPasswordForm}
+        onClose={handleCancel}
+        title="Change Password"
+        size="md"
+      >
+        <PasswordChangeForm
+          onSubmit={handlePasswordChange}
+          onCancel={handleCancel}
+          isSubmitting={isSubmitting}
+        />
+      </Dialog>
     </div>
   )
 }

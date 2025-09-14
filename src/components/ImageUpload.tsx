@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { useSession } from 'next-auth/react'
+import { uploadApi } from '@/lib/api'
 
 interface ImageUploadProps {
   onUpload: (url: string, publicId: string) => void
@@ -69,21 +70,9 @@ export default function ImageUpload({
     setError('')
 
     try {
-      const formData = new FormData()
-      formData.append('file', file)
-      formData.append('folder', folder)
-
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      const result = await response.json()
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Upload failed')
-      }
-
+      console.log('Starting upload for file:', file.name, 'Size:', file.size)
+      const result = await uploadApi.uploadImage(file, folder)
+      console.log('Upload successful:', result)
       onUpload(result.url, result.publicId)
       setPreview(null)
       if (fileInputRef.current) {
@@ -91,7 +80,18 @@ export default function ImageUpload({
       }
     } catch (error) {
       console.error('Upload error:', error)
-      const errorMsg = error instanceof Error ? error.message : 'Upload failed'
+      let errorMsg = 'Upload failed'
+      
+      if (error instanceof Error) {
+        if (error.message.includes('timeout')) {
+          errorMsg = 'Upload timed out. Please try again with a smaller file.'
+        } else if (error.message.includes('Network Error')) {
+          errorMsg = 'Network error. Please check your connection and try again.'
+        } else {
+          errorMsg = error.message
+        }
+      }
+      
       setError(errorMsg)
       onError?.(errorMsg)
     } finally {
@@ -161,10 +161,11 @@ export default function ImageUpload({
         )}
 
         {isUploading && (
-          <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center rounded-lg">
-            <div className="flex items-center space-x-2">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
-              <span className="text-sm text-gray-600">Uploading...</span>
+          <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center rounded-lg">
+            <div className="flex flex-col items-center space-y-2">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              <span className="text-sm text-gray-600 font-medium">Uploading...</span>
+              <span className="text-xs text-gray-500">This may take a moment</span>
             </div>
           </div>
         )}

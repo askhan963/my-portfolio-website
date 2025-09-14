@@ -4,6 +4,9 @@ import { useState, useEffect } from "react"
 import { signIn, getSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import Input from "@/components/ui/Input"
+import PasswordInput from "@/components/ui/PasswordInput"
+import Button from "@/components/ui/Button"
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("")
@@ -65,37 +68,26 @@ export default function AdminLogin() {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                placeholder="admin@askhan.com"
-              />
-            </div>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              label="Email address"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@askhan.com"
+              disabled={isLoading}
+            />
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter your password"
-              />
-            </div>
+            <PasswordInput
+              id="password"
+              label="Password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={setPassword}
+              disabled={isLoading}
+            />
           </div>
 
           {error && (
@@ -103,13 +95,17 @@ export default function AdminLogin() {
           )}
 
           <div>
-            <button
+            <Button
               type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              isLoading={isLoading}
+              loadingText="Signing in..."
               disabled={isLoading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
             >
-              {isLoading ? "Signing in..." : "Sign in"}
-            </button>
+              Sign in
+            </Button>
           </div>
         </form>
 

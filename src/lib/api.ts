@@ -100,6 +100,15 @@ export const experienceApi = {
   delete: (id: string) => api.delete(API_ENDPOINTS.EXPERIENCE.BY_ID(id)),
 }
 
+// Profile API
+export const profileApi = {
+  get: () => api.get(API_ENDPOINTS.PROFILE.BASE),
+  
+  update: (data: any) => api.put(API_ENDPOINTS.PROFILE.BASE, data),
+  
+  changePassword: (data: any) => api.post(API_ENDPOINTS.PROFILE.CHANGE_PASSWORD, data),
+}
+
 // Upload API
 export const uploadApi = {
   uploadImage: (file: File, folder: string = 'portfolio') => {
@@ -111,6 +120,7 @@ export const uploadApi = {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
+      timeout: 30000, // 30 seconds timeout for uploads
     }).then(response => response.data)
   },
 }

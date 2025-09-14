@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useSession, signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { 
   Bars3Icon, 
   BellIcon, 
@@ -13,6 +14,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import Image from 'next/image'
 
 interface HeaderProps {
   onMobileMenuToggle: () => void
@@ -22,7 +24,17 @@ interface HeaderProps {
 
 export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: HeaderProps) {
   const { data: session } = useSession()
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
+
+  const handleProfileClick = () => {
+    router.push('/admin/profile')
+  }
+
+  const handleSettingsClick = () => {
+    router.push('/admin/profile')
+  }
+
 
   return (
     <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 h-16 flex items-center justify-between px-4 lg:px-6">
@@ -62,7 +74,6 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
           />
         </div>
       </div>
-
       {/* Right side */}
       <div className="flex items-center space-x-4">
         {/* Notifications */}
@@ -72,19 +83,31 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
             3
           </span>
         </button>
-
+        
         {/* User menu */}
         <Menu as="div" className="relative">
           <Menu.Button className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-              <UserCircleIcon className="w-5 h-5 text-white" />
-            </div>
+            {session?.user?.image ? (
+              <div className="w-8 h-8 rounded-full overflow-hidden">
+                <Image
+                  src={session.user.image}
+                  alt={session.user.name || 'User'}
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <UserCircleIcon className="w-5 h-5 text-white" />
+              </div>
+            )}
             <div className="hidden md:block text-left">
               <p className="text-sm font-medium text-gray-900 dark:text-white">
                 {session?.user?.name || 'Admin User'}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Administrator
+                {session?.user?.email || 'Administrator'}
               </p>
             </div>
           </Menu.Button>
@@ -103,6 +126,7 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
                 <Menu.Item>
                   {({ active }) => (
                     <button
+                      onClick={handleProfileClick}
                       className={`${
                         active ? 'bg-gray-100 dark:bg-gray-700' : ''
                       } flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300`}
@@ -115,6 +139,7 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
                 <Menu.Item>
                   {({ active }) => (
                     <button
+                      onClick={handleSettingsClick}
                       className={`${
                         active ? 'bg-gray-100 dark:bg-gray-700' : ''
                       } flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300`}
