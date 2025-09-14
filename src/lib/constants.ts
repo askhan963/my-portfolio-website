@@ -17,6 +17,11 @@ export const API_ENDPOINTS = {
   },
   // Upload
   UPLOAD: '/api/upload',
+  // Profile
+  PROFILE: {
+    BASE: '/api/profile',
+    CHANGE_PASSWORD: '/api/profile/change-password',
+  },
   // Auth
   AUTH: {
     LOGIN: '/api/auth/signin',
@@ -56,6 +61,13 @@ export const TOAST_MESSAGES = {
     ERROR: 'Failed to upload image',
     INVALID_TYPE: 'Invalid file type. Please upload an image.',
     TOO_LARGE: 'File too large. Maximum size is 5MB.',
+  },
+  PROFILE: {
+    FETCH_ERROR: 'Failed to fetch profile',
+    UPDATE_SUCCESS: 'Profile updated successfully!',
+    UPDATE_ERROR: 'Failed to update profile',
+    PASSWORD_CHANGE_SUCCESS: 'Password changed successfully!',
+    PASSWORD_CHANGE_ERROR: 'Failed to change password',
   },
   GENERAL: {
     NETWORK_ERROR: 'Network error. Please check your connection.',

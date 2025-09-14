@@ -9,7 +9,8 @@ import {
   TrophyIcon, 
   BriefcaseIcon,
   XMarkIcon,
-  UserIcon
+  UserIcon,
+  Cog6ToothIcon
 } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 import Tooltip from '@/components/ui/Tooltip'
@@ -26,6 +27,7 @@ const navigation = [
   { name: 'Projects', href: '/admin/projects', icon: FolderIcon },
   { name: 'Honors', href: '/admin/honors', icon: TrophyIcon },
   { name: 'Experience', href: '/admin/experience', icon: BriefcaseIcon },
+  { name: 'Profile', href: '/admin/profile', icon: Cog6ToothIcon },
 ]
 
 export default function Sidebar({ isCollapsed, onToggle, isMobileOpen, onMobileToggle }: SidebarProps) {
