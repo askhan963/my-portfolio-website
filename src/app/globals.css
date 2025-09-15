@@ -11,6 +11,15 @@
   --border-color: #e5e7eb; /* Light border color */
 }
 
+/* Ensure dark mode variables are available */
+.dark {
+  --background: #121212; /* Dark background */
+  --foreground: #e5e5e5; /* Light text color */
+  --primary: #1e90ff; /* Brighter blue for dark mode */
+  --card-background: #1e1e1e; /* Dark card background */
+  --border-color: #2c2c2c; /* Darker border color */
+}
+
 [data-theme="dark"] {
   --background: #121212; /* Dark background */
   --foreground: #e5e5e5; /* Light text color */

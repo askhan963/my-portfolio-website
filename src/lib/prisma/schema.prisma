@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/lib/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  name      String?
+  image     String?
+  role      UserRole @default(VIEWER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  techStack   String[]
+  githubLink  String?
+  liveLink    String?
+  images      String[] // Cloudinary URLs
+  awards      String[]
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Honor {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  image       String // Cloudinary URL
+  issuedBy    String
+  issuedAt    DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Experience {
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  company     String
+  companyLink String?
+  logo        String // Cloudinary URL
+  period      String
+  roles       ExperienceRole[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model ExperienceRole {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  period       String
+  description  String[]
+  experience   Experience @relation(fields: [experienceId], references: [id])
+  experienceId String     @db.ObjectId
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  VIEWER
+}

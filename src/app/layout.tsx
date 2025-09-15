@@ -1,6 +1,6 @@
 import "./globals.css";
-import Head from "next/head";
 import { Poppins, Inter, Space_Grotesk } from "next/font/google";
+import Providers from "@/components/Providers";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,13 +34,31 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} ${inter.variable} ${spaceGrotesk.variable}`}
     >
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <body>{children}</body>
+      <head>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            :root {
+              --background: #f0f2f5;
+              --foreground: #1a1a1a;
+              --primary: #007bff;
+              --card-background: #ffffff;
+              --border-color: #e5e7eb;
+            }
+            .dark {
+              --background: #121212;
+              --foreground: #e5e5e5;
+              --primary: #1e90ff;
+              --card-background: #1e1e1e;
+              --border-color: #2c2c2c;
+            }
+          `
+        }} />
+      </head>
+      <body>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

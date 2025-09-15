@@ -55,14 +55,14 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
     >
       <motion.h1 
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+        className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
       >
         Skills & Expertise
       </motion.h1>
@@ -78,7 +78,7 @@ export default function Skills() {
               className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
                 activeCategory === category
                   ? "bg-primary text-white shadow-lg"
-                  : "bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  : "bg-card text-card-foreground border border-border hover:bg-primary/10"
               }`}
             >
               {category}
@@ -99,12 +99,12 @@ export default function Skills() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+              className="flex flex-col items-center justify-center p-6 bg-card text-card-foreground rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-border"
             >
-              <div className="text-primary dark:text-primary-dark mb-3">
+              <div className="text-primary mb-3">
                 {skill.icon}
               </div>
-              <span className="text-md font-medium text-gray-700 dark:text-gray-200 text-center">
+              <span className="text-md font-medium text-foreground text-center">
                 {skill.name}
               </span>
             </motion.div>

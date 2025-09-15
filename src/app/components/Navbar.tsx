@@ -15,9 +15,11 @@ export default function Navbar() {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme === "dark") {
       document.documentElement.classList.add("dark");
+      document.documentElement.setAttribute("data-theme", "dark");
       setDarkMode(true);
     } else {
       document.documentElement.classList.remove("dark");
+      document.documentElement.setAttribute("data-theme", "light");
       setDarkMode(false);
     }
 
@@ -46,9 +48,11 @@ export default function Navbar() {
       const newMode = !prevMode;
       if (newMode) {
         document.documentElement.classList.add("dark");
+        document.documentElement.setAttribute("data-theme", "dark");
         localStorage.setItem("theme", "dark");
       } else {
         document.documentElement.classList.remove("dark");
+        document.documentElement.setAttribute("data-theme", "light");
         localStorage.setItem("theme", "light");
       }
       return newMode;
@@ -77,7 +81,7 @@ export default function Navbar() {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-md"
+          ? "bg-background/80 backdrop-blur-lg shadow-md border-b border-border"
           : "bg-transparent"
       }`}
     >
@@ -85,7 +89,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           <motion.a
             href="/"
-            className="text-3xl font-bold text-primary dark:text-primary-dark"
+            className="text-3xl font-bold text-primary"
             whileHover={{ scale: 1.05 }}
           >
             <Image
@@ -103,7 +107,7 @@ export default function Navbar() {
               <motion.a
                 key={link.href}
                 href={link.href}
-                className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+                className="text-lg font-medium text-foreground/70 hover:text-primary transition-colors duration-300"
                 whileHover={{ y: -2 }}
               >
                 {link.title}
@@ -114,7 +118,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-4">
             <motion.button
               onClick={toggleDarkMode}
-              className="text-2xl text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary-dark transition-colors duration-300"
+              className="text-2xl text-foreground/70 hover:text-primary transition-colors duration-300"
               whileHover={{ scale: 1.2, rotate: 15 }}
             >
               {darkMode ? <FaSun /> : <FaMoon />}
@@ -123,7 +127,7 @@ export default function Navbar() {
             <div className="md:hidden">
               <motion.button
                 onClick={toggleMenu}
-                className="text-2xl text-gray-600 dark:text-gray-300"
+                className="text-2xl text-foreground/70"
                 whileHover={{ scale: 1.1 }}
               >
                 {isMenuOpen ? <FaTimes /> : <FaBars />}
@@ -140,7 +144,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white dark:bg-gray-900"
+            className="md:hidden bg-background border-t border-border"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navLinks.map((link) => (
@@ -148,7 +152,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={toggleMenu}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-primary/10"
                 >
                   {link.title}
                 </a>

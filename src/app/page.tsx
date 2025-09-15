@@ -12,7 +12,7 @@ import ContactMe from "./components/ContactMe";
 
 export default function Home() {
   return (
-    <div className="dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <div className="bg-background text-foreground min-h-screen">
       <Navbar />
       <Profile />
       <Experience />

@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { FiAward } from "react-icons/fi";
 
 const honors = [
@@ -61,27 +58,19 @@ export default function Honors() {
   return (
     <section
       id="honors"
-      className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-6"
+      className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
     >
-      <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+      <h1
+        className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
       >
         Honors & Certifications
-      </motion.h1>
+      </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
         {honors.map((honor, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col items-center text-center p-6 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+            className="bg-card text-card-foreground rounded-xl shadow-lg overflow-hidden flex flex-col items-center text-center p-6 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-border"
           >
             <div className="relative w-full h-48 mb-4">
               <Image
@@ -91,10 +80,10 @@ export default function Honors() {
                 objectFit="contain"
               />
             </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{honor.title}</h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">{honor.description}</p>
-            <FiAward className="text-primary dark:text-primary-dark mt-4" size={24} />
-          </motion.div>
+            <h3 className="text-lg font-bold text-foreground mb-2">{honor.title}</h3>
+            <p className="text-foreground/70 text-sm">{honor.description}</p>
+            <FiAward className="text-primary mt-4" size={24} />
+          </div>
         ))}
       </div>
     </section>
