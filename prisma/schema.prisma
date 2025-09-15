@@ -20,7 +20,7 @@ model User {
 
 model Project {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String   @unique
+  title       String
   description String
   techStack   String[]
   githubLink  String?
@@ -34,7 +34,7 @@ model Project {
 
 model Honor {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String   @unique
+  title       String
   description String
   image       String   // Cloudinary URL
   issuedBy    String
@@ -45,7 +45,7 @@ model Honor {
 
 model Experience {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  company     String   @unique
+  company     String
   companyLink String?
   logo        String   // Cloudinary URL
   period      String
@@ -59,7 +59,7 @@ model ExperienceRole {
   title       String
   period      String
   description String[]
-  experience  Experience @relation(fields: [experienceId], references: [id])
+  experience  Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
   experienceId String    @db.ObjectId
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
