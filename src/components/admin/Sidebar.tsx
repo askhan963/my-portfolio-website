@@ -8,6 +8,7 @@ import {
   FolderIcon, 
   TrophyIcon, 
   BriefcaseIcon,
+  DocumentTextIcon,
   XMarkIcon,
   UserIcon,
   Cog6ToothIcon
@@ -27,6 +28,7 @@ const navigation = [
   { name: 'Projects', href: '/admin/projects', icon: FolderIcon },
   { name: 'Honors', href: '/admin/honors', icon: TrophyIcon },
   { name: 'Experience', href: '/admin/experience', icon: BriefcaseIcon },
+  { name: 'CVs', href: '/admin/cvs', icon: DocumentTextIcon },
   { name: 'Profile', href: '/admin/profile', icon: Cog6ToothIcon },
 ]
 

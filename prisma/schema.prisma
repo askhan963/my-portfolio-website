@@ -65,6 +65,19 @@ model ExperienceRole {
   updatedAt   DateTime   @updatedAt
 }
 
+model resumes {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  downloadLink String   // File URL (Cloudinary or local)
+  fileName     String?  // Original filename
+  fileSize     Int?     // File size in bytes
+  fileType     String?  // MIME type
+  isActive     Boolean  @default(true) // For multiple CVs, which one to show
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 enum UserRole {
   ADMIN
   VIEWER

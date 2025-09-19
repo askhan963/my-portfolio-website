@@ -15,6 +15,11 @@ export const API_ENDPOINTS = {
     BASE: '/api/experience',
     BY_ID: (id: string) => `/api/experience/${id}`,
   },
+  // Resumes
+  RESUMES: {
+    BASE: '/api/cvs',
+    BY_ID: (id: string) => `/api/cvs/${id}`,
+  },
   // Upload
   UPLOAD: '/api/upload',
   // Profile
@@ -62,6 +67,15 @@ export const TOAST_MESSAGES = {
     INVALID_TYPE: 'Invalid file type. Please upload an image.',
     TOO_LARGE: 'File too large. Maximum size is 5MB.',
   },
+  RESUMES: {
+    CREATE_SUCCESS: 'CV uploaded successfully!',
+    CREATE_ERROR: 'Failed to upload CV',
+    UPDATE_SUCCESS: 'CV updated successfully!',
+    UPDATE_ERROR: 'Failed to update CV',
+    DELETE_SUCCESS: 'CV deleted successfully!',
+    DELETE_ERROR: 'Failed to delete CV',
+    FETCH_ERROR: 'Failed to fetch CVs',
+  },
   PROFILE: {
     FETCH_ERROR: 'Failed to fetch profile',
     UPDATE_SUCCESS: 'Profile updated successfully!',
@@ -79,9 +93,12 @@ export const TOAST_MESSAGES = {
 // Form Validation
 export const VALIDATION = {
   MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+  MAX_CV_FILE_SIZE: 10 * 1024 * 1024, // 10MB for CV files
   ALLOWED_IMAGE_TYPES: ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
+  ALLOWED_CV_TYPES: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
   REQUIRED_FIELDS: {
     PROJECT: ['title', 'description', 'category'],
+    CV: ['title', 'description'],
   },
 } as const
 

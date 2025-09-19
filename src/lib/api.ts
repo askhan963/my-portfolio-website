@@ -100,6 +100,19 @@ export const experienceApi = {
   delete: (id: string) => api.delete(API_ENDPOINTS.EXPERIENCE.BY_ID(id)),
 }
 
+// Resumes API
+export const cvsApi = {
+  getAll: () => api.get(API_ENDPOINTS.RESUMES.BASE),
+  
+  getById: (id: string) => api.get(API_ENDPOINTS.RESUMES.BY_ID(id)),
+  
+  create: (data: any) => api.post(API_ENDPOINTS.RESUMES.BASE, data),
+  
+  update: (id: string, data: any) => api.put(API_ENDPOINTS.RESUMES.BY_ID(id), data),
+  
+  delete: (id: string) => api.delete(API_ENDPOINTS.RESUMES.BY_ID(id)),
+}
+
 // Profile API
 export const profileApi = {
   get: () => api.get(API_ENDPOINTS.PROFILE.BASE),

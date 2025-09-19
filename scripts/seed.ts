@@ -67,10 +67,8 @@ async function main() {
   ]
 
   for (const project of projects) {
-    await prisma.project.upsert({
-      where: { title: project.title },
-      update: project,
-      create: project,
+    await prisma.project.create({
+      data: project,
     })
   }
 
@@ -93,10 +91,8 @@ async function main() {
   ]
 
   for (const honor of honors) {
-    await prisma.honor.upsert({
-      where: { title: honor.title },
-      update: honor,
-      create: honor,
+    await prisma.honor.create({
+      data: honor,
     })
   }
 
@@ -133,15 +129,8 @@ async function main() {
   ]
 
   for (const exp of experiences) {
-    const experience = await prisma.experience.upsert({
-      where: { company: exp.company },
-      update: {
-        company: exp.company,
-        companyLink: exp.companyLink,
-        logo: exp.logo,
-        period: exp.period,
-      },
-      create: {
+    const experience = await prisma.experience.create({
+      data: {
         company: exp.company,
         companyLink: exp.companyLink,
         logo: exp.logo,
