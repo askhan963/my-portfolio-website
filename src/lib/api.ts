@@ -122,6 +122,19 @@ export const profileApi = {
   changePassword: (data: any) => api.post(API_ENDPOINTS.PROFILE.CHANGE_PASSWORD, data),
 }
 
+// Public Profile API
+export const publicProfileApi = {
+  get: () => api.get(API_ENDPOINTS.PUBLIC_PROFILE.BASE),
+  
+  getById: (id: string) => api.get(API_ENDPOINTS.PUBLIC_PROFILE.BY_ID(id)),
+  
+  create: (data: any) => api.post(API_ENDPOINTS.PUBLIC_PROFILE.BASE, data),
+  
+  update: (id: string, data: any) => api.put(API_ENDPOINTS.PUBLIC_PROFILE.BY_ID(id), data),
+  
+  delete: (id: string) => api.delete(API_ENDPOINTS.PUBLIC_PROFILE.BY_ID(id)),
+}
+
 // Upload API
 export const uploadApi = {
   uploadImage: (file: File, folder: string = 'portfolio') => {

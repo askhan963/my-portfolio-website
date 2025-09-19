@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { uploadApi } from '@/lib/api'
 
 interface ImageUploadProps {
+  image?: string
   onUpload: (url: string, publicId: string) => void
   onError?: (error: string) => void
   folder?: string
@@ -14,6 +15,7 @@ interface ImageUploadProps {
 }
 
 export default function ImageUpload({
+  image,
   onUpload,
   onError,
   folder = 'portfolio',
@@ -22,7 +24,7 @@ export default function ImageUpload({
 }: ImageUploadProps) {
   const [isUploading, setIsUploading] = useState(false)
   const [error, setError] = useState('')
-  const [preview, setPreview] = useState<string | null>(null)
+  const [preview, setPreview] = useState<string | null>(image || null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { data: session } = useSession()
 
@@ -180,5 +182,5 @@ export default function ImageUpload({
         </div>
       )}
     </div>
-  )
+  );
 }

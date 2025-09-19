@@ -27,6 +27,11 @@ export const API_ENDPOINTS = {
     BASE: '/api/profile',
     CHANGE_PASSWORD: '/api/profile/change-password',
   },
+  // Public Profile
+  PUBLIC_PROFILE: {
+    BASE: '/api/public-profile',
+    BY_ID: (id: string) => `/api/public-profile/${id}`,
+  },
   // Auth
   AUTH: {
     LOGIN: '/api/auth/signin',
@@ -82,6 +87,15 @@ export const TOAST_MESSAGES = {
     UPDATE_ERROR: 'Failed to update profile',
     PASSWORD_CHANGE_SUCCESS: 'Password changed successfully!',
     PASSWORD_CHANGE_ERROR: 'Failed to change password',
+  },
+  PUBLIC_PROFILE: {
+    FETCH_ERROR: 'Failed to fetch public profile',
+    CREATE_SUCCESS: 'Public profile created successfully!',
+    CREATE_ERROR: 'Failed to create public profile',
+    UPDATE_SUCCESS: 'Public profile updated successfully!',
+    UPDATE_ERROR: 'Failed to update public profile',
+    DELETE_SUCCESS: 'Public profile deleted successfully!',
+    DELETE_ERROR: 'Failed to delete public profile',
   },
   GENERAL: {
     NETWORK_ERROR: 'Network error. Please check your connection.',

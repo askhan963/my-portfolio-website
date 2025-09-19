@@ -11,7 +11,8 @@ import {
   DocumentTextIcon,
   XMarkIcon,
   UserIcon,
-  Cog6ToothIcon
+  Cog6ToothIcon,
+  UserCircleIcon
 } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 import Tooltip from '@/components/ui/Tooltip'
@@ -29,6 +30,7 @@ const navigation = [
   { name: 'Honors', href: '/admin/honors', icon: TrophyIcon },
   { name: 'Experience', href: '/admin/experience', icon: BriefcaseIcon },
   { name: 'CVs', href: '/admin/cvs', icon: DocumentTextIcon },
+  { name: 'Public Profile', href: '/admin/public-profile', icon: UserCircleIcon },
   { name: 'Profile', href: '/admin/profile', icon: Cog6ToothIcon },
 ]
 

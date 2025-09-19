@@ -2,8 +2,46 @@
 import Image from 'next/image';
 import { TypeAnimation } from 'react-type-animation';
 import { motion } from 'framer-motion';
+import { usePublicProfile } from '@/hooks/usePublicProfile';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 export default function Profile() {
+  const { profile, loading, error } = usePublicProfile();
+
+  // Fallback data if no profile is found
+  const fallbackProfile = {
+    name: "Muhammad Awais Khan",
+    image: "/profile-picture.jpeg",
+    headlines: [
+      'MERN Stack Developer',
+      'Computer Scientist',
+      'Full-Stack Enthusiast',
+      'Problem Solver',
+      'Tech Innovator'
+    ],
+    tagline: "Passionate about creating web solutions that solve real-world problems. Let's build something great together!"
+  };
+
+  const displayProfile = profile || fallbackProfile;
+
+  if (loading) {
+    return (
+      <section 
+        id='home' 
+        className="min-h-screen flex items-center justify-center bg-background p-4 sm:p-6 lg:p-8"
+      >
+        <div className="flex flex-col items-center space-y-4">
+          <LoadingSpinner size="lg" />
+          <p className="text-foreground/70">Loading profile...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    console.error('Error loading profile:', error);
+  }
+
   return (
     <section 
       id='home' 
@@ -17,11 +55,11 @@ export default function Profile() {
           className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto"
         >
           <Image
-            src="/profile-picture.jpeg"
+            src={displayProfile.image}
             alt="Profile Picture"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-full shadow-2xl border-4 border-border"
+            fill
+            className="rounded-full shadow-2xl border-4 border-border object-cover"
+            priority
           />
         </motion.div>
 
@@ -32,22 +70,11 @@ export default function Profile() {
           className="text-center md:text-left"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground tracking-tight">
-            Muhammad Awais Khan
+            {displayProfile.name}
           </h1>
 
           <TypeAnimation
-            sequence={[
-              'MERN Stack Developer',
-              2000,
-              'Computer Scientist',
-              2000,
-              'Full-Stack Enthusiast',
-              2000,
-              'Problem Solver',
-              2000,
-              'Tech Innovator',
-              2000
-            ]}
+            sequence={displayProfile.headlines.flatMap(headline => [headline, 2000])}
             wrapper="p"
             cursor={true}
             repeat={Infinity}
@@ -55,7 +82,7 @@ export default function Profile() {
           />
 
           <p className="mt-4 text-lg text-foreground/70 max-w-lg mx-auto md:mx-0">
-            Passionate about creating web solutions that solve real-world problems. Let's build something great together!
+            {displayProfile.tagline}
           </p>
 
           <motion.a 
