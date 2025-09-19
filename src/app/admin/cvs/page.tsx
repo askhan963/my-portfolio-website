@@ -39,6 +39,7 @@ export default function CVsPage() {
   }
 
   const handleEditClick = (cv: CV) => {
+    setSelectedCV(cv)
     setFormData({
       title: cv.title,
       description: cv.description,
@@ -148,7 +149,7 @@ export default function CVsPage() {
   if (loading) {
     return <LoadingSpinner />
   }
-
+  {console.log(cvs)}
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -194,6 +195,7 @@ export default function CVsPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
           {cvs.map((cv) => (
             <CVCard
               key={cv.id}

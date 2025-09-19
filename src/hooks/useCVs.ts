@@ -40,7 +40,7 @@ export function useCVs() {
       setLoading(true)
       setError(null)
       const response = await cvsApi.getAll()
-      setCVs(response.data.data || [])
+      setCVs(response.data || [])
     } catch (err: any) {
       console.error('Error fetching CVs:', err)
       setError(err.response?.data?.error || TOAST_MESSAGES.RESUMES.FETCH_ERROR)
@@ -53,7 +53,7 @@ export function useCVs() {
   const createCV = async (data: CVFormData): Promise<boolean> => {
     try {
       const response = await cvsApi.create(data)
-      setCVs(prev => [response.data.data, ...prev])
+      setCVs(prev => [response.data, ...prev])
       toast.success(TOAST_MESSAGES.RESUMES.CREATE_SUCCESS)
       return true
     } catch (err: any) {
@@ -66,7 +66,7 @@ export function useCVs() {
   const updateCV = async (id: string, data: Partial<CVFormData>): Promise<boolean> => {
     try {
       const response = await cvsApi.update(id, data)
-      setCVs(prev => prev.map(cv => cv.id === id ? response.data.data : cv))
+      setCVs(prev => prev.map(cv => cv.id === id ? response.data : cv))
       toast.success(TOAST_MESSAGES.RESUMES.UPDATE_SUCCESS)
       return true
     } catch (err: any) {

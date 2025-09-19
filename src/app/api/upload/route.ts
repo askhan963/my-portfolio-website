@@ -26,16 +26,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 })
     }
 
-    // Validate file type
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+    // Validate file type based on folder
+    const imageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+    const cvTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
+    
+    let allowedTypes: string[]
+    let maxSize: number
+    
+    if (folder === 'cvs') {
+      allowedTypes = cvTypes
+      maxSize = 10 * 1024 * 1024 // 10MB for CV files
+    } else {
+      allowedTypes = imageTypes
+      maxSize = 5 * 1024 * 1024 // 5MB for images
+    }
+    
     if (!allowedTypes.includes(file.type)) {
-      return NextResponse.json({ error: 'Invalid file type' }, { status: 400 })
+      return NextResponse.json({ 
+        error: 'Invalid file type', 
+        details: `Allowed types: ${allowedTypes.join(', ')}` 
+      }, { status: 400 })
     }
 
-    // Validate file size (5MB max)
-    const maxSize = 5 * 1024 * 1024 // 5MB
+    // Validate file size
     if (file.size > maxSize) {
-      return NextResponse.json({ error: 'File too large' }, { status: 400 })
+      return NextResponse.json({ 
+        error: 'File too large', 
+        details: `Maximum size: ${maxSize / (1024 * 1024)}MB` 
+      }, { status: 400 })
     }
 
     // Check Cloudinary config
