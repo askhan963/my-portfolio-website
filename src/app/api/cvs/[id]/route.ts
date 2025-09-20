@@ -23,7 +23,7 @@ export async function GET(
   try {
     const { id } = await params
 
-    const cv = await prisma.resumes.findUnique({
+    const cv = await prisma.resume.findUnique({
       where: { id },
     })
 
@@ -76,7 +76,7 @@ export async function PUT(
     const validatedData = updateCVSchema.parse(body)
 
     // Check if CV exists
-    const existingCV = await prisma.resumes.findUnique({
+    const existingCV = await prisma.resume.findUnique({
       where: { id },
     })
 
@@ -92,7 +92,7 @@ export async function PUT(
 
     // If setting this CV as active, deactivate all others
     if (validatedData.isActive) {
-      await prisma.resumes.updateMany({
+      await prisma.resume.updateMany({
         where: { 
           isActive: true,
           id: { not: id }
@@ -101,7 +101,7 @@ export async function PUT(
       })
     }
 
-    const cv = await prisma.resumes.update({
+    const cv = await prisma.resume.update({
       where: { id },
       data: validatedData,
     })
@@ -155,7 +155,7 @@ export async function DELETE(
     const { id } = await params
 
     // Check if CV exists
-    const existingCV = await prisma.resumes.findUnique({
+    const existingCV = await prisma.resume.findUnique({
       where: { id },
     })
 
@@ -169,7 +169,7 @@ export async function DELETE(
       )
     }
 
-    await prisma.resumes.delete({
+    await prisma.resume.delete({
       where: { id },
     })
 

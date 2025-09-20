@@ -20,7 +20,7 @@ const updateCVSchema = createCVSchema.partial()
 // GET /api/cvs - Get all CVs
 export async function GET() {
   try {
-    const cvs = await prisma.resumes.findMany({
+    const cvs = await prisma.resume.findMany({
       orderBy: {
         createdAt: 'desc',
       },
@@ -62,13 +62,13 @@ export async function POST(request: NextRequest) {
 
     // If setting this CV as active, deactivate all others
     if (validatedData.isActive) {
-      await prisma.resumes.updateMany({
+      await prisma.resume.updateMany({
         where: { isActive: true },
         data: { isActive: false },
       })
     }
 
-    const cv = await prisma.resumes.create({
+    const cv = await prisma.resume.create({
       data: validatedData,
     })
 
