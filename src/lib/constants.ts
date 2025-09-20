@@ -32,6 +32,11 @@ export const API_ENDPOINTS = {
     BASE: '/api/public-profile',
     BY_ID: (id: string) => `/api/public-profile/${id}`,
   },
+  // Education
+  EDUCATION: {
+    BASE: '/api/education',
+    BY_ID: (id: string) => `/api/education/${id}`,
+  },
   // Auth
   AUTH: {
     LOGIN: '/api/auth/signin',
@@ -96,6 +101,15 @@ export const TOAST_MESSAGES = {
     UPDATE_ERROR: 'Failed to update public profile',
     DELETE_SUCCESS: 'Public profile deleted successfully!',
     DELETE_ERROR: 'Failed to delete public profile',
+  },
+  EDUCATION: {
+    FETCH_ERROR: 'Failed to fetch education',
+    CREATE_SUCCESS: 'Education entry created successfully!',
+    CREATE_ERROR: 'Failed to create education entry',
+    UPDATE_SUCCESS: 'Education entry updated successfully!',
+    UPDATE_ERROR: 'Failed to update education entry',
+    DELETE_SUCCESS: 'Education entry deleted successfully!',
+    DELETE_ERROR: 'Failed to delete education entry',
   },
   GENERAL: {
     NETWORK_ERROR: 'Network error. Please check your connection.',

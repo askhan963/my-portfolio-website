@@ -135,6 +135,19 @@ export const publicProfileApi = {
   delete: (id: string) => api.delete(API_ENDPOINTS.PUBLIC_PROFILE.BY_ID(id)),
 }
 
+// Education API
+export const educationApi = {
+  getAll: () => api.get(API_ENDPOINTS.EDUCATION.BASE),
+  
+  getById: (id: string) => api.get(API_ENDPOINTS.EDUCATION.BY_ID(id)),
+  
+  create: (data: any) => api.post(API_ENDPOINTS.EDUCATION.BASE, data),
+  
+  update: (id: string, data: any) => api.put(API_ENDPOINTS.EDUCATION.BY_ID(id), data),
+  
+  delete: (id: string) => api.delete(API_ENDPOINTS.EDUCATION.BY_ID(id)),
+}
+
 // Upload API
 export const uploadApi = {
   uploadImage: (file: File, folder: string = 'portfolio') => {

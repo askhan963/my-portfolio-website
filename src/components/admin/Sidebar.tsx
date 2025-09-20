@@ -12,7 +12,8 @@ import {
   XMarkIcon,
   UserIcon,
   Cog6ToothIcon,
-  UserCircleIcon
+  UserCircleIcon,
+  AcademicCapIcon
 } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 import Tooltip from '@/components/ui/Tooltip'
@@ -29,6 +30,7 @@ const navigation = [
   { name: 'Projects', href: '/admin/projects', icon: FolderIcon },
   { name: 'Honors', href: '/admin/honors', icon: TrophyIcon },
   { name: 'Experience', href: '/admin/experience', icon: BriefcaseIcon },
+  { name: 'Education', href: '/admin/education', icon: AcademicCapIcon },
   { name: 'CVs', href: '/admin/cvs', icon: DocumentTextIcon },
   { name: 'Public Profile', href: '/admin/public-profile', icon: UserCircleIcon },
   { name: 'Profile', href: '/admin/profile', icon: Cog6ToothIcon },

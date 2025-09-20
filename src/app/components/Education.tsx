@@ -1,8 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { FaGraduationCap } from "react-icons/fa"; // Correct icon for education
+import { useEducation } from "@/hooks/useEducation";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 const Education = () => {
-  const educationData = [
+  const { education, loading, error } = useEducation();
+
+  // Fallback data if no education is found
+  const fallbackEducation = [
     {
       institution: "COMSATS University Islamabad, Abbottabad Campus",
       degree: "BS Computer Science",
@@ -25,11 +32,31 @@ const Education = () => {
       institution: "MLWHS School Makerwal",
       degree: "Intermediate in Computer Science (ICS)",
       period: "2018 - 2020",
-      coreSubjects: ["Physics", "Computer Science", "Mathematics"],
+      coreCourses: ["Physics", "Computer Science", "Mathematics"],
       logo: "/Logos/mlw.jpg",
       link: "https://m.facebook.com/MLWHSSM/?profile_tab_item_selected=about",
     },
   ];
+
+  const displayEducation = education.length > 0 ? education : fallbackEducation;
+
+  if (loading) {
+    return (
+      <section
+        id="education"
+        className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
+      >
+        <div className="flex flex-col items-center space-y-4">
+          <LoadingSpinner size="lg" />
+          <p className="text-foreground/70">Loading education...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    console.error('Error loading education:', error);
+  }
 
   return (
     <section
@@ -44,7 +71,7 @@ const Education = () => {
 
       <div className="w-full max-w-4xl mx-auto">
         <ol className="relative border-s border-border">
-          {educationData.map((edu, index) => (
+          {displayEducation.map((edu, index) => (
             <li key={index} className="mb-12 ms-8">
               <span className="absolute flex items-center justify-center w-8 h-8 bg-primary/15 rounded-full -start-4 ring-8 ring-card">
                 <FaGraduationCap className="w-4 h-4 text-primary" />
@@ -62,16 +89,22 @@ const Education = () => {
                     className="rounded-lg shadow-sm flex-shrink-0"
                   />
                   <div className="flex-1">
-                    <a
-                      href={edu.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block"
-                    >
-                      <h3 className="text-xl font-bold text-foreground hover:text-primary transition-colors">
+                    {edu.link ? (
+                      <a
+                        href={edu.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block"
+                      >
+                        <h3 className="text-xl font-bold text-foreground hover:text-primary transition-colors">
+                          {edu.institution}
+                        </h3>
+                      </a>
+                    ) : (
+                      <h3 className="text-xl font-bold text-foreground">
                         {edu.institution}
                       </h3>
-                    </a>
+                    )}
                     <p className="text-md font-semibold text-foreground">
                       {edu.degree}
                     </p>
@@ -93,19 +126,17 @@ const Education = () => {
                   
                   <div>
                     <h4 className="font-semibold text-foreground mb-2">
-                      {edu.coreCourses ? "Core Courses" : "Core Subjects"}
+                      Core Courses
                     </h4>
                     <ul className="space-y-2 text-foreground/70 list-disc pl-5">
-                      {(edu.coreCourses || edu.coreSubjects)?.map(
-                        (item, idx) => (
-                          <li
-                            key={idx}
-                            className="text-sm sm:text-base leading-relaxed"
-                          >
-                            {item}
-                          </li>
-                        )
-                      )}
+                      {edu.coreCourses?.map((item, idx) => (
+                        <li
+                          key={idx}
+                          className="text-sm sm:text-base leading-relaxed"
+                        >
+                          {item}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>

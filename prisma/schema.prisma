@@ -89,6 +89,21 @@ model PublicProfile {
   updatedAt   DateTime @updatedAt
 }
 
+model Education {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  institution   String
+  degree        String
+  period        String
+  cgpa          String?  // Optional CGPA/GPA
+  logo          String   // Cloudinary URL or local path
+  link          String?  // Institution website link
+  coreCourses   String[] // Array of core courses/subjects
+  isActive      Boolean  @default(true)
+  displayOrder  Int      @default(0) // For ordering education entries
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
 enum UserRole {
   ADMIN
   VIEWER
