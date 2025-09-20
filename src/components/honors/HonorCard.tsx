@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { PencilIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { Honor } from '@/hooks/useHonors'
 import { formatDate } from '@/lib/utils'
+import Button from '@/components/ui/Button'
 
 interface HonorCardProps {
   honor: Honor
@@ -27,12 +28,13 @@ export default function HonorCard({ honor, onEdit, onDelete, onView }: HonorCard
             onError={() => setImageError(true)}
           />
           {onView && (
-            <button
+            <Button
               onClick={() => onView(honor)}
+              variant="ghost"
               className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center"
             >
               <EyeIcon className="h-8 w-8 text-white opacity-0 hover:opacity-100 transition-opacity duration-200" />
-            </button>
+            </Button>
           )}
         </div>
       )}
@@ -64,20 +66,24 @@ export default function HonorCard({ honor, onEdit, onDelete, onView }: HonorCard
         </div>
         
         <div className="flex space-x-2">
-          <button
+          <Button
             onClick={() => onEdit(honor)}
-            className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors duration-200"
+            variant="ghost"
+            size="sm"
+            className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
           >
             <PencilIcon className="h-4 w-4" />
             <span>Edit</span>
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => onDelete(honor.id)}
-            className="flex items-center space-x-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium transition-colors duration-200"
+            variant="ghost"
+            size="sm"
+            className="flex items-center space-x-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
           >
             <TrashIcon className="h-4 w-4" />
             <span>Delete</span>
-          </button>
+          </Button>
         </div>
       </div>
     </div>

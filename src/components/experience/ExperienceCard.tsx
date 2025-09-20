@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { PencilIcon, TrashIcon, EyeIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { Experience } from '@/hooks/useExperience'
 import { formatDate } from '@/lib/utils'
+import Button from '@/components/ui/Button'
 
 interface ExperienceCardProps {
   experience: Experience
@@ -50,12 +51,14 @@ export default function ExperienceCard({ experience, onEdit, onDelete, onView }:
                 </p>
               </div>
               {onView && (
-                <button
+                <Button
                   onClick={() => onView(experience)}
+                  variant="ghost"
+                  size="sm"
                   className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   <EyeIcon className="h-5 w-5" />
-                </button>
+                </Button>
               )}
             </div>
 
@@ -104,20 +107,24 @@ export default function ExperienceCard({ experience, onEdit, onDelete, onView }:
 
             {/* Actions */}
             <div className="flex space-x-2 mt-4">
-              <button
+              <Button
                 onClick={() => onEdit(experience)}
-                className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors duration-200"
+                variant="ghost"
+                size="sm"
+                className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
               >
                 <PencilIcon className="h-4 w-4" />
                 <span>Edit</span>
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => onDelete(experience.id)}
-                className="flex items-center space-x-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium transition-colors duration-200"
+                variant="ghost"
+                size="sm"
+                className="flex items-center space-x-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
               >
                 <TrashIcon className="h-4 w-4" />
                 <span>Delete</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { PencilIcon, TrashIcon, EyeIcon, DocumentIcon } from '@heroicons/react/24/outline'
 import { CV } from '@/hooks/useCVs'
 import { formatDate } from '@/lib/utils'
+import Button from '@/components/ui/Button'
 
 interface CVCardProps {
   cv: CV
@@ -56,28 +57,34 @@ export default function CVCard({ cv, onEdit, onDelete, onView }: CVCardProps) {
           {/* Action buttons */}
           <div className="flex items-center space-x-2">
             {onView && (
-              <button
+              <Button
                 onClick={() => onView(cv)}
+                variant="ghost"
+                size="sm"
                 className="p-2 text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
                 title="View CV"
               >
                 <EyeIcon className="h-5 w-5" />
-              </button>
+              </Button>
             )}
-            <button
+            <Button
               onClick={() => onEdit(cv)}
+              variant="ghost"
+              size="sm"
               className="p-2 text-gray-400 hover:text-yellow-600 dark:hover:text-yellow-400 transition-colors duration-200"
               title="Edit CV"
             >
               <PencilIcon className="h-5 w-5" />
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => onDelete(cv.id)}
+              variant="ghost"
+              size="sm"
               className="p-2 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200"
               title="Delete CV"
             >
               <TrashIcon className="h-5 w-5" />
-            </button>
+            </Button>
           </div>
         </div>
       </div>

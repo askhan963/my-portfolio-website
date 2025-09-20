@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import ImageUpload from '@/components/ImageUpload'
 import { ProjectFormData } from '@/hooks/useProjects'
 import { VALIDATION } from '@/lib/constants'
+import Button from '@/components/ui/Button'
 
 interface ProjectFormProps {
   formData: ProjectFormData
@@ -174,14 +175,16 @@ export default function ProjectForm({
                     height={96}
                     className="w-full h-24 object-cover rounded-md"
                   />
-                  <button
+                  <Button
                     type="button"
                     onClick={() => onImageRemove(index)}
-                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    variant="danger"
+                    size="sm"
+                    className="absolute -top-2 -right-2 rounded-full w-6 h-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                     disabled={isSubmitting}
                   >
                     <XMarkIcon className="h-4 w-4" />
-                  </button>
+                  </Button>
                 </div>
               ))}
             </div>
@@ -189,21 +192,21 @@ export default function ProjectForm({
         </div>
 
         <div className="flex space-x-4">
-          <button
+          <Button
             type="submit"
             disabled={isSubmitting}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+            isLoading={isSubmitting}
           >
             {isSubmitting ? 'Saving...' : (isEditing ? 'Update Project' : 'Create Project')}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             onClick={onCancel}
             disabled={isSubmitting}
-            className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+            variant="secondary"
           >
             Cancel
-          </button>
+          </Button>
         </div>
       </form>
     </div>

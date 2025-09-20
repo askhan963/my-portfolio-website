@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Dialog as HeadlessDialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import Button from './Button'
 
 interface ConfirmDialogProps {
   isOpen: boolean
@@ -83,22 +84,25 @@ export default function ConfirmDialog({
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <button
+                  <Button
                     type="button"
-                    className={`inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed ${buttonClasses[variant]}`}
+                    variant={variant === 'danger' ? 'danger' : 'primary'}
+                    className={`inline-flex w-full justify-center sm:ml-3 sm:w-auto ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                     onClick={onConfirm}
                     disabled={isLoading}
+                    isLoading={isLoading}
                   >
                     {isLoading ? 'Processing...' : confirmText}
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-base font-medium text-gray-700 dark:text-gray-300 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm"
+                    variant="secondary"
+                    className="mt-3 inline-flex w-full justify-center sm:mt-0 sm:w-auto"
                     onClick={onClose}
                     disabled={isLoading}
                   >
                     {cancelText}
-                  </button>
+                  </Button>
                 </div>
               </HeadlessDialog.Panel>
             </Transition.Child>
