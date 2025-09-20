@@ -9,6 +9,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner'
 import Dialog from '@/components/ui/Dialog'
 import { formatDate } from '@/lib/utils'
 import Image from 'next/image'
+import Button from '@/components/ui/Button'
 
 export default function ProfilePage() {
   const { profile, loading, error, updateProfile, changePassword } = useProfile()
@@ -60,12 +61,11 @@ export default function ProfilePage() {
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
           <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
-          <button
+          <Button
             onClick={() => window.location.reload()}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Retry
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -133,13 +133,15 @@ export default function ProfilePage() {
                   </span>
                 </div>
               </div>
-              <button
+              <Button
                 onClick={() => setShowProfileForm(true)}
-                className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium transition-colors duration-200"
+                variant="ghost"
+                size="sm"
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
               >
                 <PencilIcon className="h-4 w-4" />
                 <span>Edit Profile</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -157,13 +159,15 @@ export default function ProfilePage() {
               Manage your password and security settings
             </p>
           </div>
-          <button
+          <Button
             onClick={() => setShowPasswordForm(true)}
-            className="flex items-center space-x-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium transition-colors duration-200"
+            variant="ghost"
+            size="sm"
+            className="flex items-center space-x-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
           >
             <KeyIcon className="h-4 w-4" />
             <span>Change Password</span>
-          </button>
+          </Button>
         </div>
       </div>
 

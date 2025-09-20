@@ -1,6 +1,7 @@
 import { Fragment, ReactNode } from 'react'
 import { Dialog as HeadlessDialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import Button from './Button'
 
 interface DialogProps {
   isOpen: boolean
@@ -63,14 +64,16 @@ export default function Dialog({
                     {title}
                   </HeadlessDialog.Title>
                   {showCloseButton && (
-                    <button
+                    <Button
                       type="button"
-                      className="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      variant="ghost"
+                      size="sm"
+                      className="rounded-md text-gray-400 hover:text-gray-500"
                       onClick={onClose}
                     >
                       <span className="sr-only">Close</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </Button>
                   )}
                 </div>
                 {children}

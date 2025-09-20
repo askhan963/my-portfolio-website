@@ -15,12 +15,27 @@ export const API_ENDPOINTS = {
     BASE: '/api/experience',
     BY_ID: (id: string) => `/api/experience/${id}`,
   },
+  // Resumes
+  RESUMES: {
+    BASE: '/api/cvs',
+    BY_ID: (id: string) => `/api/cvs/${id}`,
+  },
   // Upload
   UPLOAD: '/api/upload',
   // Profile
   PROFILE: {
     BASE: '/api/profile',
     CHANGE_PASSWORD: '/api/profile/change-password',
+  },
+  // Public Profile
+  PUBLIC_PROFILE: {
+    BASE: '/api/public-profile',
+    BY_ID: (id: string) => `/api/public-profile/${id}`,
+  },
+  // Education
+  EDUCATION: {
+    BASE: '/api/education',
+    BY_ID: (id: string) => `/api/education/${id}`,
   },
   // Auth
   AUTH: {
@@ -62,12 +77,39 @@ export const TOAST_MESSAGES = {
     INVALID_TYPE: 'Invalid file type. Please upload an image.',
     TOO_LARGE: 'File too large. Maximum size is 5MB.',
   },
+  RESUMES: {
+    CREATE_SUCCESS: 'CV uploaded successfully!',
+    CREATE_ERROR: 'Failed to upload CV',
+    UPDATE_SUCCESS: 'CV updated successfully!',
+    UPDATE_ERROR: 'Failed to update CV',
+    DELETE_SUCCESS: 'CV deleted successfully!',
+    DELETE_ERROR: 'Failed to delete CV',
+    FETCH_ERROR: 'Failed to fetch CVs',
+  },
   PROFILE: {
     FETCH_ERROR: 'Failed to fetch profile',
     UPDATE_SUCCESS: 'Profile updated successfully!',
     UPDATE_ERROR: 'Failed to update profile',
     PASSWORD_CHANGE_SUCCESS: 'Password changed successfully!',
     PASSWORD_CHANGE_ERROR: 'Failed to change password',
+  },
+  PUBLIC_PROFILE: {
+    FETCH_ERROR: 'Failed to fetch public profile',
+    CREATE_SUCCESS: 'Public profile created successfully!',
+    CREATE_ERROR: 'Failed to create public profile',
+    UPDATE_SUCCESS: 'Public profile updated successfully!',
+    UPDATE_ERROR: 'Failed to update public profile',
+    DELETE_SUCCESS: 'Public profile deleted successfully!',
+    DELETE_ERROR: 'Failed to delete public profile',
+  },
+  EDUCATION: {
+    FETCH_ERROR: 'Failed to fetch education',
+    CREATE_SUCCESS: 'Education entry created successfully!',
+    CREATE_ERROR: 'Failed to create education entry',
+    UPDATE_SUCCESS: 'Education entry updated successfully!',
+    UPDATE_ERROR: 'Failed to update education entry',
+    DELETE_SUCCESS: 'Education entry deleted successfully!',
+    DELETE_ERROR: 'Failed to delete education entry',
   },
   GENERAL: {
     NETWORK_ERROR: 'Network error. Please check your connection.',
@@ -79,9 +121,12 @@ export const TOAST_MESSAGES = {
 // Form Validation
 export const VALIDATION = {
   MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+  MAX_CV_FILE_SIZE: 10 * 1024 * 1024, // 10MB for CV files
   ALLOWED_IMAGE_TYPES: ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
+  ALLOWED_CV_TYPES: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
   REQUIRED_FIELDS: {
     PROJECT: ['title', 'description', 'category'],
+    CV: ['title', 'description'],
   },
 } as const
 

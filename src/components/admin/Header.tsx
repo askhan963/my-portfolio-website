@@ -15,6 +15,7 @@ import {
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import Image from 'next/image'
+import Button from '@/components/ui/Button'
 
 interface HeaderProps {
   onMobileMenuToggle: () => void
@@ -41,24 +42,28 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
       {/* Left side */}
       <div className="flex items-center space-x-4">
         {/* Mobile menu button */}
-        <button
+        <Button
           onClick={onMobileMenuToggle}
-          className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+          variant="ghost"
+          size="sm"
+          className="lg:hidden"
         >
           <Bars3Icon className="w-6 h-6" />
-        </button>
+        </Button>
 
         {/* Desktop toggle button */}
-        <button
+        <Button
           onClick={onToggle}
-          className="hidden lg:flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+          variant="ghost"
+          size="sm"
+          className="hidden lg:flex"
         >
           {isCollapsed ? (
             <ChevronRightIcon className="w-5 h-5" />
           ) : (
             <Bars3Icon className="w-5 h-5" />
           )}
-        </button>
+        </Button>
 
         {/* Search */}
         <div className="relative hidden sm:block">
@@ -77,12 +82,16 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
       {/* Right side */}
       <div className="flex items-center space-x-4">
         {/* Notifications */}
-        <button className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 relative">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="relative"
+        >
           <BellIcon className="w-5 h-5" />
           <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
             3
           </span>
-        </button>
+        </Button>
         
         {/* User menu */}
         <Menu as="div" className="relative">
@@ -125,42 +134,45 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <button
+                    <Button
                       onClick={handleProfileClick}
+                      variant="ghost"
                       className={`${
                         active ? 'bg-gray-100 dark:bg-gray-700' : ''
-                      } flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300`}
+                      } flex items-center w-full justify-start`}
                     >
                       <UserCircleIcon className="w-4 h-4 mr-3" />
                       Profile
-                    </button>
+                    </Button>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <button
+                    <Button
                       onClick={handleSettingsClick}
+                      variant="ghost"
                       className={`${
                         active ? 'bg-gray-100 dark:bg-gray-700' : ''
-                      } flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-300`}
+                      } flex items-center w-full justify-start`}
                     >
                       <Cog6ToothIcon className="w-4 h-4 mr-3" />
                       Settings
-                    </button>
+                    </Button>
                   )}
                 </Menu.Item>
                 <div className="border-t border-gray-200 dark:border-gray-700 my-1"></div>
                 <Menu.Item>
                   {({ active }) => (
-                    <button
+                    <Button
                       onClick={() => signOut({ callbackUrl: '/' })}
+                      variant="ghost"
                       className={`${
                         active ? 'bg-gray-100 dark:bg-gray-700' : ''
-                      } flex items-center w-full px-4 py-2 text-sm text-red-600 dark:text-red-400`}
+                      } flex items-center w-full justify-start text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300`}
                     >
                       <ArrowRightOnRectangleIcon className="w-4 h-4 mr-3" />
                       Sign out
-                    </button>
+                    </Button>
                   )}
                 </Menu.Item>
               </div>

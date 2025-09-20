@@ -7,11 +7,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-console.log('Cloudinary config loaded:', {
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME ? 'Set' : 'Missing',
-  api_key: process.env.CLOUDINARY_API_KEY ? 'Set' : 'Missing',
-  api_secret: process.env.CLOUDINARY_API_SECRET ? 'Set' : 'Missing',
-})
+
 
 export { cloudinary }
 
@@ -22,12 +18,7 @@ export async function uploadImage(
   publicId?: string
 ): Promise<{ url: string; publicId: string }> {
   try {
-    console.log('Starting Cloudinary upload...', {
-      folder,
-      publicId,
-      fileType: file instanceof File ? file.type : 'Buffer',
-      fileSize: file instanceof File ? file.size : 'Unknown'
-    })
+   
 
     // Convert File to Buffer if needed
     let fileBuffer: Buffer
@@ -49,7 +40,6 @@ export async function uploadImage(
       }
     )
 
-    console.log('Cloudinary upload successful:', result.secure_url)
     return {
       url: result.secure_url,
       publicId: result.public_id,

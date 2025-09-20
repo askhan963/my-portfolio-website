@@ -108,9 +108,18 @@ export async function DELETE(
     }
 
     const { id } = await params
-    // Delete experience (roles will be deleted automatically due to cascade)
-    await prisma.experience.delete({
-      where: { id },
+    
+    // Delete experience and related roles in a transaction
+    await prisma.$transaction(async (tx) => {
+      // First delete all related roles
+      await tx.experienceRole.deleteMany({
+        where: { experienceId: id }
+      })
+      
+      // Then delete the experience
+      await tx.experience.delete({
+        where: { id },
+      })
     })
 
     return NextResponse.json({ success: true })

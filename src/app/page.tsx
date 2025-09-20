@@ -5,10 +5,10 @@ import Projects from "@/app/components/Projects";
 import Skills from "@/app/components/Skills";
 import Education from "@/app/components/Education"; 
 import Honors from "@/app/components/Honors";
-import MyCVs from "@/app/components/MyCVs";
 import Contact from "@/app/components/Contact";
 import Footer from "./components/Footer";
 import ContactMe from "./components/ContactMe";
+import MyCVs from "./components/MyCVs";
 
 export default function Home() {
   return (

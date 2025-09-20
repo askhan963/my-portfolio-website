@@ -1,8 +1,8 @@
-import { NextAuthOptions } from "next-auth"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import CredentialsProvider from "next-auth/providers/credentials"
-import bcrypt from "bcryptjs"
-import { prisma } from "./prisma"
+import { NextAuthOptions } from "next-auth";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
+import { prisma } from "./prisma";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -10,41 +10,36 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("Auth attempt:", credentials?.email)
-        
         if (!credentials?.email || !credentials?.password) {
-          console.log("Missing credentials")
-          return null
+          return null;
         }
 
         try {
           const user = await prisma.user.findUnique({
             where: {
-              email: credentials.email
-            }
-          })
-
-          console.log("User found:", !!user)
+              email: credentials.email,
+            },
+          });
 
           if (!user) {
-            console.log("User not found")
-            return null
+            return null;
           }
 
           // Check if user has a password
           if (!user.password) {
-            console.log("User has no password")
-            return null
+            return null;
           }
 
-          const isPasswordValid = await bcrypt.compare(credentials.password, user.password)
-          console.log("Password valid:", isPasswordValid)
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
 
           if (!isPasswordValid) {
-            return null
+            return null;
           }
 
           return {
@@ -53,13 +48,13 @@ export const authOptions: NextAuthOptions = {
             name: user.name,
             image: user.image,
             role: user.role,
-          }
+          };
         } catch (error) {
-          console.error("Auth error:", error)
-          return null
+          console.error("Auth error:", error);
+          return null;
         }
-      }
-    })
+      },
+    }),
   ],
   session: {
     strategy: "jwt",
@@ -67,19 +62,19 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role
+        token.role = user.role;
       }
-      return token
+      return token;
     },
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.sub!
-        session.user.role = token.role as string
+        session.user.id = token.sub!;
+        session.user.role = token.role as string;
       }
-      return session
+      return session;
     },
   },
   pages: {
     signIn: "/admin/login",
   },
-}
+};

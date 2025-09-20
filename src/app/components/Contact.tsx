@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiLinkedin, FiFacebook, FiTwitter, FiGithub, FiMail, FiCheckCircle } from "react-icons/fi";
+import Button from "@/components/ui/Button";
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -89,9 +90,14 @@ const Contact = () => {
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">Message</label>
                 <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} rows={4} className="w-full px-4 py-3 rounded-lg border border-border focus:ring-2 focus:ring-primary bg-background text-foreground" required />
               </div>
-              <button type="submit" disabled={isSubmitting} className="w-full py-3 px-6 bg-primary text-white font-bold rounded-lg shadow-md hover:bg-primary/90 transition-all duration-300 disabled:opacity-50">
+              <Button 
+                type="submit" 
+                disabled={isSubmitting} 
+                className="w-full"
+                isLoading={isSubmitting}
+              >
                 {isSubmitting ? "Sending..." : "Send Message"}
-              </button>
+              </Button>
             </form>
           )}
         </motion.div>

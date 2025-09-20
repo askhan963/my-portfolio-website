@@ -8,12 +8,16 @@ import {
   FolderIcon, 
   TrophyIcon, 
   BriefcaseIcon,
+  DocumentTextIcon,
   XMarkIcon,
   UserIcon,
-  Cog6ToothIcon
+  Cog6ToothIcon,
+  UserCircleIcon,
+  AcademicCapIcon
 } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 import Tooltip from '@/components/ui/Tooltip'
+import Button from '@/components/ui/Button'
 
 interface SidebarProps {
   isCollapsed: boolean
@@ -27,6 +31,9 @@ const navigation = [
   { name: 'Projects', href: '/admin/projects', icon: FolderIcon },
   { name: 'Honors', href: '/admin/honors', icon: TrophyIcon },
   { name: 'Experience', href: '/admin/experience', icon: BriefcaseIcon },
+  { name: 'Education', href: '/admin/education', icon: AcademicCapIcon },
+  { name: 'CVs', href: '/admin/cvs', icon: DocumentTextIcon },
+  { name: 'Public Profile', href: '/admin/public-profile', icon: UserCircleIcon },
   { name: 'Profile', href: '/admin/profile', icon: Cog6ToothIcon },
 ]
 
@@ -63,12 +70,14 @@ export default function Sidebar({ isCollapsed, onToggle, isMobileOpen, onMobileT
           )}
           
           {/* Mobile close button only */}
-          <button
+          <Button
             onClick={onMobileToggle}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200"
+            variant="ghost"
+            size="sm"
+            className="lg:hidden"
           >
             <XMarkIcon className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
 
         {/* Navigation */}

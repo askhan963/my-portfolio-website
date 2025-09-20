@@ -20,7 +20,7 @@ model User {
 
 model Project {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String   @unique
+  title       String
   description String
   techStack   String[]
   githubLink  String?
@@ -34,7 +34,7 @@ model Project {
 
 model Honor {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String   @unique
+  title       String
   description String
   image       String   // Cloudinary URL
   issuedBy    String
@@ -45,7 +45,7 @@ model Honor {
 
 model Experience {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  company     String   @unique
+  company     String
   companyLink String?
   logo        String   // Cloudinary URL
   period      String
@@ -59,10 +59,49 @@ model ExperienceRole {
   title       String
   period      String
   description String[]
-  experience  Experience @relation(fields: [experienceId], references: [id])
+  experience  Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
   experienceId String    @db.ObjectId
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+}
+
+model resumes {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  downloadLink String   // File URL (Cloudinary or local)
+  fileName     String?  // Original filename
+  fileSize     Int?     // File size in bytes
+  fileType     String?  // MIME type
+  isActive     Boolean  @default(true) // For multiple CVs, which one to show
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model PublicProfile {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  image       String   // Cloudinary URL
+  headlines   String[] // Array of headlines for type animation
+  tagline     String   // Intro/tagline text
+  isActive    Boolean  @default(true) // Only one active profile
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Education {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  institution   String
+  degree        String
+  period        String
+  cgpa          String?  // Optional CGPA/GPA
+  logo          String   // Cloudinary URL or local path
+  link          String?  // Institution website link
+  coreCourses   String[] // Array of core courses/subjects
+  isActive      Boolean  @default(true)
+  displayOrder  Int      @default(0) // For ordering education entries
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 enum UserRole {
