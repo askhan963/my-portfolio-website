@@ -25,7 +25,7 @@ const Education = () => {
         "Database Systems",
         "Operating Systems",
       ],
-      logo: "/Logos/COMSATS.jpg",
+      logo: "https://res.cloudinary.com/dfq1peuay/image/upload/v1758349296/education/hxmnj3v6dmiqak5rftbx.jpg",
       link: "https://www.cuiatd.edu.pk/",
     },
     {
@@ -33,7 +33,7 @@ const Education = () => {
       degree: "Intermediate in Computer Science (ICS)",
       period: "2018 - 2020",
       coreCourses: ["Physics", "Computer Science", "Mathematics"],
-      logo: "/Logos/mlw.jpg",
+      logo: "https://res.cloudinary.com/dfq1peuay/image/upload/v1758349592/education/q3eqgpevo8zr6xqv236b.jpg",
       link: "https://m.facebook.com/MLWHSSM/?profile_tab_item_selected=about",
     },
   ];
@@ -55,7 +55,7 @@ const Education = () => {
   }
 
   if (error) {
-    console.error('Error loading education:', error);
+    console.error("Error loading education:", error);
   }
 
   return (
@@ -63,9 +63,7 @@ const Education = () => {
       id="education"
       className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
     >
-      <h1
-        className="text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center"
-      >
+      <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center">
         Education & Academics
       </h1>
 
@@ -77,9 +75,7 @@ const Education = () => {
                 <FaGraduationCap className="w-4 h-4 text-primary" />
               </span>
 
-              <div
-                className="p-6 bg-card text-card-foreground rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-border"
-              >
+              <div className="p-6 bg-card text-card-foreground rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-border">
                 <div className="flex flex-col sm:flex-row items-start gap-4">
                   <Image
                     src={edu.logo}
@@ -123,7 +119,7 @@ const Education = () => {
                       {edu.cgpa} / 4.0
                     </p>
                   )}
-                  
+
                   <div>
                     <h4 className="font-semibold text-foreground mb-2">
                       Core Courses

@@ -149,7 +149,6 @@ export default function CVsPage() {
   if (loading) {
     return <LoadingSpinner />
   }
-  {console.log(cvs)}
   return (
     <div className="space-y-6">
       {/* Header */}
