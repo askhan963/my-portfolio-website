@@ -148,6 +148,19 @@ export const educationApi = {
   delete: (id: string) => api.delete(API_ENDPOINTS.EDUCATION.BY_ID(id)),
 }
 
+// Skills API
+export const skillsApi = {
+  getAll: () => api.get(API_ENDPOINTS.SKILLS.BASE),
+  
+  getById: (id: string) => api.get(API_ENDPOINTS.SKILLS.BY_ID(id)),
+  
+  create: (data: any) => api.post(API_ENDPOINTS.SKILLS.BASE, data),
+  
+  update: (id: string, data: any) => api.put(API_ENDPOINTS.SKILLS.BY_ID(id), data),
+  
+  delete: (id: string) => api.delete(API_ENDPOINTS.SKILLS.BY_ID(id)),
+}
+
 // Upload API
 export const uploadApi = {
   uploadImage: (file: File, folder: string = 'portfolio') => {
