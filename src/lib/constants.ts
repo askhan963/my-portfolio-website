@@ -37,6 +37,11 @@ export const API_ENDPOINTS = {
     BASE: '/api/education',
     BY_ID: (id: string) => `/api/education/${id}`,
   },
+  // Skills
+  SKILLS: {
+    BASE: '/api/skills',
+    BY_ID: (id: string) => `/api/skills/${id}`,
+  },
   // Auth
   AUTH: {
     LOGIN: '/api/auth/signin',
@@ -110,6 +115,15 @@ export const TOAST_MESSAGES = {
     UPDATE_ERROR: 'Failed to update education entry',
     DELETE_SUCCESS: 'Education entry deleted successfully!',
     DELETE_ERROR: 'Failed to delete education entry',
+  },
+  SKILLS: {
+    FETCH_ERROR: 'Failed to fetch skills',
+    CREATE_SUCCESS: 'Skill created successfully!',
+    CREATE_ERROR: 'Failed to create skill',
+    UPDATE_SUCCESS: 'Skill updated successfully!',
+    UPDATE_ERROR: 'Failed to update skill',
+    DELETE_SUCCESS: 'Skill deleted successfully!',
+    DELETE_ERROR: 'Failed to delete skill',
   },
   GENERAL: {
     NETWORK_ERROR: 'Network error. Please check your connection.',
