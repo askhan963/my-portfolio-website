@@ -1,63 +1,102 @@
-import { v2 as cloudinary } from 'cloudinary'
+import { v2 as cloudinary } from "cloudinary";
 
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
-})
+});
 
-
-
-export { cloudinary }
+export { cloudinary };
 
 // Utility function to upload image
+// export async function uploadImage(
+//   file: File | Buffer,
+//   folder: string = 'portfolio',
+//   publicId?: string
+// ): Promise<{ url: string; publicId: string }> {
+//   try {
+
+//     // Convert File to Buffer if needed
+//     let fileBuffer: Buffer
+//     if (file instanceof File) {
+//       const arrayBuffer = await file.arrayBuffer()
+//       fileBuffer = Buffer.from(arrayBuffer)
+//     } else {
+//       fileBuffer = file
+//     }
+
+//     const result = await cloudinary.uploader.upload(
+//       `data:${file instanceof File ? file.type : 'image/jpeg'};base64,${fileBuffer.toString('base64')}`,
+//       {
+//         folder,
+//         public_id: publicId,
+//         resource_type: 'auto',
+//         quality: 'auto',
+//         fetch_format: 'auto',
+//       }
+//     )
+
+//     return {
+//       url: result.secure_url,
+//       publicId: result.public_id,
+//     }
+//   } catch (error) {
+//     console.error('Cloudinary upload error details:', error)
+//     throw new Error(`Failed to upload image: ${error instanceof Error ? error.message : 'Unknown error'}`)
+//   }
+// }
 export async function uploadImage(
   file: File | Buffer,
-  folder: string = 'portfolio',
+  folder: string = "portfolio",
   publicId?: string
 ): Promise<{ url: string; publicId: string }> {
   try {
-   
+    let fileBuffer: Buffer;
+    let mimeType = "application/octet-stream";
 
-    // Convert File to Buffer if needed
-    let fileBuffer: Buffer
     if (file instanceof File) {
-      const arrayBuffer = await file.arrayBuffer()
-      fileBuffer = Buffer.from(arrayBuffer)
+      const arrayBuffer = await file.arrayBuffer();
+      fileBuffer = Buffer.from(arrayBuffer);
+      mimeType = file.type; // ✅ use the actual type (e.g., application/pdf)
     } else {
-      fileBuffer = file
+      fileBuffer = file;
     }
 
     const result = await cloudinary.uploader.upload(
-      `data:${file instanceof File ? file.type : 'image/jpeg'};base64,${fileBuffer.toString('base64')}`,
+      `data:${mimeType};base64,${fileBuffer.toString("base64")}`,
       {
         folder,
         public_id: publicId,
-        resource_type: 'auto',
-        quality: 'auto',
-        fetch_format: 'auto',
+        resource_type: "auto", // ✅ allows images, videos, PDFs, etc.
+        // remove auto conversions:
+        // quality: 'auto',
+        // fetch_format: 'auto',
       }
-    )
+    );
 
     return {
       url: result.secure_url,
       publicId: result.public_id,
-    }
+    };
   } catch (error) {
-    console.error('Cloudinary upload error details:', error)
-    throw new Error(`Failed to upload image: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    console.error("Cloudinary upload error details:", error);
+    throw new Error(
+      `Failed to upload file: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`
+    );
   }
 }
 
 // Utility function to delete image
 export async function deleteImage(publicId: string): Promise<boolean> {
   try {
-    await cloudinary.uploader.destroy(publicId)
-    return true
+    await cloudinary.uploader.destroy(publicId);
+    return true;
   } catch (error) {
-    console.error('Cloudinary delete error:', error)
-    return false
+    console.error("Cloudinary delete error:", error);
+    return false;
   }
 }
 
@@ -66,12 +105,12 @@ export function getOptimizedImageUrl(
   publicId: string,
   width?: number,
   height?: number,
-  quality: string = 'auto'
+  quality: string = "auto"
 ): string {
   return cloudinary.url(publicId, {
     width,
     height,
     quality,
-    fetch_format: 'auto',
-  })
+    fetch_format: "auto",
+  });
 }
