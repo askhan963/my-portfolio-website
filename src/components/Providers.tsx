@@ -3,6 +3,8 @@
 import { SessionProvider } from "next-auth/react"
 import { Toaster } from "react-hot-toast"
 
+import { ThemeProvider } from "@/context/ThemeContext"
+
 export default function Providers({
   children,
 }: {
@@ -10,8 +12,9 @@ export default function Providers({
 }) {
   return (
     <SessionProvider>
-      {children}
-      <Toaster
+      <ThemeProvider>
+        {children}
+        <Toaster
         position="top-right"
         toastOptions={{
           duration: 4000,
@@ -49,6 +52,7 @@ export default function Providers({
           },
         }}
       />
+      </ThemeProvider>
     </SessionProvider>
   )
 }

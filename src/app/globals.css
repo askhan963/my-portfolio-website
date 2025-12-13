@@ -28,6 +28,33 @@
   --border-color: #2c2c2c; /* Darker border color */
 }
 
+/* Ocean Theme */
+[data-theme="ocean"] {
+  --background: #0f172a; /* Slate 900 */
+  --foreground: #e2e8f0; /* Slate 200 */
+  --primary: #38bdf8; /* Sky 400 */
+  --card-background: #1e293b; /* Slate 800 */
+  --border-color: #334155; /* Slate 700 */
+}
+
+/* Forest Theme */
+[data-theme="forest"] {
+  --background: #052e16; /* Green 950 */
+  --foreground: #dcfce7; /* Green 100 */
+  --primary: #4ade80; /* Green 400 */
+  --card-background: #064e3b; /* Green 900 */
+  --border-color: #166534; /* Green 800 */
+}
+
+/* Coffee Theme */
+[data-theme="coffee"] {
+  --background: #2f221e; /* Dark Coffee */
+  --foreground: #f0e6d2; /* Cream/Beige */
+  --primary: #c0a080; /* Latte */
+  --card-background: #4a3b32; /* Mocha */
+  --border-color: #5e4b40; /* Brown */
+}
+
 /* Smooth scrolling and base styles */
 html {
   scroll-behavior: smooth;
