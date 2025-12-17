@@ -1,28 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
+import { FaSun, FaMoon, FaBars, FaTimes, FaWater, FaTree, FaCoffee } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useTheme, Theme } from "@/context/ThemeContext";
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      document.documentElement.classList.add("dark");
-      document.documentElement.setAttribute("data-theme", "dark");
-      setDarkMode(true);
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.setAttribute("data-theme", "light");
-      setDarkMode(false);
-    }
-
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
@@ -32,6 +23,7 @@ export default function Navbar() {
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         // Scrolling down
         setIsHidden(true);
+        setIsThemeMenuOpen(false); // Close theme menu on scroll
       } else {
         // Scrolling up
         setIsHidden(false);
@@ -42,22 +34,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => {
-      const newMode = !prevMode;
-      if (newMode) {
-        document.documentElement.classList.add("dark");
-        document.documentElement.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        document.documentElement.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
-      }
-      return newMode;
-    });
-  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -73,6 +49,16 @@ export default function Navbar() {
     { title: "My CVs", href: "#my-cvs" },
     { title: "Contact", href: "#contact" },
   ];
+
+  const themes: { name: Theme; icon: React.ReactNode; label: string }[] = [
+    { name: "light", icon: <FaSun />, label: "Light" },
+    { name: "dark", icon: <FaMoon />, label: "Dark" },
+    { name: "ocean", icon: <FaWater />, label: "Ocean" },
+    { name: "forest", icon: <FaTree />, label: "Forest" },
+    { name: "coffee", icon: <FaCoffee />, label: "Coffee" },
+  ];
+
+  const currentThemeIcon = themes.find((t) => t.name === theme)?.icon || <FaSun />;
 
   return (
     <motion.nav
@@ -116,13 +102,46 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <motion.button
-              onClick={toggleDarkMode}
-              className="text-2xl text-foreground/70 hover:text-primary transition-colors duration-300"
-              whileHover={{ scale: 1.2, rotate: 15 }}
-            >
-              {darkMode ? <FaSun /> : <FaMoon />}
-            </motion.button>
+            {/* Theme Selector */}
+            <div className="relative">
+              <motion.button
+                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
+                className="text-2xl text-foreground/70 hover:text-primary transition-colors duration-300 p-2"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {currentThemeIcon}
+              </motion.button>
+              
+              <AnimatePresence>
+                {isThemeMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute right-0 mt-2 w-32 bg-card-background border border-border rounded-lg shadow-xl overflow-hidden"
+                  >
+                    {themes.map((t) => (
+                      <button
+                        key={t.name}
+                        onClick={() => {
+                          setTheme(t.name);
+                          setIsThemeMenuOpen(false);
+                        }}
+                        className={`w-full flex items-center space-x-3 px-4 py-3 text-sm transition-colors duration-200 ${
+                          theme === t.name
+                            ? "bg-primary/10 text-primary"
+                            : "text-foreground hover:bg-primary/5"
+                        }`}
+                      >
+                        <span className="text-lg">{t.icon}</span>
+                        <span>{t.label}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             <div className="md:hidden">
               <motion.button
