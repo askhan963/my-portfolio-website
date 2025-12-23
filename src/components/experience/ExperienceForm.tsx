@@ -126,12 +126,11 @@ export default function ExperienceForm({
                   type="button"
                   onClick={() => onLogoSet('')}
                   variant="danger"
+                  leftIcon={<XMarkIcon className="h-4 w-4" />}
                   size="sm"
                   className="absolute -top-2 -right-2 rounded-full w-6 h-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                   disabled={isSubmitting}
-                >
-                  <XMarkIcon className="h-4 w-4" />
-                </Button>
+                />
               </div>
             )}
           </div>
@@ -145,12 +144,12 @@ export default function ExperienceForm({
               type="button"
               onClick={onAddRole}
               disabled={isSubmitting}
+              leftIcon={<PlusIcon className="h-4 w-4" />}
               variant="ghost"
               size="sm"
               className="inline-flex items-center space-x-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
             >
-              <PlusIcon className="h-4 w-4" />
-              <span>Add Role</span>
+              Add Role
             </Button>
           </div>
 
@@ -165,11 +164,12 @@ export default function ExperienceForm({
                     type="button"
                     onClick={() => onRemoveRole(index)}
                     disabled={isSubmitting}
+                    leftIcon={<TrashIcon className="h-4 w-4" />}
                     variant="ghost"
                     size="sm"
                     className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
                   >
-                    <TrashIcon className="h-4 w-4" />
+                    Remove Role
                   </Button>
                 )}
               </div>

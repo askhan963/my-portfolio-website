@@ -1,13 +1,14 @@
 "use client"
 
 import { useState } from 'react'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { ArrowPathIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { useProjects, useProjectForm, Project } from '@/hooks/useProjects'
 import ProjectCard from '@/components/projects/ProjectCard'
 import ProjectForm from '@/components/projects/ProjectForm'
 import ProjectViewDialog from '@/components/projects/ProjectViewDialog'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import Button from '@/components/ui/Button'
 
 export default function ProjectsPage() {
   const {
@@ -110,12 +111,13 @@ export default function ProjectsPage() {
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
           <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
-          <button
+          <Button
             onClick={() => window.location.reload()}
+            leftIcon={<ArrowPathIcon className="h-5 w-5" />}
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Retry
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -131,13 +133,13 @@ export default function ProjectsPage() {
             Manage your portfolio projects
           </p>
         </div>
-        <button
+        <Button
           onClick={handleCreate}
+          leftIcon={<PlusIcon className="h-5 w-5" />}
           className="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
         >
-          <PlusIcon className="h-5 w-5" />
-          <span>Add Project</span>
-        </button>
+          Add Project
+        </Button>
       </div>
 
       {/* Form */}
@@ -168,12 +170,13 @@ export default function ProjectsPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Get started by creating your first project.
           </p>
-          <button
+          <Button
             onClick={handleCreate}
+            leftIcon={<PlusIcon className="h-5 w-5" />}
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Create Project
-          </button>
+          </Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

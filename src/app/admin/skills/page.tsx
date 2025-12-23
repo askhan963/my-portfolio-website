@@ -174,10 +174,10 @@ export default function SkillsPage() {
         </div>
         <Button
           onClick={handleCreateClick}
+          leftIcon={<PlusIcon className="w-5 h-5" />}
           className="flex items-center space-x-2"
         >
-          <PlusIcon className="w-5 h-5" />
-          <span>Add Skill</span>
+          Add Skill
         </Button>
       </div>
 

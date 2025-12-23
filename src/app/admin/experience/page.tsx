@@ -1,13 +1,14 @@
 "use client"
 
 import { useState } from 'react'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { ArrowPathIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { useExperience, useExperienceForm, Experience } from '@/hooks/useExperience'
 import ExperienceCard from '@/components/experience/ExperienceCard'
 import ExperienceForm from '@/components/experience/ExperienceForm'
 import ExperienceViewDialog from '@/components/experience/ExperienceViewDialog'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import Button from '@/components/ui/Button'
 
 export default function ExperiencePage() {
   const {
@@ -112,12 +113,13 @@ export default function ExperiencePage() {
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
           <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
-          <button
+          <Button
             onClick={() => window.location.reload()}
+            leftIcon={<ArrowPathIcon className="w-5 h-5" />}
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Retry
-          </button>
+          </Button>
         </div>
       </div>
     )
@@ -133,13 +135,13 @@ export default function ExperiencePage() {
             Manage your professional work experience
           </p>
         </div>
-        <button
+        <Button
           onClick={handleCreate}
+          leftIcon={<PlusIcon className="w-5 h-5" />}
           className="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
         >
-          <PlusIcon className="h-5 w-5" />
-          <span>Add Experience</span>
-        </button>
+          Add Experience
+        </Button>
       </div>
 
       {/* Form */}
@@ -172,12 +174,14 @@ export default function ExperiencePage() {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Get started by adding your first work experience.
           </p>
-          <button
+          <Button
             onClick={handleCreate}
+            leftIcon={<PlusIcon className="w-5 h-5" />}
+            variant='ghost'
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Add Experience
-          </button>
+          </Button>
         </div>
       ) : (
         <div className="space-y-6">
