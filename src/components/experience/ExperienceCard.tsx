@@ -55,9 +55,10 @@ export default function ExperienceCard({ experience, onEdit, onDelete, onView }:
                   onClick={() => onView(experience)}
                   variant="ghost"
                   size="sm"
+                  leftIcon={<EyeIcon className="h-5 w-5" />}
                   className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                 >
-                  <EyeIcon className="h-5 w-5" />
+                  View
                 </Button>
               )}
             </div>
@@ -111,19 +112,19 @@ export default function ExperienceCard({ experience, onEdit, onDelete, onView }:
                 onClick={() => onEdit(experience)}
                 variant="ghost"
                 size="sm"
+                leftIcon={<PencilIcon className="h-4 w-4" />}
                 className="flex items-center space-x-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
               >
-                <PencilIcon className="h-4 w-4" />
-                <span>Edit</span>
+                Edit
               </Button>
               <Button
                 onClick={() => onDelete(experience.id)}
                 variant="ghost"
                 size="sm"
+                leftIcon={<TrashIcon className="h-4 w-4" />}
                 className="flex items-center space-x-1 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
               >
-                <TrashIcon className="h-4 w-4" />
-                <span>Delete</span>
+                Delete
               </Button>
             </div>
           </div>

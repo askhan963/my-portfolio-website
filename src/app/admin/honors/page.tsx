@@ -8,6 +8,7 @@ import HonorForm from '@/components/honors/HonorForm'
 import HonorViewDialog from '@/components/honors/HonorViewDialog'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import Button from '@/components/ui/Button'
 
 export default function HonorsPage() {
   const {
@@ -135,13 +136,13 @@ export default function HonorsPage() {
             Manage your certificates and achievements
           </p>
         </div>
-        <button
+        <Button
           onClick={handleCreate}
+          leftIcon={<PlusIcon className="h-5 w-5" />}
           className="inline-flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
         >
-          <PlusIcon className="h-5 w-5" />
-          <span>Add Honor</span>
-        </button>
+          Add Honor
+        </Button>
       </div>
 
       {/* Form */}
@@ -171,12 +172,12 @@ export default function HonorsPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Get started by adding your first honor or award.
           </p>
-          <button
+          <Button
             onClick={handleCreate}
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Add Honor
-          </button>
+          </Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

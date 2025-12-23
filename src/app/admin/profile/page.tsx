@@ -135,12 +135,12 @@ export default function ProfilePage() {
               </div>
               <Button
                 onClick={() => setShowProfileForm(true)}
+                leftIcon={<PencilIcon className="h-4 w-4" />}
                 variant="ghost"
                 size="sm"
                 className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
               >
-                <PencilIcon className="h-4 w-4" />
-                <span>Edit Profile</span>
+                Edit Profile
               </Button>
             </div>
           </div>
@@ -161,12 +161,12 @@ export default function ProfilePage() {
           </div>
           <Button
             onClick={() => setShowPasswordForm(true)}
+            leftIcon={<KeyIcon className="h-4 w-4" />}
             variant="ghost"
             size="sm"
             className="flex items-center space-x-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
           >
-            <KeyIcon className="h-4 w-4" />
-            <span>Change Password</span>
+            Change Password
           </Button>
         </div>
       </div>

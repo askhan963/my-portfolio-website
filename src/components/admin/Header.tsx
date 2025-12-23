@@ -137,11 +137,11 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
                     <Button
                       onClick={handleProfileClick}
                       variant="ghost"
+                      leftIcon={<UserCircleIcon className="w-4 h-4" />}
                       className={`${
                         active ? 'bg-gray-100 dark:bg-gray-700' : ''
-                      } flex items-center w-full justify-start`}
+                      } w-full justify-start`}
                     >
-                      <UserCircleIcon className="w-4 h-4 mr-3" />
                       Profile
                     </Button>
                   )}
@@ -151,11 +151,11 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
                     <Button
                       onClick={handleSettingsClick}
                       variant="ghost"
+                      leftIcon={<Cog6ToothIcon className="w-4 h-4" />}
                       className={`${
                         active ? 'bg-gray-100 dark:bg-gray-700' : ''
-                      } flex items-center w-full justify-start`}
+                      } w-full justify-start`}
                     >
-                      <Cog6ToothIcon className="w-4 h-4 mr-3" />
                       Settings
                     </Button>
                   )}
@@ -166,11 +166,11 @@ export default function Header({ onMobileMenuToggle, isCollapsed, onToggle }: He
                     <Button
                       onClick={() => signOut({ callbackUrl: '/' })}
                       variant="ghost"
+                      leftIcon={<ArrowRightOnRectangleIcon className="w-4 h-4" />}
                       className={`${
                         active ? 'bg-gray-100 dark:bg-gray-700' : ''
-                      } flex items-center w-full justify-start text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300`}
+                      } w-full justify-start text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300`}
                     >
-                      <ArrowRightOnRectangleIcon className="w-4 h-4 mr-3" />
                       Sign out
                     </Button>
                   )}

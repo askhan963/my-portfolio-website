@@ -128,10 +128,10 @@ export default function EducationPage() {
         </div>
         <Button
           onClick={handleCreateClick}
+          leftIcon={<PlusIcon className="w-5 h-5" />}
           className="flex items-center space-x-2"
         >
-          <PlusIcon className="w-5 h-5" />
-          <span>Add Education</span>
+          Add Education
         </Button>
       </div>
 
@@ -189,29 +189,29 @@ export default function EducationPage() {
                   <Button
                     variant="secondary"
                     size="sm"
+                    leftIcon={<EyeIcon className="w-4 h-4" />}
                     onClick={() => handleViewClick(edu)}
                     className="flex items-center space-x-1"
                   >
-                    <EyeIcon className="w-4 h-4" />
-                    <span>View</span>
+                    View
                   </Button>
                   <Button
                     variant="secondary"
                     size="sm"
+                    leftIcon={<PencilIcon className="w-4 h-4" />}
                     onClick={() => handleEditClick(edu)}
                     className="flex items-center space-x-1"
                   >
-                    <PencilIcon className="w-4 h-4" />
-                    <span>Edit</span>
+                    Edit
                   </Button>
                   <Button
                     variant="secondary"
                     size="sm"
+                    leftIcon={<TrashIcon className="w-4 h-4" />}
                     onClick={() => handleDeleteClick(edu)}
                     className="flex items-center space-x-1 text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20"
                   >
-                    <TrashIcon className="w-4 h-4" />
-                    <span>Delete</span>
+                    Delete
                   </Button>
                 </div>
               </div>

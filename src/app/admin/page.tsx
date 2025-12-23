@@ -1,5 +1,6 @@
 import DashboardStats from '@/components/admin/DashboardStats'
 import RecentActivity from '@/components/admin/RecentActivity'
+import AnalyticsDashboard from "@/components/admin/AnalyticsDashboard";
 import Link from 'next/link'
 import { 
   FolderIcon, 
@@ -49,6 +50,9 @@ export default function AdminDashboard() {
           Manage your portfolio content and track your progress
         </p>
       </div>
+
+      {/* Analytics Section */}
+      <AnalyticsDashboard />
 
       {/* Stats Cards */}
       <DashboardStats />
