@@ -119,6 +119,22 @@ model Skill {
   updatedAt     DateTime @updatedAt
 }
 
+
+model AnalyticsVisit {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  pathname    String
+  country     String?  // ISO country code or "Unknown"
+  city        String?  // Optional: City level if available
+  deviceType  String?  // mobile, tablet, console, smarttv, wearable, embedded, desktop
+  browser     String?
+  os          String?
+  referrer    String?
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([pathname])
+}
+
 enum UserRole {
   ADMIN
   VIEWER

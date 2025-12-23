@@ -1,27 +1,56 @@
-import { withAuth } from "next-auth/middleware"
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
-    // Add any additional middleware logic here
+    // 1. Admin Security Check
+    if (req.nextUrl.pathname.startsWith("/admin")) {
+      if (req.nextUrl.pathname === "/admin/login") {
+        return NextResponse.next();
+      }
+      return NextResponse.next(); // Let withAuth handle the role check via callbacks
+    }
+
+    // 2. Analytics Tracking (Non-blocking)
+    const isApi = req.nextUrl.pathname.startsWith("/api");
+    const isStatic = req.nextUrl.pathname.match(/\.(.*)$/);
+    const isNext = req.nextUrl.pathname.startsWith("/_next");
+    const isFavicon = req.nextUrl.pathname.includes("favicon.ico");
+
+    if (!isApi && !isStatic && !isNext && !isFavicon) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/api/analytics/track";
+      
+      fetch(url.toString(), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pathname: req.nextUrl.pathname,
+          country: (req as any).geo?.country || "Unknown",
+          userAgent: req.headers.get("user-agent"),
+          referrer: req.headers.get("referer"),
+        }),
+      }).catch((err) => console.error("Tracking Error:", err));
+    }
+
+    return NextResponse.next();
   },
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        // Check if user is trying to access admin routes
         if (req.nextUrl.pathname.startsWith("/admin")) {
-          // Allow access to login page
-          if (req.nextUrl.pathname === "/admin/login") {
-            return true
-          }
-          // Check if user has admin role
-          return token?.role === "ADMIN"
+          if (req.nextUrl.pathname === "/admin/login") return true;
+          return token?.role === "ADMIN";
         }
-        return true
+        return true;
       },
     },
   }
-)
+);
 
 export const config = {
-  matcher: ["/admin/:path*"]
-}
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+};
+

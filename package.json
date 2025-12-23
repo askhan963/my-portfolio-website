@@ -17,6 +17,7 @@
     "@headlessui/react": "^2.2.8",
     "@heroicons/react": "^2.2.0",
     "@prisma/client": "^6.16.1",
+    "@types/ua-parser-js": "^0.7.39",
     "axios": "^1.12.1",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
@@ -32,9 +33,11 @@
     "react-icons": "^5.3.0",
     "react-intersection-observer": "^9.16.0",
     "react-type-animation": "^3.2.0",
+    "recharts": "^3.6.0",
     "sharp": "^0.34.2",
     "swiper": "^11.1.14",
     "tailwind-merge": "^3.3.1",
+    "ua-parser-js": "^2.0.7",
     "zod": "^4.1.8"
   },
   "devDependencies": {
