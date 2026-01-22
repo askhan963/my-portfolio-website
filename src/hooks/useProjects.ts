@@ -13,6 +13,15 @@ export interface Project {
   images: string[]
   awards: string[]
   category: string
+  // New Case Study Fields
+  content?: string
+  problemStatement?: string
+  solution?: string
+  features: string[]
+  challenges: string[]
+  learnings: string[]
+  seoTitle?: string
+  seoDescription?: string
   createdAt: string
   updatedAt: string
 }
@@ -26,6 +35,15 @@ export interface ProjectFormData {
   images: string[]
   awards: string
   category: string
+  // New Case Study Fields
+  content: string
+  problemStatement: string
+  solution: string
+  features: string
+  challenges: string
+  learnings: string
+  seoTitle: string
+  seoDescription: string
 }
 
 export const useProjects = () => {
@@ -54,6 +72,9 @@ export const useProjects = () => {
         ...projectData,
         techStack: projectData.techStack.split(',').map(tech => tech.trim()).filter(Boolean),
         awards: projectData.awards.split(',').map(award => award.trim()).filter(Boolean),
+        features: projectData.features.split('\n').map(item => item.trim()).filter(Boolean),
+        challenges: projectData.challenges.split('\n').map(item => item.trim()).filter(Boolean),
+        learnings: projectData.learnings.split('\n').map(item => item.trim()).filter(Boolean),
       }
 
       const newProject = await projectsApi.create(processedData)
@@ -73,7 +94,11 @@ export const useProjects = () => {
         ...projectData,
         techStack: projectData.techStack.split(',').map(tech => tech.trim()).filter(Boolean),
         awards: projectData.awards.split(',').map(award => award.trim()).filter(Boolean),
+        features: projectData.features.split('\n').map(item => item.trim()).filter(Boolean),
+        challenges: projectData.challenges.split('\n').map(item => item.trim()).filter(Boolean),
+        learnings: projectData.learnings.split('\n').map(item => item.trim()).filter(Boolean),
       }
+      console.log({processedData})
 
       const updatedProject = await projectsApi.update(id, processedData)
       setProjects(prev => prev.map(project => 
@@ -125,6 +150,14 @@ export const useProjectForm = (initialData?: ProjectFormData) => {
     images: [],
     awards: '',
     category: '',
+    content: '',
+    problemStatement: '',
+    solution: '',
+    features: '',
+    challenges: '',
+    learnings: '',
+    seoTitle: '',
+    seoDescription: '',
     ...initialData,
   })
 
@@ -161,6 +194,14 @@ export const useProjectForm = (initialData?: ProjectFormData) => {
       images: [],
       awards: '',
       category: '',
+      content: '',
+      problemStatement: '',
+      solution: '',
+      features: '',
+      challenges: '',
+      learnings: '',
+      seoTitle: '',
+      seoDescription: '',
     })
     setIsSubmitting(false)
   }, [])
@@ -175,6 +216,14 @@ export const useProjectForm = (initialData?: ProjectFormData) => {
       images: project.images,
       awards: project.awards.join(', '),
       category: project.category,
+      content: project.content || '',
+      problemStatement: project.problemStatement || '',
+      solution: project.solution || '',
+      features: project.features.join('\n'),
+      challenges: project.challenges.join('\n'),
+      learnings: project.learnings.join('\n'),
+      seoTitle: project.seoTitle || '',
+      seoDescription: project.seoDescription || '',
     })
   }, [])
 

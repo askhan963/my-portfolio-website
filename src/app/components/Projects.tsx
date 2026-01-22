@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { useProjects, Project as ProjectType } from "@/hooks/useProjects";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import Link from "next/link";
 
 export default function Projects() {
   const { projects, loading, error } = useProjects();
@@ -195,10 +196,17 @@ export default function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-2xl text-primary hover:text-opacity-80 transition-colors duration-300"
+                      title="Live Demo"
                     >
                       <FiExternalLink />
                     </a>
                   )}
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className="px-6 py-2 bg-primary text-primary-foreground rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors duration-300 flex items-center"
+                  >
+                    View Details
+                  </Link>
                 </div>
               </div>
 

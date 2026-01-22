@@ -28,6 +28,15 @@ model Project {
   images      String[] // Cloudinary URLs
   awards      String[]
   category    String
+  // New Case Study Fields
+  content     String?
+  problemStatement String?
+  solution    String?
+  features    String[]
+  challenges  String[]
+  learnings   String[]
+  seoTitle    String?
+  seoDescription String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
