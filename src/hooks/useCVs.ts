@@ -93,11 +93,12 @@ export function useCVs({ enabled = true } = {}) {
       await cvsApi.delete(id)
       setCVs(prev => prev.filter(cv => cv.id !== id))
       toast.success(TOAST_MESSAGES.RESUMES.DELETE_SUCCESS)
+      return true
     } catch (err: any) {
       const errorMessage = err.response?.data?.error || TOAST_MESSAGES.RESUMES.DELETE_ERROR
       setError(errorMessage)
       toast.error(errorMessage)
-      throw err
+      return false
     } finally {
       setLoading(false)
     }
