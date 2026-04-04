@@ -5,8 +5,11 @@ import { motion } from "framer-motion";
 import { usePublicProfile } from "@/hooks/usePublicProfile";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
+import { useInView } from "react-intersection-observer";
+
 export default function Profile() {
-  const { profile, loading, error } = usePublicProfile();
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '0px' });
+  const { profile, loading, error } = usePublicProfile({ enabled: inView });
 
   // Fallback data if no profile is found
   const fallbackProfile = {
@@ -30,6 +33,7 @@ export default function Profile() {
     return (
       <section
         id="home"
+        ref={ref}
         className="min-h-screen flex items-center justify-center bg-background p-4 sm:p-6 lg:p-8"
       >
         <div className="flex flex-col items-center space-y-4">
@@ -47,6 +51,7 @@ export default function Profile() {
   return (
     <section
       id="home"
+      ref={ref}
       className="min-h-screen flex items-center justify-center bg-background p-4 sm:p-6 lg:p-8"
     >
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

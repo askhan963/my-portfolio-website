@@ -22,7 +22,7 @@ export interface PublicProfileFormData {
   isActive: boolean
 }
 
-export const usePublicProfile = () => {
+export const usePublicProfile = ({ enabled = true } = {}) => {
   const [profile, setProfile] = useState<PublicProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -136,8 +136,10 @@ export const usePublicProfile = () => {
 
   // Load profile on mount
   useEffect(() => {
-    fetchProfile()
-  }, [])
+    if (enabled) {
+      fetchProfile()
+    }
+  }, [enabled])
 
   return {
     profile,

@@ -6,13 +6,18 @@ import { FiAward } from "react-icons/fi";
 import { useHonors, Honor as HonorType } from "@/hooks/useHonors";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
+import { useInView } from "react-intersection-observer";
+
 export default function Honors() {
-  const { honors, loading, error } = useHonors();
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
+  const { honors, loading, error } = useHonors({ enabled: inView });
+
   // Loading state
   if (loading) {
     return (
       <section
         id="honors"
+        ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
         <motion.h1
@@ -37,6 +42,7 @@ export default function Honors() {
     return (
       <section
         id="honors"
+        ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
         <motion.h1
@@ -62,6 +68,7 @@ export default function Honors() {
     return (
       <section
         id="honors"
+        ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
         <motion.h1
@@ -84,6 +91,7 @@ export default function Honors() {
   return (
     <section
       id="honors"
+      ref={ref}
       className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
     >
       <motion.h1

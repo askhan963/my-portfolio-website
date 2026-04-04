@@ -46,7 +46,7 @@ export interface ProjectFormData {
   seoDescription: string
 }
 
-export const useProjects = () => {
+export const useProjects = ({ enabled = true } = {}) => {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -66,68 +66,64 @@ export const useProjects = () => {
     }
   }, [])
 
-  const createProject = useCallback(async (projectData: ProjectFormData) => {
+  // Create new project
+  const createProject = useCallback(async (data: ProjectFormData) => {
     try {
-      const processedData = {
-        ...projectData,
-        techStack: projectData.techStack.split(',').map(tech => tech.trim()).filter(Boolean),
-        awards: projectData.awards.split(',').map(award => award.trim()).filter(Boolean),
-        features: projectData.features.split('\n').map(item => item.trim()).filter(Boolean),
-        challenges: projectData.challenges.split('\n').map(item => item.trim()).filter(Boolean),
-        learnings: projectData.learnings.split('\n').map(item => item.trim()).filter(Boolean),
-      }
-
-      const newProject = await projectsApi.create(processedData)
-      setProjects(prev => [newProject, ...prev])
+      setLoading(true)
+      const response = await projectsApi.create(data)
+      setProjects(prev => [response, ...prev])
       toast.success(TOAST_MESSAGES.PROJECTS.CREATE_SUCCESS)
-      return newProject
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : TOAST_MESSAGES.PROJECTS.CREATE_ERROR
+      return response
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.PROJECTS.CREATE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
-  const updateProject = useCallback(async (id: string, projectData: ProjectFormData) => {
+  // Update project
+  const updateProject = useCallback(async (id: string, data: ProjectFormData) => {
     try {
-      const processedData = {
-        ...projectData,
-        techStack: projectData.techStack.split(',').map(tech => tech.trim()).filter(Boolean),
-        awards: projectData.awards.split(',').map(award => award.trim()).filter(Boolean),
-        features: projectData.features.split('\n').map(item => item.trim()).filter(Boolean),
-        challenges: projectData.challenges.split('\n').map(item => item.trim()).filter(Boolean),
-        learnings: projectData.learnings.split('\n').map(item => item.trim()).filter(Boolean),
-      }
-      console.log({processedData})
-
-      const updatedProject = await projectsApi.update(id, processedData)
-      setProjects(prev => prev.map(project => 
-        project.id === id ? updatedProject : project
-      ))
+      setLoading(true)
+      const response = await projectsApi.update(id, data)
+      setProjects(prev => prev.map(p => p.id === id ? response : p))
       toast.success(TOAST_MESSAGES.PROJECTS.UPDATE_SUCCESS)
-      return updatedProject
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : TOAST_MESSAGES.PROJECTS.UPDATE_ERROR
+      return response
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.PROJECTS.UPDATE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
+  // Delete project
   const deleteProject = useCallback(async (id: string) => {
     try {
+      setLoading(true)
       await projectsApi.delete(id)
-      setProjects(prev => prev.filter(project => project.id !== id))
+      setProjects(prev => prev.filter(p => p.id !== id))
       toast.success(TOAST_MESSAGES.PROJECTS.DELETE_SUCCESS)
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : TOAST_MESSAGES.PROJECTS.DELETE_ERROR
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.PROJECTS.DELETE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
   useEffect(() => {
-    fetchProjects()
-  }, [fetchProjects])
+    if (enabled) {
+      fetchProjects()
+    }
+  }, [fetchProjects, enabled])
 
   return {
     projects,

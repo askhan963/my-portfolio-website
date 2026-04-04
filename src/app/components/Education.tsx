@@ -5,8 +5,11 @@ import { FaGraduationCap } from "react-icons/fa"; // Correct icon for education
 import { useEducation } from "@/hooks/useEducation";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
+import { useInView } from "react-intersection-observer";
+
 const Education = () => {
-  const { education, loading, error } = useEducation();
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
+  const { education, loading, error } = useEducation({ enabled: inView });
 
   // Fallback data if no education is found
   const fallbackEducation = [
@@ -44,6 +47,7 @@ const Education = () => {
     return (
       <section
         id="education"
+        ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
       >
         <div className="flex flex-col items-center space-y-4">
@@ -61,6 +65,7 @@ const Education = () => {
   return (
     <section
       id="education"
+      ref={ref}
       className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
     >
       <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center">

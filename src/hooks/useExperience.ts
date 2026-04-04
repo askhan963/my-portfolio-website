@@ -36,7 +36,7 @@ export interface ExperienceFormData {
   }[]
 }
 
-export const useExperience = () => {
+export const useExperience = ({ enabled = true } = {}) => {
   const [experiences, setExperiences] = useState<Experience[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -56,65 +56,61 @@ export const useExperience = () => {
     }
   }, [])
 
-  const createExperience = useCallback(async (experienceData: ExperienceFormData) => {
+  const createExperience = useCallback(async (data: ExperienceFormData) => {
     try {
-      const processedData = {
-        ...experienceData,
-        roles: experienceData.roles.map(role => ({
-          ...role,
-          description: role.description.split('\n').filter(Boolean),
-        })),
-      }
-
-      const newExperience = await experienceApi.create(processedData)
-      setExperiences(prev => [newExperience, ...prev])
-      toast.success('Experience created successfully!')
-      return newExperience
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to create experience'
+      setLoading(true)
+      const response = await experienceApi.create(data)
+      setExperiences(prev => [response, ...prev])
+      toast.success(TOAST_MESSAGES.EXPERIENCE.CREATE_SUCCESS)
+      return response
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || 'Failed to create experience'
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
-  const updateExperience = useCallback(async (id: string, experienceData: ExperienceFormData) => {
+  const updateExperience = useCallback(async (id: string, data: ExperienceFormData) => {
     try {
-      const processedData = {
-        ...experienceData,
-        roles: experienceData.roles.map(role => ({
-          ...role,
-          description: role.description.split('\n').filter(Boolean),
-        })),
-      }
-
-      const updatedExperience = await experienceApi.update(id, processedData)
-      setExperiences(prev => prev.map(experience => 
-        experience.id === id ? updatedExperience : experience
-      ))
-      toast.success('Experience updated successfully!')
-      return updatedExperience
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to update experience'
+      setLoading(true)
+      const response = await experienceApi.update(id, data)
+      setExperiences(prev => prev.map(exp => exp.id === id ? response : exp))
+      toast.success(TOAST_MESSAGES.EXPERIENCE.UPDATE_SUCCESS)
+      return response
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || 'Failed to update experience'
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
   const deleteExperience = useCallback(async (id: string) => {
     try {
+      setLoading(true)
       await experienceApi.delete(id)
-      setExperiences(prev => prev.filter(experience => experience.id !== id))
-      toast.success('Experience deleted successfully!')
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to delete experience'
+      setExperiences(prev => prev.filter(exp => exp.id !== id))
+      toast.success(TOAST_MESSAGES.EXPERIENCE.DELETE_SUCCESS)
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || 'Failed to delete experience'
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
   useEffect(() => {
-    fetchExperiences()
-  }, [fetchExperiences])
+    if (enabled) {
+      fetchExperiences()
+    }
+  }, [fetchExperiences, enabled])
 
   return {
     experiences,

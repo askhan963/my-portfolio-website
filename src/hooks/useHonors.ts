@@ -22,7 +22,7 @@ export interface HonorFormData {
   issuedAt: string
 }
 
-export const useHonors = () => {
+export const useHonors = ({ enabled = true } = {}) => {
   const [honors, setHonors] = useState<Honor[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -42,49 +42,61 @@ export const useHonors = () => {
     }
   }, [])
 
-  const createHonor = useCallback(async (honorData: HonorFormData) => {
+  const createHonor = useCallback(async (data: HonorFormData) => {
     try {
-      const newHonor = await honorsApi.create(honorData)
-      setHonors(prev => [newHonor, ...prev])
-      toast.success('Honor created successfully!')
-      return newHonor
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to create honor'
+      setLoading(true)
+      const response = await honorsApi.create(data)
+      setHonors(prev => [response, ...prev])
+      toast.success(TOAST_MESSAGES.HONORS.CREATE_SUCCESS)
+      return response
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.HONORS.CREATE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
-  const updateHonor = useCallback(async (id: string, honorData: HonorFormData) => {
+  const updateHonor = useCallback(async (id: string, data: HonorFormData) => {
     try {
-      const updatedHonor = await honorsApi.update(id, honorData)
-      setHonors(prev => prev.map(honor => 
-        honor.id === id ? updatedHonor : honor
-      ))
-      toast.success('Honor updated successfully!')
-      return updatedHonor
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to update honor'
+      setLoading(true)
+      const response = await honorsApi.update(id, data)
+      setHonors(prev => prev.map(h => h.id === id ? response : h))
+      toast.success(TOAST_MESSAGES.HONORS.UPDATE_SUCCESS)
+      return response
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.HONORS.UPDATE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
   const deleteHonor = useCallback(async (id: string) => {
     try {
+      setLoading(true)
       await honorsApi.delete(id)
-      setHonors(prev => prev.filter(honor => honor.id !== id))
-      toast.success('Honor deleted successfully!')
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to delete honor'
+      setHonors(prev => prev.filter(h => h.id !== id))
+      toast.success(TOAST_MESSAGES.HONORS.DELETE_SUCCESS)
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.HONORS.DELETE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
   useEffect(() => {
-    fetchHonors()
-  }, [fetchHonors])
+    if (enabled) {
+      fetchHonors()
+    }
+  }, [fetchHonors, enabled])
 
   return {
     honors,
