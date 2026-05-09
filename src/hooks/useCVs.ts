@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { cvsApi } from '@/lib/api'
 import { TOAST_MESSAGES } from '@/lib/constants'
 import toast from 'react-hot-toast'
@@ -30,12 +30,12 @@ export interface CVFormData {
 }
 
 // Custom hook for CVs management
-export function useCVs() {
+export function useCVs({ enabled = true } = {}) {
   const [cvs, setCVs] = useState<CV[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchCVs = async () => {
+  const fetchCVs = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -48,50 +48,67 @@ export function useCVs() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  const createCV = async (data: CVFormData): Promise<boolean> => {
+  // Create new CV
+  const createCV = useCallback(async (data: CVFormData) => {
     try {
+      setLoading(true)
       const response = await cvsApi.create(data)
-      setCVs(prev => [response.data, ...prev])
+      setCVs(prev => [response, ...prev])
       toast.success(TOAST_MESSAGES.RESUMES.CREATE_SUCCESS)
-      return true
+      return response
     } catch (err: any) {
-      console.error('Error creating CV:', err)
-      toast.error(err.response?.data?.error || TOAST_MESSAGES.RESUMES.CREATE_ERROR)
-      return false
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.RESUMES.CREATE_ERROR
+      setError(errorMessage)
+      toast.error(errorMessage)
+      throw err
+    } finally {
+      setLoading(false)
     }
-  }
+  }, [])
 
-  const updateCV = async (id: string, data: Partial<CVFormData>): Promise<boolean> => {
+  // Update CV
+  const updateCV = useCallback(async (id: string, data: CVFormData) => {
     try {
+      setLoading(true)
       const response = await cvsApi.update(id, data)
-      setCVs(prev => prev.map(cv => cv.id === id ? response.data : cv))
+      setCVs(prev => prev.map(cv => cv.id === id ? response : cv))
       toast.success(TOAST_MESSAGES.RESUMES.UPDATE_SUCCESS)
-      return true
+      return response
     } catch (err: any) {
-      console.error('Error updating CV:', err)
-      toast.error(err.response?.data?.error || TOAST_MESSAGES.RESUMES.UPDATE_ERROR)
-      return false
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.RESUMES.UPDATE_ERROR
+      setError(errorMessage)
+      toast.error(errorMessage)
+      throw err
+    } finally {
+      setLoading(false)
     }
-  }
+  }, [])
 
-  const deleteCV = async (id: string): Promise<boolean> => {
+  // Delete CV
+  const deleteCV = useCallback(async (id: string) => {
     try {
+      setLoading(true)
       await cvsApi.delete(id)
       setCVs(prev => prev.filter(cv => cv.id !== id))
       toast.success(TOAST_MESSAGES.RESUMES.DELETE_SUCCESS)
       return true
     } catch (err: any) {
-      console.error('Error deleting CV:', err)
-      toast.error(err.response?.data?.error || TOAST_MESSAGES.RESUMES.DELETE_ERROR)
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.RESUMES.DELETE_ERROR
+      setError(errorMessage)
+      toast.error(errorMessage)
       return false
+    } finally {
+      setLoading(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
-    fetchCVs()
-  }, [])
+    if (enabled) {
+      fetchCVs()
+    }
+  }, [fetchCVs, enabled])
 
   return {
     cvs,

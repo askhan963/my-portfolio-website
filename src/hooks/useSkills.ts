@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { skillsApi } from '@/lib/api'
 import { TOAST_MESSAGES } from '@/lib/constants'
 import { toast } from 'react-hot-toast'
@@ -32,13 +32,13 @@ export interface SkillFormData {
   displayOrder: number
 }
 
-export const useSkills = () => {
+export const useSkills = ({ enabled = true } = {}) => {
   const [skills, setSkills] = useState<Skill[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   // Fetch all skills
-  const fetchSkills = async () => {
+  const fetchSkills = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -56,10 +56,10 @@ export const useSkills = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Create new skill
-  const createSkill = async (data: SkillFormData): Promise<boolean> => {
+  const createSkill = useCallback(async (data: SkillFormData): Promise<boolean> => {
     try {
       setLoading(true)
       setError(null)
@@ -84,10 +84,10 @@ export const useSkills = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Update skill
-  const updateSkill = async (id: string, data: Partial<SkillFormData>): Promise<boolean> => {
+  const updateSkill = useCallback(async (id: string, data: Partial<SkillFormData>): Promise<boolean> => {
     try {
       setLoading(true)
       setError(null)
@@ -112,10 +112,10 @@ export const useSkills = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Delete skill
-  const deleteSkill = async (id: string): Promise<boolean> => {
+  const deleteSkill = useCallback(async (id: string): Promise<boolean> => {
     try {
       setLoading(true)
       setError(null)
@@ -140,12 +140,14 @@ export const useSkills = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Load skills on mount
   useEffect(() => {
-    fetchSkills()
-  }, [])
+    if (enabled) {
+      fetchSkills()
+    }
+  }, [fetchSkills, enabled])
 
   return {
     skills,

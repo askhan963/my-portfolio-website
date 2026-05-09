@@ -18,6 +18,15 @@ export const projectSchema = z.object({
   images: z.array(z.string()).min(1, 'At least one image is required'),
   awards: z.array(z.string()).default([]),
   category: z.string().min(1, 'Category is required'),
+  // New Case Study Fields
+  content: z.string().optional(),
+  problemStatement: z.string().optional(),
+  solution: z.string().optional(),
+  features: z.array(z.string()).default([]),
+  challenges: z.array(z.string()).default([]),
+  learnings: z.array(z.string()).default([]),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
 })
 
 export const createProjectSchema = projectSchema

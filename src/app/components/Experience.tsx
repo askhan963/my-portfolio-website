@@ -6,85 +6,16 @@ import { FaBriefcase, FaArrowUp } from "react-icons/fa";
 import { useExperience, Experience as ExperienceType } from "@/hooks/useExperience";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
+import { useInView } from "react-intersection-observer";
+
 export default function Experience() {
-  const { experiences, loading, error } = useExperience();
-
-  // Loading state
-  if (loading) {
-    return (
-      <section
-        id="experience"
-        className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center"
-        >
-          Professional Experience
-        </motion.h1>
-        <div className="flex flex-col items-center justify-center">
-          <LoadingSpinner size="lg" />
-          <p className="mt-4 text-foreground/60">Loading experiences...</p>
-        </div>
-      </section>
-    );
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <section
-        id="experience"
-        className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center"
-        >
-          Professional Experience
-        </motion.h1>
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="text-red-500 text-xl mb-4">⚠️</div>
-          <p className="text-foreground/60 mb-4">Failed to load experiences</p>
-          <p className="text-sm text-foreground/40">{error}</p>
-        </div>
-      </section>
-    );
-  }
-
-  // Empty state
-  if (!experiences || experiences.length === 0) {
-    return (
-      <section
-        id="experience"
-        className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center"
-        >
-          Professional Experience
-        </motion.h1>
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="text-foreground/40 text-xl mb-4">💼</div>
-          <p className="text-foreground/60">No experiences available at the moment</p>
-        </div>
-      </section>
-    );
-  }
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
+  const { experiences, loading, error } = useExperience({ enabled: inView });
 
   return (
     <section
       id="experience"
+      ref={ref}
       className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
     >
       <motion.h1
@@ -96,6 +27,24 @@ export default function Experience() {
       >
         Professional Experience
       </motion.h1>
+
+      {loading ? (
+        <div className="flex flex-col items-center justify-center">
+          <LoadingSpinner size="lg" />
+          <p className="mt-4 text-foreground/60">Loading experiences...</p>
+        </div>
+      ) : error ? (
+        <div className="flex flex-col items-center justify-center text-center">
+          <div className="text-red-500 text-xl mb-4">⚠️</div>
+          <p className="text-foreground/60 mb-4">Failed to load experiences</p>
+          <p className="text-sm text-foreground/40">{error}</p>
+        </div>
+      ) : (!experiences || experiences.length === 0) ? (
+        <div className="flex flex-col items-center justify-center text-center">
+          <div className="text-foreground/40 text-xl mb-4">💼</div>
+          <p className="text-foreground/60">No experiences available at the moment</p>
+        </div>
+      ) : (
 
       <div className="w-full max-w-4xl mx-auto">
         <ol className="relative border-s border-border">
@@ -110,7 +59,7 @@ export default function Experience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="p-6 bg-card text-card-foreground rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-border"
+                className="p-6 bg-card text-card-foreground rounded-2xl shadow-card dark:shadow-card-dark hover:-translate-y-1 transition-all duration-300 border border-border"
               >
                 {/* Shared Company Header */}
                 <div className="flex flex-col sm:flex-row items-start gap-4">
@@ -182,6 +131,7 @@ export default function Experience() {
           ))}
         </ol>
       </div>
+      )}
     </section>
   );
 }

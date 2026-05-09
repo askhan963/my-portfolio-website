@@ -147,6 +147,123 @@ export default function ProjectForm({
             disabled={isSubmitting}
           />
         </div>
+        
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+          <h3 className="text-md font-semibold mb-4 text-gray-900 dark:text-white">Case Study Details</h3>
+          
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Problem Statement
+              </label>
+              <textarea
+                value={formData.problemStatement}
+                onChange={(e) => onFieldChange('problemStatement', e.target.value)}
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Solution
+              </label>
+              <textarea
+                value={formData.solution}
+                onChange={(e) => onFieldChange('solution', e.target.value)}
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Features (one per line)
+                </label>
+                <textarea
+                  value={formData.features}
+                  onChange={(e) => onFieldChange('features', e.target.value)}
+                  rows={5}
+                  placeholder="Feature 1&#10;Feature 2&#10;Feature 3"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Challenges (one per line)
+                </label>
+                <textarea
+                  value={formData.challenges}
+                  onChange={(e) => onFieldChange('challenges', e.target.value)}
+                  rows={5}
+                  placeholder="Challenge 1&#10;Challenge 2"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Learnings (one per line)
+                </label>
+                <textarea
+                  value={formData.learnings}
+                  onChange={(e) => onFieldChange('learnings', e.target.value)}
+                  rows={5}
+                  placeholder="Learning 1&#10;Learning 2"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  disabled={isSubmitting}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Detailed Content (Markdown)
+              </label>
+              <textarea
+                value={formData.content}
+                onChange={(e) => onFieldChange('content', e.target.value)}
+                rows={10}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+          <h3 className="text-md font-semibold mb-4 text-gray-900 dark:text-white">SEO Settings</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                SEO Title
+              </label>
+              <input
+                type="text"
+                value={formData.seoTitle}
+                onChange={(e) => onFieldChange('seoTitle', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                disabled={isSubmitting}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                SEO Description
+              </label>
+              <input
+                type="text"
+                value={formData.seoDescription}
+                onChange={(e) => onFieldChange('seoDescription', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">

@@ -4,8 +4,11 @@ import { FaDownload, FaFilePdf, FaFileWord } from "react-icons/fa"
 import { FiDownload, FiFileText, FiClock } from "react-icons/fi"
 import { useCVs } from "@/hooks/useCVs"
 
+import { useInView } from "react-intersection-observer";
+
 export default function MyCVs() {
-  const { cvs, loading, error } = useCVs()
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
+  const { cvs, loading, error } = useCVs({ enabled: inView });
 
   const getFileIcon = (fileType?: string) => {
     if (fileType?.includes('pdf')) {
@@ -35,6 +38,7 @@ export default function MyCVs() {
     return (
       <section
         id="my-cvs"
+        ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
@@ -62,6 +66,7 @@ export default function MyCVs() {
     return (
       <section
         id="my-cvs"
+        ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
@@ -80,6 +85,7 @@ export default function MyCVs() {
     return (
       <section
         id="my-cvs"
+        ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
@@ -98,6 +104,7 @@ export default function MyCVs() {
   return (
     <section
       id="my-cvs"
+      ref={ref}
       className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
     >
       <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
@@ -151,7 +158,7 @@ export default function MyCVs() {
             <a
               href={cv.downloadLink}
               download={cv.fileName || cv.title}
-              className="mt-4 md:mt-0 md:ml-auto flex-shrink-0 inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold rounded-full shadow-lg hover:bg-primary/90 transition-all duration-300 group-hover:scale-105"
+              className="mt-4 md:mt-0 md:ml-auto flex-shrink-0 inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-full shadow-lg shadow-primary/15 hover:bg-primary/90 transition-all duration-300 group-hover:scale-105"
             >
               <FaDownload className="mr-2" />
               Download

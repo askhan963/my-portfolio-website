@@ -107,8 +107,11 @@ const renderSkillIcon = (skill: Skill) => {
   return <FaReact size={40} />;
 };
 
+import { useInView } from "react-intersection-observer";
+
 export default function Skills() {
-  const { skills, loading, error } = useSkills();
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
+  const { skills, loading, error } = useSkills({ enabled: inView });
   const [activeCategory, setActiveCategory] = useState<Category>("Frontend");
 
   // Group skills by category
@@ -130,6 +133,7 @@ export default function Skills() {
     return (
       <section
         id="skills"
+        ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
         <div className="flex flex-col items-center space-y-4">
@@ -147,6 +151,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
+      ref={ref}
       className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
     >
       <motion.h1 

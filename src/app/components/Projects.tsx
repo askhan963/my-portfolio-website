@@ -12,9 +12,13 @@ import { motion } from "framer-motion";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { useProjects, Project as ProjectType } from "@/hooks/useProjects";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import Link from "next/link";
+
+import { useInView } from "react-intersection-observer";
 
 export default function Projects() {
-  const { projects, loading, error } = useProjects();
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
+  const { projects, loading, error } = useProjects({ enabled: inView });
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   // Get unique categories from API data
@@ -32,82 +36,10 @@ export default function Projects() {
       : projects.filter(project => project.category === selectedCategory);
   }, [projects, selectedCategory]);
 
-  // Loading state
-  if (loading) {
-    return (
-      <section
-        id="projects"
-        className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
-        >
-          My Projects
-        </motion.h1>
-        <div className="flex flex-col items-center justify-center">
-          <LoadingSpinner size="lg" />
-          <p className="mt-4 text-foreground/60">Loading projects...</p>
-        </div>
-      </section>
-    );
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <section
-        id="projects"
-        className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
-        >
-          My Projects
-        </motion.h1>
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="text-red-500 text-xl mb-4">⚠️</div>
-          <p className="text-foreground/60 mb-4">Failed to load projects</p>
-          <p className="text-sm text-foreground/40">{error}</p>
-        </div>
-      </section>
-    );
-  }
-
-  // Empty state
-  if (!projects || projects.length === 0) {
-    return (
-      <section
-        id="projects"
-        className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
-      >
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
-        >
-          My Projects
-        </motion.h1>
-        <div className="flex flex-col items-center justify-center text-center">
-          <div className="text-foreground/40 text-xl mb-4">🚀</div>
-          <p className="text-foreground/60">No projects available at the moment</p>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section
       id="projects"
+      ref={ref}
       className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
     >
       <motion.h1
@@ -119,6 +51,24 @@ export default function Projects() {
       >
         My Projects
       </motion.h1>
+
+      {loading ? (
+        <div className="flex flex-col items-center justify-center">
+          <LoadingSpinner size="lg" />
+          <p className="mt-4 text-foreground/60">Loading projects...</p>
+        </div>
+      ) : error ? (
+        <div className="flex flex-col items-center justify-center text-center">
+          <div className="text-red-500 text-xl mb-4">⚠️</div>
+          <p className="text-foreground/60 mb-4">Failed to load projects</p>
+          <p className="text-sm text-foreground/40">{error}</p>
+        </div>
+      ) : (!projects || projects.length === 0) ? (
+        <div className="flex flex-col items-center justify-center text-center">
+          <div className="text-foreground/40 text-xl mb-4">🚀</div>
+          <p className="text-foreground/60">No projects available at the moment</p>
+        </div>
+      ) : (
 
       <div className="w-full max-w-6xl mx-auto">
         <div className="flex justify-center flex-wrap gap-4 mb-12">
@@ -195,10 +145,17 @@ export default function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-2xl text-primary hover:text-opacity-80 transition-colors duration-300"
+                      title="Live Demo"
                     >
                       <FiExternalLink />
                     </a>
                   )}
+                  <Link
+                    href={`/projects/${project.id}`}
+                    className="px-6 py-2 bg-primary text-primary-foreground rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors duration-300 flex items-center"
+                  >
+                    View Details
+                  </Link>
                 </div>
               </div>
 
@@ -238,6 +195,7 @@ export default function Projects() {
           ))}
         </div>
       </div>
+      )}
     </section>
   );
 }

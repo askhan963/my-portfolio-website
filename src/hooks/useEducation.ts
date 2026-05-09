@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { educationApi } from '@/lib/api'
 import { TOAST_MESSAGES } from '@/lib/constants'
 import { toast } from 'react-hot-toast'
@@ -32,13 +32,13 @@ export interface EducationFormData {
   displayOrder: number
 }
 
-export const useEducation = () => {
+export const useEducation = ({ enabled = true } = {}) => {
   const [education, setEducation] = useState<Education[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   // Fetch all education entries
-  const fetchEducation = async () => {
+  const fetchEducation = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
@@ -56,96 +56,74 @@ export const useEducation = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  // Create new education entry
-  const createEducation = async (data: EducationFormData): Promise<boolean> => {
+  const createEducation = useCallback(async (data: EducationFormData) => {
     try {
       setLoading(true)
-      setError(null)
-      
       const response = await educationApi.create(data)
-      
       if (response.success) {
-        setEducation(prev => [...prev, response.data])
+        setEducation(prev => [response.data, ...prev])
         toast.success(TOAST_MESSAGES.EDUCATION.CREATE_SUCCESS)
         return true
-      } else {
-        const errorMessage = response.error || 'Failed to create education entry'
-        setError(errorMessage)
-        toast.error(errorMessage)
-        return false
       }
+      return false
     } catch (err: any) {
-      const errorMessage = err.response?.data?.error || 'Failed to create education entry'
+      const errorMessage = err.response?.data?.error || 'Failed to create education'
       setError(errorMessage)
       toast.error(errorMessage)
       return false
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  // Update education entry
-  const updateEducation = async (id: string, data: Partial<EducationFormData>): Promise<boolean> => {
+  const updateEducation = useCallback(async (id: string, data: Partial<EducationFormData>) => {
     try {
       setLoading(true)
-      setError(null)
-      
       const response = await educationApi.update(id, data)
-      
       if (response.success) {
         setEducation(prev => prev.map(edu => edu.id === id ? response.data : edu))
         toast.success(TOAST_MESSAGES.EDUCATION.UPDATE_SUCCESS)
         return true
-      } else {
-        const errorMessage = response.error || 'Failed to update education entry'
-        setError(errorMessage)
-        toast.error(errorMessage)
-        return false
       }
+      return false
     } catch (err: any) {
-      const errorMessage = err.response?.data?.error || 'Failed to update education entry'
+      const errorMessage = err.response?.data?.error || 'Failed to update education'
       setError(errorMessage)
       toast.error(errorMessage)
       return false
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  // Delete education entry
-  const deleteEducation = async (id: string): Promise<boolean> => {
+  const deleteEducation = useCallback(async (id: string) => {
     try {
       setLoading(true)
-      setError(null)
-      
       const response = await educationApi.delete(id)
-      
       if (response.success) {
         setEducation(prev => prev.filter(edu => edu.id !== id))
         toast.success(TOAST_MESSAGES.EDUCATION.DELETE_SUCCESS)
         return true
-      } else {
-        const errorMessage = response.error || 'Failed to delete education entry'
-        setError(errorMessage)
-        toast.error(errorMessage)
-        return false
       }
+      return false
     } catch (err: any) {
-      const errorMessage = err.response?.data?.error || 'Failed to delete education entry'
+      const errorMessage = err.response?.data?.error || 'Failed to delete education'
       setError(errorMessage)
       toast.error(errorMessage)
       return false
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
   // Load education on mount
   useEffect(() => {
-    fetchEducation()
-  }, [])
+    if (enabled) {
+      fetchEducation()
+    }
+  }, [fetchEducation, enabled])
 
   return {
     education,

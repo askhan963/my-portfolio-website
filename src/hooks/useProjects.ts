@@ -13,6 +13,15 @@ export interface Project {
   images: string[]
   awards: string[]
   category: string
+  // New Case Study Fields
+  content?: string
+  problemStatement?: string
+  solution?: string
+  features: string[]
+  challenges: string[]
+  learnings: string[]
+  seoTitle?: string
+  seoDescription?: string
   createdAt: string
   updatedAt: string
 }
@@ -26,9 +35,18 @@ export interface ProjectFormData {
   images: string[]
   awards: string
   category: string
+  // New Case Study Fields
+  content: string
+  problemStatement: string
+  solution: string
+  features: string
+  challenges: string
+  learnings: string
+  seoTitle: string
+  seoDescription: string
 }
 
-export const useProjects = () => {
+export const useProjects = ({ enabled = true } = {}) => {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -48,61 +66,64 @@ export const useProjects = () => {
     }
   }, [])
 
-  const createProject = useCallback(async (projectData: ProjectFormData) => {
+  // Create new project
+  const createProject = useCallback(async (data: ProjectFormData) => {
     try {
-      const processedData = {
-        ...projectData,
-        techStack: projectData.techStack.split(',').map(tech => tech.trim()).filter(Boolean),
-        awards: projectData.awards.split(',').map(award => award.trim()).filter(Boolean),
-      }
-
-      const newProject = await projectsApi.create(processedData)
-      setProjects(prev => [newProject, ...prev])
+      setLoading(true)
+      const response = await projectsApi.create(data)
+      setProjects(prev => [response, ...prev])
       toast.success(TOAST_MESSAGES.PROJECTS.CREATE_SUCCESS)
-      return newProject
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : TOAST_MESSAGES.PROJECTS.CREATE_ERROR
+      return response
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.PROJECTS.CREATE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
-  const updateProject = useCallback(async (id: string, projectData: ProjectFormData) => {
+  // Update project
+  const updateProject = useCallback(async (id: string, data: ProjectFormData) => {
     try {
-      const processedData = {
-        ...projectData,
-        techStack: projectData.techStack.split(',').map(tech => tech.trim()).filter(Boolean),
-        awards: projectData.awards.split(',').map(award => award.trim()).filter(Boolean),
-      }
-
-      const updatedProject = await projectsApi.update(id, processedData)
-      setProjects(prev => prev.map(project => 
-        project.id === id ? updatedProject : project
-      ))
+      setLoading(true)
+      const response = await projectsApi.update(id, data)
+      setProjects(prev => prev.map(p => p.id === id ? response : p))
       toast.success(TOAST_MESSAGES.PROJECTS.UPDATE_SUCCESS)
-      return updatedProject
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : TOAST_MESSAGES.PROJECTS.UPDATE_ERROR
+      return response
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.PROJECTS.UPDATE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
+  // Delete project
   const deleteProject = useCallback(async (id: string) => {
     try {
+      setLoading(true)
       await projectsApi.delete(id)
-      setProjects(prev => prev.filter(project => project.id !== id))
+      setProjects(prev => prev.filter(p => p.id !== id))
       toast.success(TOAST_MESSAGES.PROJECTS.DELETE_SUCCESS)
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : TOAST_MESSAGES.PROJECTS.DELETE_ERROR
+    } catch (err: any) {
+      const errorMessage = err.response?.data?.error || TOAST_MESSAGES.PROJECTS.DELETE_ERROR
+      setError(errorMessage)
       toast.error(errorMessage)
       throw err
+    } finally {
+      setLoading(false)
     }
   }, [])
 
   useEffect(() => {
-    fetchProjects()
-  }, [fetchProjects])
+    if (enabled) {
+      fetchProjects()
+    }
+  }, [fetchProjects, enabled])
 
   return {
     projects,
@@ -125,6 +146,14 @@ export const useProjectForm = (initialData?: ProjectFormData) => {
     images: [],
     awards: '',
     category: '',
+    content: '',
+    problemStatement: '',
+    solution: '',
+    features: '',
+    challenges: '',
+    learnings: '',
+    seoTitle: '',
+    seoDescription: '',
     ...initialData,
   })
 
@@ -161,6 +190,14 @@ export const useProjectForm = (initialData?: ProjectFormData) => {
       images: [],
       awards: '',
       category: '',
+      content: '',
+      problemStatement: '',
+      solution: '',
+      features: '',
+      challenges: '',
+      learnings: '',
+      seoTitle: '',
+      seoDescription: '',
     })
     setIsSubmitting(false)
   }, [])
@@ -175,6 +212,14 @@ export const useProjectForm = (initialData?: ProjectFormData) => {
       images: project.images,
       awards: project.awards.join(', '),
       category: project.category,
+      content: project.content || '',
+      problemStatement: project.problemStatement || '',
+      solution: project.solution || '',
+      features: project.features.join('\n'),
+      challenges: project.challenges.join('\n'),
+      learnings: project.learnings.join('\n'),
+      seoTitle: project.seoTitle || '',
+      seoDescription: project.seoDescription || '',
     })
   }, [])
 
