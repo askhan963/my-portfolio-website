@@ -98,7 +98,7 @@ export default function Profile() {
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.05, y: -5 }}
-            className="inline-block mt-8 px-8 py-3 bg-primary text-white font-bold rounded-full shadow-lg hover:bg-primary/90 transition-all duration-300"
+            className="inline-block mt-8 px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-full shadow-lg shadow-primary/15 hover:bg-primary/90 transition-all duration-300"
           >
             Get in Touch
           </motion.a>

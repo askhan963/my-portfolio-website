@@ -2,72 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modern color palette */
+/* ─── Theme tokens (exactly two: light + dark) ────────────────────────────────
+ * Light — "Daylight": cool paper (#f5f7fb), ink text (#0f172a), accent indigo (#4f46e5)
+ * Dark  — "Nocturne": deep base (#0a0a10), softened text (#e2e8f0), accent #818cf8
+ */
 :root {
-  --background: #f0f2f5; /* Light gray background */
-  --foreground: #1a1a1a; /* Dark text color */
-  --primary: #007bff; /* Vibrant blue for accents */
-  --card-background: #ffffff; /* White card background */
-  --border-color: #e5e7eb; /* Light border color */
+  --background: #f5f7fb;
+  --foreground: #0f172a;
+  --primary: #4f46e5;
+  --primary-foreground: #fafafa;
+  --card-background: #ffffff;
+  --border-color: #e2e8f0;
+  --muted: #eef1f8;
+  --muted-foreground: #64748b;
+  --ring: #4f46e5;
 }
 
-/* Ensure dark mode variables are available */
-.dark {
-  --background: #121212; /* Dark background */
-  --foreground: #e5e5e5; /* Light text color */
-  --primary: #1e90ff; /* Brighter blue for dark mode */
-  --card-background: #1e1e1e; /* Dark card background */
-  --border-color: #2c2c2c; /* Darker border color */
-}
-
+.dark,
 [data-theme="dark"] {
-  --background: #121212; /* Dark background */
-  --foreground: #e5e5e5; /* Light text color */
-  --primary: #1e90ff; /* Brighter blue for dark mode */
-  --card-background: #1e1e1e; /* Dark card background */
-  --border-color: #2c2c2c; /* Darker border color */
+  --background: #0a0a10;
+  --foreground: #e8edf6;
+  --primary: #818cf8;
+  --primary-foreground: #0f0a1a;
+  --card-background: #14141c;
+  --border-color: #2a2a36;
+  --muted: #1c1c26;
+  --muted-foreground: #94a3b8;
+  --ring: #818cf8;
 }
 
-/* Ocean Theme */
-[data-theme="ocean"] {
-  --background: #0f172a; /* Slate 900 */
-  --foreground: #e2e8f0; /* Slate 200 */
-  --primary: #38bdf8; /* Sky 400 */
-  --card-background: #1e293b; /* Slate 800 */
-  --border-color: #334155; /* Slate 700 */
+[data-theme="light"] {
+  /* Same as :root — explicit selector for ThemeProvider */
+  --background: #f5f7fb;
+  --foreground: #0f172a;
+  --primary: #4f46e5;
+  --primary-foreground: #fafafa;
+  --card-background: #ffffff;
+  --border-color: #e2e8f0;
+  --muted: #eef1f8;
+  --muted-foreground: #64748b;
+  --ring: #4f46e5;
 }
 
-/* Forest Theme */
-[data-theme="forest"] {
-  --background: #052e16; /* Green 950 */
-  --foreground: #dcfce7; /* Green 100 */
-  --primary: #4ade80; /* Green 400 */
-  --card-background: #064e3b; /* Green 900 */
-  --border-color: #166534; /* Green 800 */
-}
-
-/* Coffee Theme */
-[data-theme="coffee"] {
-  --background: #2f221e; /* Dark Coffee */
-  --foreground: #f0e6d2; /* Cream/Beige */
-  --primary: #c0a080; /* Latte */
-  --card-background: #4a3b32; /* Mocha */
-  --border-color: #5e4b40; /* Brown */
-}
-
-/* Smooth scrolling and base styles */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-background text-foreground font-sans;
-  transition: background-color 0.3s, color 0.3s;
+  @apply bg-background text-foreground font-sans antialiased;
+  transition: background-color 0.28s ease, color 0.28s ease;
+  background-color: var(--background);
+  background-image:
+    radial-gradient(ellipse 120% 85% at 50% -25%, rgb(79 70 229 / 0.09), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 100% 0%, rgb(99 102 241 / 0.05), transparent 45%);
+  background-attachment: fixed;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Responsive typography */
-h1, h2, h3, h4, h5, h6 {
-  @apply font-bold tracking-tight;
+.dark body,
+[data-theme="dark"] body {
+  background-image:
+    radial-gradient(ellipse 110% 70% at 50% -20%, rgb(129 140 248 / 0.14), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 0% 0%, rgb(99 102 241 / 0.06), transparent 40%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-bold tracking-tight text-foreground;
 }
 
 h1 {
@@ -86,13 +92,16 @@ p {
   @apply text-base sm:text-lg;
 }
 
-/* Hide scrollbar */
-::-webkit-scrollbar {
-  display: none;
+::selection {
+  background-color: rgb(79 70 229 / 0.22);
 }
 
-/* For IE, Edge and Firefox */
-body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+.dark ::selection,
+[data-theme="dark"] ::selection {
+  background-color: rgb(129 140 248 / 0.25);
+}
+
+/* Hide scrollbar (existing behavior) */
+::-webkit-scrollbar {
+  display: none;
 }

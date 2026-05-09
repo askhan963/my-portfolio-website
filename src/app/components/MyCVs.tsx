@@ -158,7 +158,7 @@ export default function MyCVs() {
             <a
               href={cv.downloadLink}
               download={cv.fileName || cv.title}
-              className="mt-4 md:mt-0 md:ml-auto flex-shrink-0 inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold rounded-full shadow-lg hover:bg-primary/90 transition-all duration-300 group-hover:scale-105"
+              className="mt-4 md:mt-0 md:ml-auto flex-shrink-0 inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-full shadow-lg shadow-primary/15 hover:bg-primary/90 transition-all duration-300 group-hover:scale-105"
             >
               <FaDownload className="mr-2" />
               Download

@@ -59,7 +59,7 @@ export default function Experience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="p-6 bg-card text-card-foreground rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-border"
+                className="p-6 bg-card text-card-foreground rounded-2xl shadow-card dark:shadow-card-dark hover:-translate-y-1 transition-all duration-300 border border-border"
               >
                 {/* Shared Company Header */}
                 <div className="flex flex-col sm:flex-row items-start gap-4">

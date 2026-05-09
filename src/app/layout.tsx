@@ -34,10 +34,8 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} ${inter.variable} ${spaceGrotesk.variable}`}
     >
-      <body>
-        <Providers>
-          {children}
-        </Providers>
+      <body className="min-h-screen">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

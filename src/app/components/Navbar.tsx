@@ -1,15 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaSun, FaMoon, FaBars, FaTimes, FaWater, FaTree, FaCoffee } from "react-icons/fa";
+import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useTheme, Theme } from "@/context/ThemeContext";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
@@ -21,11 +20,8 @@ export default function Navbar() {
       setIsScrolled(currentScrollY > 10);
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down
         setIsHidden(true);
-        setIsThemeMenuOpen(false); // Close theme menu on scroll
       } else {
-        // Scrolling up
         setIsHidden(false);
       }
       lastScrollY = currentScrollY;
@@ -35,9 +31,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const navLinks = [
     { title: "Home", href: "#home" },
@@ -50,16 +44,6 @@ export default function Navbar() {
     { title: "Contact", href: "#contact" },
   ];
 
-  const themes: { name: Theme; icon: React.ReactNode; label: string }[] = [
-    { name: "light", icon: <FaSun />, label: "Light" },
-    { name: "dark", icon: <FaMoon />, label: "Dark" },
-    { name: "ocean", icon: <FaWater />, label: "Ocean" },
-    { name: "forest", icon: <FaTree />, label: "Forest" },
-    { name: "coffee", icon: <FaCoffee />, label: "Coffee" },
-  ];
-
-  const currentThemeIcon = themes.find((t) => t.name === theme)?.icon || <FaSun />;
-
   return (
     <motion.nav
       initial={{ y: 0 }}
@@ -67,7 +51,7 @@ export default function Navbar() {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-lg shadow-md border-b border-border"
+          ? "bg-background/85 backdrop-blur-xl shadow-sm border-b border-border"
           : "bg-transparent"
       }`}
     >
@@ -75,79 +59,71 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           <motion.a
             href="/"
-            className="text-3xl font-bold text-primary"
-            whileHover={{ scale: 1.05 }}
+            className="text-3xl font-bold text-primary shrink-0"
+            whileHover={{ scale: 1.03 }}
           >
             <Image
               src="/Logos/ASKHAN_LOGO.png"
               alt="Logo"
               width={50}
               height={50}
-              className="mr-2 dark:invert dark:brightness-0 dark:sepia dark:hue-rotate-[180deg] dark:saturate-200"
+              className="mr-2 dark:invert dark:brightness-0 dark:contrast-125 opacity-95 hover:opacity-100 transition-opacity"
             />
           </motion.a>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <motion.a
                 key={link.href}
                 href={link.href}
-                className="text-lg font-medium text-foreground/70 hover:text-primary transition-colors duration-300"
-                whileHover={{ y: -2 }}
+                className="text-[15px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                whileHover={{ y: -1 }}
               >
                 {link.title}
               </motion.a>
             ))}
           </div>
 
-          <div className="flex items-center space-x-4">
-            {/* Theme Selector */}
-            <div className="relative">
-              <motion.button
-                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
-                className="text-2xl text-foreground/70 hover:text-primary transition-colors duration-300 p-2"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+          <div className="flex items-center gap-3">
+            <div
+              className="inline-flex rounded-full border border-border bg-muted/80 p-0.5 shadow-sm"
+              role="group"
+              aria-label="Color theme"
+            >
+              <button
+                type="button"
+                onClick={() => setTheme("light")}
+                aria-pressed={theme === "light"}
+                className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-200 ${
+                  theme === "light"
+                    ? "bg-card text-primary shadow-sm ring-1 ring-border"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
-                {currentThemeIcon}
-              </motion.button>
-              
-              <AnimatePresence>
-                {isThemeMenuOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute right-0 mt-2 w-32 bg-card-background border border-border rounded-lg shadow-xl overflow-hidden"
-                  >
-                    {themes.map((t) => (
-                      <button
-                        key={t.name}
-                        onClick={() => {
-                          setTheme(t.name);
-                          setIsThemeMenuOpen(false);
-                        }}
-                        className={`w-full flex items-center space-x-3 px-4 py-3 text-sm transition-colors duration-200 ${
-                          theme === t.name
-                            ? "bg-primary/10 text-primary"
-                            : "text-foreground hover:bg-primary/5"
-                        }`}
-                      >
-                        <span className="text-lg">{t.icon}</span>
-                        <span>{t.label}</span>
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                <FaSun className="text-base" aria-hidden />
+                <span className="hidden sm:inline">Light</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setTheme("dark")}
+                aria-pressed={theme === "dark"}
+                className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-200 ${
+                  theme === "dark"
+                    ? "bg-card text-primary shadow-sm ring-1 ring-border"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <FaMoon className="text-base" aria-hidden />
+                <span className="hidden sm:inline">Dark</span>
+              </button>
             </div>
 
             <div className="md:hidden">
               <motion.button
                 onClick={toggleMenu}
-                className="text-2xl text-foreground/70"
-                whileHover={{ scale: 1.1 }}
+                className="text-2xl text-muted-foreground hover:text-foreground p-1"
+                whileHover={{ scale: 1.05 }}
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               >
                 {isMenuOpen ? <FaTimes /> : <FaBars />}
               </motion.button>
@@ -156,22 +132,21 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-t border-border"
+            className="md:hidden bg-background/95 backdrop-blur-lg border-t border-border"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div className="px-2 pt-2 pb-4 space-y-0.5 sm:px-3">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={toggleMenu}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-primary/10"
+                  className="block px-3 py-2.5 rounded-lg text-base font-medium text-foreground/90 hover:bg-muted hover:text-primary transition-colors"
                 >
                   {link.title}
                 </a>
