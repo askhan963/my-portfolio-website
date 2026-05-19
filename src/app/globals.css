@@ -2,46 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Theme tokens (exactly two: light + dark) ────────────────────────────────
- * Light — "Daylight": cool paper (#f5f7fb), ink text (#0f172a), accent indigo (#4f46e5)
- * Dark  — "Nocturne": deep base (#0a0a10), softened text (#e2e8f0), accent #818cf8
- */
 :root {
-  --background: #f5f7fb;
-  --foreground: #0f172a;
-  --primary: #4f46e5;
-  --primary-foreground: #fafafa;
-  --card-background: #ffffff;
-  --border-color: #e2e8f0;
-  --muted: #eef1f8;
-  --muted-foreground: #64748b;
-  --ring: #4f46e5;
+  --background: #0b080c;
+  --foreground: #f3edf8;
+  --primary: #c2a4ff;
+  --primary-foreground: #100914;
+  --card-background: rgba(255, 255, 255, 0.055);
+  --border-color: rgba(255, 255, 255, 0.14);
+  --muted: rgba(255, 255, 255, 0.08);
+  --muted-foreground: rgba(243, 237, 248, 0.64);
+  --ring: #c2a4ff;
 }
 
 .dark,
 [data-theme="dark"] {
-  --background: #0a0a10;
-  --foreground: #e8edf6;
-  --primary: #818cf8;
-  --primary-foreground: #0f0a1a;
-  --card-background: #14141c;
-  --border-color: #2a2a36;
-  --muted: #1c1c26;
-  --muted-foreground: #94a3b8;
-  --ring: #818cf8;
+  --background: #0b080c;
+  --foreground: #f3edf8;
+  --primary: #c2a4ff;
+  --primary-foreground: #100914;
+  --card-background: rgba(255, 255, 255, 0.055);
+  --border-color: rgba(255, 255, 255, 0.14);
+  --muted: rgba(255, 255, 255, 0.08);
+  --muted-foreground: rgba(243, 237, 248, 0.64);
+  --ring: #c2a4ff;
 }
 
 [data-theme="light"] {
-  /* Same as :root — explicit selector for ThemeProvider */
-  --background: #f5f7fb;
-  --foreground: #0f172a;
-  --primary: #4f46e5;
-  --primary-foreground: #fafafa;
-  --card-background: #ffffff;
-  --border-color: #e2e8f0;
-  --muted: #eef1f8;
-  --muted-foreground: #64748b;
-  --ring: #4f46e5;
+  --background: #eae5ec;
+  --foreground: #140f17;
+  --primary: #7f40ff;
+  --primary-foreground: #f9f6ff;
+  --card-background: rgba(255, 255, 255, 0.72);
+  --border-color: rgba(20, 15, 23, 0.16);
+  --muted: rgba(20, 15, 23, 0.06);
+  --muted-foreground: rgba(20, 15, 23, 0.62);
+  --ring: #7f40ff;
 }
 
 html {
@@ -53,8 +48,9 @@ body {
   transition: background-color 0.28s ease, color 0.28s ease;
   background-color: var(--background);
   background-image:
-    radial-gradient(ellipse 120% 85% at 50% -25%, rgb(79 70 229 / 0.09), transparent 55%),
-    radial-gradient(ellipse 70% 45% at 100% 0%, rgb(99 102 241 / 0.05), transparent 45%);
+    radial-gradient(circle at 0% 8%, rgb(251 141 255 / 0.22), transparent 22rem),
+    radial-gradient(circle at 100% 45%, rgb(84 0 255 / 0.2), transparent 24rem),
+    linear-gradient(180deg, rgb(11 8 12), rgb(11 8 12));
   background-attachment: fixed;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -63,8 +59,9 @@ body {
 .dark body,
 [data-theme="dark"] body {
   background-image:
-    radial-gradient(ellipse 110% 70% at 50% -20%, rgb(129 140 248 / 0.14), transparent 50%),
-    radial-gradient(ellipse 60% 40% at 0% 0%, rgb(99 102 241 / 0.06), transparent 40%);
+    radial-gradient(circle at 0% 8%, rgb(251 141 255 / 0.22), transparent 22rem),
+    radial-gradient(circle at 100% 45%, rgb(84 0 255 / 0.2), transparent 24rem),
+    linear-gradient(180deg, rgb(11 8 12), rgb(11 8 12));
 }
 
 h1,
@@ -104,4 +101,52 @@ p {
 /* Hide scrollbar (existing behavior) */
 ::-webkit-scrollbar {
   display: none;
+}
+
+.section-shell {
+  @apply relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-heading {
+  @apply text-center text-4xl font-medium uppercase leading-none text-foreground sm:text-5xl lg:text-7xl;
+  background: linear-gradient(180deg, #ffffff 12%, var(--primary) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-kicker {
+  @apply mb-4 text-center text-sm font-medium uppercase tracking-[0.45em] text-primary sm:text-base;
+}
+
+.glass-panel {
+  @apply border border-border bg-card text-card-foreground shadow-card backdrop-blur-xl;
+}
+
+.corner-frame {
+  @apply relative border border-white/15 bg-white/[0.045];
+}
+
+.corner-frame::before,
+.corner-frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(255, 255, 255, 0.78);
+  pointer-events: none;
+}
+
+.corner-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.corner-frame::after {
+  right: -1px;
+  bottom: -1px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
 }

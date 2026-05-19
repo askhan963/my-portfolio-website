@@ -1,18 +1,11 @@
-import { FaHeart, FaCoffee } from "react-icons/fa";
-
 const Footer = () => {
   return (
-    <footer className="w-full bg-card text-card-foreground border-t border-border py-8 px-6">
-      <div className="text-center text-foreground/70">
-        <div className="flex items-center justify-center gap-2 mb-4">
-          <span>Built with</span>
-          <FaHeart className="text-primary" />
-          <span>and</span>
-          <FaCoffee className="text-primary" />
-          <span>by</span>
-          <span className="font-semibold text-primary">Awais Khan</span>
-        </div>
-        <p className="text-sm">
+    <footer className="w-full border-t border-border bg-background px-6 py-8 text-card-foreground">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 text-center text-foreground/60 sm:flex-row sm:text-left">
+        <p className="text-sm uppercase tracking-[0.24em]">
+          Built by <span className="font-semibold text-primary">Awais Khan</span>
+        </p>
+        <p className="text-sm uppercase tracking-[0.24em]">
           © {new Date().getFullYear()} Awais Khan. All rights reserved.
         </p>
       </div>

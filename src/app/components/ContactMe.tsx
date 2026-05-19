@@ -10,7 +10,7 @@ const ContactMe: React.FC = () => {
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.7, delay: 1, ease: "easeOut" }}
-      className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden sm:flex flex-col items-center space-y-4"
+      className="fixed bottom-6 left-[max(1rem,calc((100vw-1280px)/2))] z-40 hidden flex-col items-center gap-5 sm:flex"
     >
       <motion.a
         href="https://www.linkedin.com/in/askhan963/"
@@ -18,7 +18,7 @@ const ContactMe: React.FC = () => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        className="w-12 h-12 bg-card text-card-foreground rounded-full shadow-lg flex items-center justify-center hover:text-primary transition-colors duration-300 border border-border"
+        className="flex h-11 w-11 items-center justify-center border border-border bg-card text-card-foreground backdrop-blur transition-colors duration-300 hover:border-primary hover:text-primary"
         title="LinkedIn"
       >
         <FiLinkedin className="w-6 h-6" />
@@ -29,7 +29,7 @@ const ContactMe: React.FC = () => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        className="w-12 h-12 bg-card text-card-foreground rounded-full shadow-lg flex items-center justify-center hover:text-primary transition-colors duration-300 border border-border"
+        className="flex h-11 w-11 items-center justify-center border border-border bg-card text-card-foreground backdrop-blur transition-colors duration-300 hover:border-primary hover:text-primary"
         title="GitHub"
       >
         <FiGithub className="w-6 h-6" />
@@ -40,7 +40,7 @@ const ContactMe: React.FC = () => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1, rotate: 5 }}
         whileTap={{ scale: 0.9 }}
-        className="w-12 h-12 bg-card text-card-foreground rounded-full shadow-lg flex items-center justify-center hover:text-primary transition-colors duration-300 border border-border"
+        className="flex h-11 w-11 items-center justify-center border border-border bg-card text-card-foreground backdrop-blur transition-colors duration-300 hover:border-primary hover:text-primary"
         title="Email"
       >
         <FiMail className="w-6 h-6" />

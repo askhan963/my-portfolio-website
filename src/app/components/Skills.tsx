@@ -152,30 +152,31 @@ export default function Skills() {
     <section
       id="skills"
       ref={ref}
-      className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
+      className="relative overflow-hidden bg-background py-24 sm:py-32"
     >
+      <div className="section-shell">
       <motion.h1 
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
+        className="section-heading mb-12"
       >
-        Skills & Expertise
+        Tech Stack
       </motion.h1>
 
-      <div className="w-full max-w-6xl mx-auto">
-        <div className="flex justify-center flex-wrap gap-4 mb-12">
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="mb-12 flex flex-wrap justify-center gap-3">
           {Object.keys(skillCategories).map((category) => (
             <motion.button
               key={category}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(category as Category)}
-              className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
+              className={`rounded-full px-5 py-2 text-sm font-semibold uppercase tracking-[0.12em] transition-all duration-300 ${
                 activeCategory === category
-                  ? "bg-primary text-white shadow-lg"
-                  : "bg-card text-card-foreground border border-border hover:bg-primary/10"
+                  ? "bg-primary text-primary-foreground shadow-[0_10px_30px_rgba(194,164,255,0.22)]"
+                  : "border border-border bg-card text-card-foreground hover:border-primary/60 hover:bg-primary/10"
               }`}
             >
               {category}
@@ -188,7 +189,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8"
+          className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
         >
           {skillCategories[activeCategory]?.map((skill, index) => {
             const isDynamicSkill = 'id' in skill;
@@ -201,12 +202,12 @@ export default function Skills() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col items-center justify-center p-6 bg-card text-card-foreground rounded-xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-border"
+                className="group flex aspect-[0.86] flex-col items-center justify-center border border-border bg-card p-4 text-card-foreground backdrop-blur transition-all duration-300 hover:-translate-y-2 hover:border-primary/70 hover:bg-primary/10 hover:shadow-[0_16px_45px_rgba(194,164,255,0.18)]"
               >
-                <div className="text-primary mb-3">
+                <div className="mb-3 text-primary grayscale transition-all duration-300 group-hover:grayscale-0">
                   {skillIcon}
                 </div>
-                <span className="text-md font-medium text-foreground text-center">
+                <span className="text-center text-sm font-medium text-foreground">
                   {skillName}
                 </span>
                 {isDynamicSkill && (skill as Skill).proficiency && (
@@ -218,6 +219,7 @@ export default function Skills() {
             );
           })}
         </motion.div>
+      </div>
       </div>
     </section>
   );
