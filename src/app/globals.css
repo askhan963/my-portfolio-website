@@ -103,6 +103,56 @@ p {
   display: none;
 }
 
+input,
+textarea {
+  color: var(--foreground);
+  caret-color: var(--primary);
+}
+
+.contact-field {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #120b16;
+  caret-color: var(--primary);
+  padding: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.contact-field::placeholder {
+  color: rgba(18, 11, 22, 0.48);
+}
+
+.dark .contact-field,
+[data-theme="dark"] .contact-field {
+  background-color: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dark .contact-field::placeholder,
+[data-theme="dark"] .contact-field::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-field:focus {
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+.dark .contact-field:focus,
+[data-theme="dark"] .contact-field:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--foreground);
+  box-shadow: 0 0 0 1000px var(--background) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 .section-shell {
   @apply relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
