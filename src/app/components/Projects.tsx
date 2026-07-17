@@ -1,16 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useState, useMemo } from "react";
-import "swiper/css";
-import "swiper/css/zoom";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
-import { useProjects, Project as ProjectType } from "@/hooks/useProjects";
+import { useProjects } from "@/hooks/useProjects";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import Link from "next/link";
 
@@ -36,20 +29,28 @@ export default function Projects() {
       : projects.filter(project => project.category === selectedCategory);
   }, [projects, selectedCategory]);
 
+  const projectTransition = {
+    type: "spring",
+    stiffness: 70,
+    damping: 18,
+    mass: 0.8,
+  };
+
   return (
     <section
       id="projects"
       ref={ref}
-      className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
+      className="relative overflow-hidden bg-background py-24 sm:py-32"
     >
+      <div className="section-shell">
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
+        className="section-heading mb-14 text-left sm:text-center"
       >
-        My Projects
+        My <span className="text-primary">Projects</span>
       </motion.h1>
 
       {loading ? (
@@ -70,18 +71,18 @@ export default function Projects() {
         </div>
       ) : (
 
-      <div className="w-full max-w-6xl mx-auto">
-        <div className="flex justify-center flex-wrap gap-4 mb-12">
+      <div className="mx-auto w-full max-w-7xl">
+        <div className="sticky top-24 z-20 mb-14 flex flex-wrap justify-center gap-3 rounded-full border border-border bg-background/78 p-2 backdrop-blur-xl">
           {categories.map((category) => (
             <motion.button
               key={category}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
+              className={`rounded-full px-5 py-2 text-sm font-semibold uppercase tracking-[0.12em] transition-all duration-300 ${
                 selectedCategory === category
-                  ? "bg-primary text-white shadow-lg"
-                  : "bg-card text-card-foreground border border-border hover:bg-primary/10"
+                  ? "bg-primary text-primary-foreground shadow-[0_10px_30px_rgba(194,164,255,0.22)]"
+                  : "border border-border bg-card text-card-foreground hover:border-primary/60 hover:bg-primary/10"
               }`}
             >
               {category}
@@ -89,52 +90,72 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className="space-y-12 max-w-6xl w-full">
+        <div className="space-y-10 md:space-y-0">
           {filteredProjects.map((project, index) => (
-            <motion.div
+            <div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-card text-card-foreground p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-8 border border-border"
+              className="relative md:min-h-[60vh]"
+              style={{
+                zIndex: index + 1,
+              }}
             >
-              <div className="lg:w-1/2 space-y-4">
-                <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary mb-3">
-                  {project.title}
-                </h2>
-                <p className="text-lg sm:text-xl font-body text-foreground/70">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-3 mt-4">
-                  {project.techStack.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="px-4 py-2 bg-background rounded-full text-sm font-body text-primary border border-border"
-                    >
-                      {tech}
+            <motion.div
+              initial={{ opacity: 0, y: 80, scale: 0.97, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              transition={{ ...projectTransition, delay: Math.min(index * 0.06, 0.18) }}
+              viewport={{ once: false, amount: 0.18 }}
+              className="group min-h-[46vh] origin-top overflow-hidden border border-border bg-card text-card-foreground shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-500 hover:border-primary/55 hover:bg-white/[0.075] hover:shadow-[0_34px_110px_rgba(194,164,255,0.14)] md:sticky md:top-40"
+            >
+              <div className="flex min-h-[46vh] flex-col justify-between gap-6 p-6 sm:p-8 lg:p-10">
+                <div className="space-y-5">
+                  <div className="flex items-start justify-between gap-6">
+                    <div>
+                      <span className="mb-4 block text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+                        Project {(index + 1).toString().padStart(2, "0")}
+                      </span>
+                      <h2 className="max-w-5xl text-4xl font-semibold leading-none text-foreground sm:text-6xl lg:text-7xl">
+                        {project.title}
+                      </h2>
+                    </div>
+                    <span className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full border border-primary/35 text-sm font-semibold text-primary sm:flex">
+                      {(index + 1).toString().padStart(2, "0")}
                     </span>
-                  ))}
-                </div>
-                {project.awards && project.awards.length > 0 && (
-                  <div className="mt-4">
-                    <h4 className="text-sm font-semibold text-foreground mb-2">Awards & Recognition:</h4>
-                    <ul className="space-y-1">
-                      {project.awards.map((award, idx) => (
-                        <li key={idx} className="text-sm text-foreground/70 flex items-center">
-                          <span className="text-primary mr-2">🏆</span>
-                          {award}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                )}
-                <div className="flex space-x-4 mt-6">
+                  <p className="max-w-4xl text-base leading-7 text-foreground/68 sm:text-xl sm:leading-8">
+                    {project.description}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    {project.techStack.map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-foreground/80"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  {project.awards && project.awards.length > 0 && (
+                    <div className="mt-4">
+                      <h4 className="mb-2 text-sm font-semibold text-foreground">Awards & Recognition:</h4>
+                      <ul className="space-y-1">
+                        {project.awards.map((award, idx) => (
+                          <li key={idx} className="flex items-center text-sm text-foreground/70">
+                            <span className="mr-2 text-primary">Award</span>
+                            {award}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-4">
                   {project.githubLink && (
                     <a
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-2xl text-primary hover:text-opacity-80 transition-colors duration-300"
+                    className="text-2xl text-primary transition-colors duration-300 hover:text-foreground"
                     >
                       <FiGithub />
                     </a>
@@ -144,7 +165,7 @@ export default function Projects() {
                       href={project.liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-2xl text-primary hover:text-opacity-80 transition-colors duration-300"
+                    className="text-2xl text-primary transition-colors duration-300 hover:text-foreground"
                       title="Live Demo"
                     >
                       <FiExternalLink />
@@ -152,50 +173,19 @@ export default function Projects() {
                   )}
                   <Link
                     href={`/projects/${project.id}`}
-                    className="px-6 py-2 bg-primary text-primary-foreground rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors duration-300 flex items-center"
+                    className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors duration-300 hover:bg-primary/90"
                   >
                     View Details
                   </Link>
                 </div>
               </div>
-
-              <div className="lg:w-1/2 w-full">
-                <Swiper
-                  modules={[Pagination, Navigation, Autoplay]}
-                  pagination={{ clickable: true }}
-                  navigation={true}
-                  autoplay={{
-                    delay: 3000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                  }}
-                  loop={true}
-                  className="rounded-lg shadow-lg w-full max-w-full"
-                >
-                  {project.images.map((img, idx) => (
-                    <SwiperSlide key={idx}>
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="relative w-full h-80 rounded-lg overflow-hidden"
-                      >
-                        <Image
-                          src={img}
-                          alt={`${project.title} Image ${idx + 1}`}
-                          fill
-                          className="rounded-lg object-cover transition duration-300 hover:scale-105"
-                        />
-                      </motion.div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
             </motion.div>
+            </div>
           ))}
         </div>
       </div>
       )}
+      </div>
     </section>
   );
 }

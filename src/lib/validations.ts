@@ -45,10 +45,21 @@ export const createHonorSchema = honorSchema
 export const updateHonorSchema = honorSchema.partial()
 
 // Experience schemas
+// Form sends newline-separated string; API/DB store string[]
+const experienceDescriptionSchema = z.preprocess((val) => {
+  if (typeof val === 'string') {
+    return val
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+  }
+  return val
+}, z.array(z.string().min(1)).min(1, 'At least one description is required'))
+
 export const experienceRoleSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   period: z.string().min(1, 'Period is required'),
-  description: z.array(z.string()).min(1, 'At least one description is required'),
+  description: experienceDescriptionSchema,
 })
 
 export const experienceSchema = z.object({

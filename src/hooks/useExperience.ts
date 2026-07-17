@@ -36,6 +36,17 @@ export interface ExperienceFormData {
   }[]
 }
 
+const toExperiencePayload = (data: ExperienceFormData) => ({
+  ...data,
+  roles: data.roles.map((role) => ({
+    ...role,
+    description: role.description
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean),
+  })),
+})
+
 export const useExperience = ({ enabled = true } = {}) => {
   const [experiences, setExperiences] = useState<Experience[]>([])
   const [loading, setLoading] = useState(true)
@@ -59,7 +70,7 @@ export const useExperience = ({ enabled = true } = {}) => {
   const createExperience = useCallback(async (data: ExperienceFormData) => {
     try {
       setLoading(true)
-      const response = await experienceApi.create(data)
+      const response = await experienceApi.create(toExperiencePayload(data))
       setExperiences(prev => [response, ...prev])
       toast.success(TOAST_MESSAGES.EXPERIENCE.CREATE_SUCCESS)
       return response
@@ -76,7 +87,7 @@ export const useExperience = ({ enabled = true } = {}) => {
   const updateExperience = useCallback(async (id: string, data: ExperienceFormData) => {
     try {
       setLoading(true)
-      const response = await experienceApi.update(id, data)
+      const response = await experienceApi.update(id, toExperiencePayload(data))
       setExperiences(prev => prev.map(exp => exp.id === id ? response : exp))
       toast.success(TOAST_MESSAGES.EXPERIENCE.UPDATE_SUCCESS)
       return response

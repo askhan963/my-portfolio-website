@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { FaGraduationCap } from "react-icons/fa"; // Correct icon for education
+import { motion } from "framer-motion";
+import { FaGraduationCap } from "react-icons/fa";
 import { useEducation } from "@/hooks/useEducation";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
@@ -66,85 +67,137 @@ const Education = () => {
     <section
       id="education"
       ref={ref}
-      className="min-h-screen flex flex-col items-center justify-center bg-background p-6 sm:p-12"
+      className="relative overflow-hidden bg-background py-24 sm:py-32"
     >
-      <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-16 text-center">
-        Education & Academics
-      </h1>
+      <div className="pointer-events-none absolute left-1/2 top-1/4 h-80 w-80 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+      <div className="section-shell">
+        <motion.p
+          initial={{ opacity: 0, y: -16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true }}
+          className="section-kicker"
+        >
+          Academic foundation
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: -32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true }}
+          className="section-heading mb-16"
+        >
+          Education & Academics
+        </motion.h1>
 
-      <div className="w-full max-w-4xl mx-auto">
-        <ol className="relative border-s border-border">
+      <div className="mx-auto w-full max-w-6xl">
+        <ol className="relative grid gap-8 lg:grid-cols-2">
+          <div className="absolute left-1/2 top-10 hidden h-[calc(100%-5rem)] w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-primary/70 to-transparent lg:block" />
           {displayEducation.map((edu, index) => (
-            <li key={index} className="mb-12 ms-8">
-              <span className="absolute flex items-center justify-center w-8 h-8 bg-primary/15 rounded-full -start-4 ring-8 ring-card">
-                <FaGraduationCap className="w-4 h-4 text-primary" />
-              </span>
-
-              <div className="p-6 bg-card text-card-foreground rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 border border-border">
-                <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <Image
-                    src={edu.logo}
-                    alt={`${edu.institution} Logo`}
-                    width={56}
-                    height={56}
-                    className="rounded-lg shadow-sm flex-shrink-0"
-                  />
-                  <div className="flex-1">
-                    {edu.link ? (
-                      <a
-                        href={edu.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block"
+            <motion.li
+              key={index}
+              initial={{ opacity: 0, y: 56, scale: 0.97, filter: "blur(8px)" }}
+              whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              transition={{
+                type: "spring",
+                stiffness: 72,
+                damping: 18,
+                delay: index * 0.12,
+              }}
+              viewport={{ once: true, amount: 0.28 }}
+              className={`${index % 2 === 0 ? "lg:pt-0" : "lg:pt-24"}`}
+            >
+              <div className="corner-frame group relative overflow-hidden p-6 shadow-[0_28px_90px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-[background-color,border-color,box-shadow,transform] duration-500 hover:-translate-y-2 hover:border-primary/60 hover:bg-white/[0.07] hover:shadow-[0_34px_110px_rgba(194,164,255,0.14)] sm:p-8">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(194,164,255,0.18),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_45%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="relative flex flex-col gap-6">
+                  <div className="flex items-start justify-between gap-6">
+                    <div className="flex min-w-0 items-start gap-4">
+                      <motion.div
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{
+                          duration: 4.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.25,
+                        }}
+                        className="relative h-16 w-16 shrink-0 overflow-hidden border border-border bg-white/90 p-1.5 shadow-sm"
                       >
-                        <h3 className="text-xl font-bold text-foreground hover:text-primary transition-colors">
+                        <Image
+                          src={edu.logo}
+                          alt={`${edu.institution} Logo`}
+                          fill
+                          className="object-contain p-1"
+                        />
+                      </motion.div>
+                      <div className="min-w-0 flex-1">
+                        <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.35em] text-primary">
+                          {edu.period}
+                        </span>
+                        {edu.link ? (
+                          <a
+                            href={edu.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block"
+                          >
+                            <h3 className="text-2xl font-semibold leading-tight text-foreground transition-colors hover:text-primary">
+                              {edu.institution}
+                            </h3>
+                          </a>
+                        ) : (
+                          <h3 className="text-2xl font-semibold leading-tight text-foreground">
                           {edu.institution}
-                        </h3>
-                      </a>
-                    ) : (
-                      <h3 className="text-xl font-bold text-foreground">
-                        {edu.institution}
-                      </h3>
-                    )}
-                    <p className="text-md font-semibold text-foreground">
-                      {edu.degree}
-                    </p>
-                    <time className="block mb-2 text-sm font-normal leading-none text-foreground/60 mt-1">
-                      {edu.period}
-                    </time>
+                          </h3>
+                        )}
+                        <p className="mt-3 text-lg font-medium text-primary">
+                          {edu.degree}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/35 text-primary sm:flex">
+                      <FaGraduationCap className="h-5 w-5" />
+                    </div>
                   </div>
-                </div>
 
-                <div className="mt-4 border-t border-border pt-4">
-                  {edu.cgpa && (
-                    <p className="text-sm text-foreground/70 mb-4">
-                      <span className="font-semibold text-foreground">
-                        Final CGPA:
-                      </span>{" "}
-                      {edu.cgpa} / 4.0
-                    </p>
-                  )}
+                  <div className="grid gap-5 border-t border-border pt-6 sm:grid-cols-[auto_1fr]">
+                    {edu.cgpa && (
+                      <div className="flex h-28 w-28 flex-col items-center justify-center border border-primary/35 bg-primary/10 text-center">
+                        <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                          CGPA
+                        </span>
+                        <span className="mt-2 text-3xl font-semibold text-foreground">
+                          {edu.cgpa}
+                        </span>
+                        <span className="text-xs text-foreground/45">/ 4.0</span>
+                      </div>
+                    )}
 
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">
-                      Core Courses
-                    </h4>
-                    <ul className="space-y-2 text-foreground/70 list-disc pl-5">
-                      {edu.coreCourses?.map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="text-sm sm:text-base leading-relaxed"
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                    <div>
+                      <h4 className="mb-3 text-sm font-semibold uppercase tracking-[0.28em] text-foreground/70">
+                        Core Courses
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {edu.coreCourses?.map((item, idx) => (
+                          <motion.span
+                            key={idx}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.35, delay: idx * 0.035 }}
+                            viewport={{ once: true }}
+                            className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-sm text-foreground/75"
+                          >
+                            {item}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </li>
+            </motion.li>
           ))}
         </ol>
+      </div>
       </div>
     </section>
   );
