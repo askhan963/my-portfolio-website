@@ -195,9 +195,9 @@ export default function CVsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
-          {cvs.map((cv) => (
+          {cvs.map((cv, index) => (
             <CVCard
-              key={cv.id}
+              key={index}
               cv={cv}
               onEdit={handleEditClick}
               onDelete={handleDeleteClick}
