@@ -78,7 +78,7 @@ const Contact = () => {
       >
         Let us build
       </motion.p>
-      <motion.h1
+      <motion.h2
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -86,7 +86,7 @@ const Contact = () => {
         className="section-heading mb-6"
       >
         Get in Touch
-      </motion.h1>
+      </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}

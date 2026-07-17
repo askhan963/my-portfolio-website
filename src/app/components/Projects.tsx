@@ -3,15 +3,22 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
-import { useProjects } from "@/hooks/useProjects";
+import { useProjects, type Project } from "@/hooks/useProjects";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import Link from "next/link";
 
 import { useInView } from "react-intersection-observer";
 
-export default function Projects() {
+export default function Projects({
+  initialData,
+}: {
+  initialData?: Project[];
+}) {
   const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
-  const { projects, loading, error } = useProjects({ enabled: inView });
+  const { projects, loading, error } = useProjects({
+    enabled: inView && !initialData,
+    initialData,
+  });
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   // Get unique categories from API data
@@ -43,7 +50,7 @@ export default function Projects() {
       className="relative overflow-hidden bg-background py-24 sm:py-32"
     >
       <div className="section-shell">
-      <motion.h1
+      <motion.h2
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -51,7 +58,7 @@ export default function Projects() {
         className="section-heading mb-14 text-left sm:text-center"
       >
         My <span className="text-primary">Projects</span>
-      </motion.h1>
+      </motion.h2>
 
       {loading ? (
         <div className="flex flex-col items-center justify-center">

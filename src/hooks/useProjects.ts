@@ -46,9 +46,15 @@ export interface ProjectFormData {
   seoDescription: string
 }
 
-export const useProjects = ({ enabled = true } = {}) => {
-  const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
+export const useProjects = ({
+  enabled = true,
+  initialData,
+}: {
+  enabled?: boolean
+  initialData?: Project[]
+} = {}) => {
+  const [projects, setProjects] = useState<Project[]>(initialData ?? [])
+  const [loading, setLoading] = useState(!initialData)
   const [error, setError] = useState<string | null>(null)
 
   const fetchProjects = useCallback(async () => {
@@ -120,10 +126,10 @@ export const useProjects = ({ enabled = true } = {}) => {
   }, [])
 
   useEffect(() => {
-    if (enabled) {
+    if (enabled && !initialData) {
       fetchProjects()
     }
-  }, [fetchProjects, enabled])
+  }, [fetchProjects, enabled, initialData])
 
   return {
     projects,

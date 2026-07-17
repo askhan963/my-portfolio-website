@@ -22,9 +22,15 @@ export interface PublicProfileFormData {
   isActive: boolean
 }
 
-export const usePublicProfile = ({ enabled = true } = {}) => {
-  const [profile, setProfile] = useState<PublicProfile | null>(null)
-  const [loading, setLoading] = useState(true)
+export const usePublicProfile = ({
+  enabled = true,
+  initialData = null,
+}: {
+  enabled?: boolean
+  initialData?: PublicProfile | null
+} = {}) => {
+  const [profile, setProfile] = useState<PublicProfile | null>(initialData)
+  const [loading, setLoading] = useState(!initialData)
   const [error, setError] = useState<string | null>(null)
 
   // Fetch active public profile
@@ -134,12 +140,12 @@ export const usePublicProfile = ({ enabled = true } = {}) => {
     }
   }
 
-  // Load profile on mount
+  // Load profile on mount when no SSR data was provided
   useEffect(() => {
-    if (enabled) {
+    if (enabled && !initialData) {
       fetchProfile()
     }
-  }, [enabled])
+  }, [enabled, initialData])
 
   return {
     profile,

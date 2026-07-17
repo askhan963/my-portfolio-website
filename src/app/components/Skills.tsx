@@ -133,9 +133,16 @@ const renderSkillIcon = (skill: Skill) => {
   return <FaReact size={40} />;
 };
 
-export default function Skills() {
+export default function Skills({
+  initialData,
+}: {
+  initialData?: Skill[];
+}) {
   const { ref, inView } = useInView({ triggerOnce: true, rootMargin: "200px 0px" });
-  const { skills, loading, error } = useSkills({ enabled: inView });
+  const { skills, loading, error } = useSkills({
+    enabled: inView && !initialData,
+    initialData,
+  });
   const [activeCategory, setActiveCategory] = useState<Category>("All");
 
   const skillsByCategory = skills.reduce((acc, skill) => {
@@ -209,7 +216,7 @@ export default function Skills() {
       className="relative overflow-hidden bg-background py-24 sm:py-32"
     >
       <div className="section-shell">
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -217,7 +224,7 @@ export default function Skills() {
           className="section-heading mb-12"
         >
           Tech Stack
-        </motion.h1>
+        </motion.h2>
 
         <div className="mx-auto w-full max-w-6xl">
           <div className="mb-10 flex flex-wrap justify-center gap-3">

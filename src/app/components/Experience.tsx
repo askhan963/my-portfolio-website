@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaArrowUp } from "react-icons/fa";
-import { useExperience } from "@/hooks/useExperience";
+import { useExperience, type Experience } from "@/hooks/useExperience";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 import { useInView } from "react-intersection-observer";
@@ -15,9 +15,16 @@ const cardTransition = {
   mass: 0.8,
 };
 
-export default function Experience() {
+export default function Experience({
+  initialData,
+}: {
+  initialData?: Experience[];
+}) {
   const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
-  const { experiences, loading, error } = useExperience({ enabled: inView });
+  const { experiences, loading, error } = useExperience({
+    enabled: inView && !initialData,
+    initialData,
+  });
 
   return (
     <section
@@ -26,7 +33,7 @@ export default function Experience() {
       className="relative bg-background py-24 sm:py-32"
     >
       <div className="section-shell">
-      <motion.h1
+      <motion.h2
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -34,7 +41,7 @@ export default function Experience() {
         className="section-heading mb-20"
       >
         Career <span className="font-light">Path</span>
-      </motion.h1>
+      </motion.h2>
 
       {loading ? (
         <div className="flex flex-col items-center justify-center">
@@ -80,9 +87,10 @@ export default function Experience() {
                   <div className="flex flex-col items-start gap-4 sm:flex-row">
                     <Image
                       src={experience.logo}
-                      alt={`${experience.company} Logo`}
+                      alt={`${experience.company} company logo`}
                       width={64}
                       height={64}
+                      sizes="64px"
                       className="h-16 w-16 flex-shrink-0 rounded-lg border border-border bg-white/90 object-contain p-1.5 shadow-sm"
                     />
                     <div className="flex-1">

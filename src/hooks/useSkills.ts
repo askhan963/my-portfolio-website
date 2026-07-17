@@ -32,9 +32,15 @@ export interface SkillFormData {
   displayOrder: number
 }
 
-export const useSkills = ({ enabled = true } = {}) => {
-  const [skills, setSkills] = useState<Skill[]>([])
-  const [loading, setLoading] = useState(true)
+export const useSkills = ({
+  enabled = true,
+  initialData,
+}: {
+  enabled?: boolean
+  initialData?: Skill[]
+} = {}) => {
+  const [skills, setSkills] = useState<Skill[]>(initialData ?? [])
+  const [loading, setLoading] = useState(!initialData)
   const [error, setError] = useState<string | null>(null)
 
   // Fetch all skills
@@ -142,12 +148,12 @@ export const useSkills = ({ enabled = true } = {}) => {
     }
   }, [])
 
-  // Load skills on mount
+  // Load skills on mount when no SSR data was provided
   useEffect(() => {
-    if (enabled) {
+    if (enabled && !initialData) {
       fetchSkills()
     }
-  }, [fetchSkills, enabled])
+  }, [fetchSkills, enabled, initialData])
 
   return {
     skills,

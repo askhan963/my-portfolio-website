@@ -2,6 +2,10 @@ import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import ProjectDetails from './ProjectDetails';
 import { Metadata } from 'next';
+import { buildProjectJsonLd, serializeJsonLd } from '@/lib/seo/jsonld';
+import { SITE_NAME, absoluteUrl } from '@/lib/seo/site';
+
+export const revalidate = 3600;
 
 interface ProjectPageProps {
   params: Promise<{
@@ -9,7 +13,16 @@ interface ProjectPageProps {
   }>;
 }
 
-// Generate dynamic metadata for SEO
+export async function generateStaticParams() {
+  const projects = await prisma.project.findMany({
+    select: { id: true },
+  });
+
+  return projects.map((project) => ({
+    id: project.id,
+  }));
+}
+
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { id } = await params;
   
@@ -19,17 +32,49 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
   if (!project) {
     return {
-      title: 'Project Not Found | Portfolio',
+      title: 'Project Not Found',
+      description: 'The requested project could not be found.',
+      robots: { index: false, follow: false },
     };
   }
 
+  const title = project.seoTitle || project.title;
+  const description = project.seoDescription || project.description;
+  const url = absoluteUrl(`/projects/${project.id}`);
+  const image =
+    project.images.length > 0
+      ? project.images[0]
+      : absoluteUrl('/Logos/ASKHAN_LOGO.png');
+
   return {
-    title: project.seoTitle ? `${project.seoTitle} | Portfolio` : `${project.title} | Portfolio`,
-    description: project.seoDescription || project.description,
+    title,
+    description,
+    authors: [{ name: 'Muhammad Awais Khan' }],
+    creator: 'Muhammad Awais Khan',
+    publisher: 'Muhammad Awais Khan',
+    alternates: {
+      canonical: `/projects/${project.id}`,
+    },
     openGraph: {
-      title: project.seoTitle || project.title,
-      description: project.seoDescription || project.description,
-      images: project.images.length > 0 ? [project.images[0]] : [],
+      type: 'article',
+      url,
+      siteName: SITE_NAME,
+      title,
+      description,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
     },
   };
 }
@@ -45,28 +90,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  // Serialize the dates to strings because Client Components cannot receive Date objects directly if not strictly needed as Date
-  // Actually, implementation of ProjectDetails expects Date objects for createdAt/updatedAt? 
-  // Let's check ProjectDetails interface.
-  // interface Project { createdAt: Date; ... }
-  // Server components pass data to Client components via props.
-  // Next.js serializes props. JSON does not support Date objects.
-  // They will be passed as strings if not careful, OR Next.js handles it?
-  // Next.js Server Components -> Client Components serialization warns about Dates.
-  // It is safer to convert them to strings or pass them as is if Next.js supports it in recent versions (it usually warns).
-  // However, `prisma` returns Date objects.
-  // Let's modify the interface in ProjectDetails to accept strings or Date, or just pass them and let's see.
-  // Actually, standard practice is to pass basic JSON types.
-  // I will pass them as is. If it warnings, I will fix. 
-  // Wait, I should probably check if I need to transform.
-  // For now I will pass as is.
-  
-  // Convert dates to strings to avoid "Date object not supported" warning
   const serializedProject = {
     ...project,
     createdAt: project.createdAt.toISOString(),
     updatedAt: project.updatedAt.toISOString(),
   };
 
-  return <ProjectDetails project={serializedProject} />;
+  const jsonLd = buildProjectJsonLd(serializedProject);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
+      />
+      <ProjectDetails project={serializedProject} />
+    </>
+  );
 }

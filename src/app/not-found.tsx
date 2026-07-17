@@ -7,8 +7,10 @@ export default function NotFound() {
   return (
     <Providers>
       <div className="bg-background text-foreground min-h-screen">
-        <Navbar />
-        <div className="h-screen flex flex-col justify-center items-center text-center px-4">
+        <header>
+          <Navbar />
+        </header>
+        <main className="h-screen flex flex-col justify-center items-center text-center px-4">
           <h1 className="text-5xl font-bold text-primary">404</h1>
           <p className="text-xl mt-4 text-foreground/70">
             This page could not be found.
@@ -19,7 +21,7 @@ export default function NotFound() {
           >
             ⬅ Back to Home
           </Link>
-        </div>
+        </main>
         <Footer />
       </div>
     </Providers>

@@ -3,14 +3,21 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaGraduationCap } from "react-icons/fa";
-import { useEducation } from "@/hooks/useEducation";
+import { useEducation, type Education as EducationType } from "@/hooks/useEducation";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 import { useInView } from "react-intersection-observer";
 
-const Education = () => {
+const Education = ({
+  initialData,
+}: {
+  initialData?: EducationType[];
+}) => {
   const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
-  const { education, loading, error } = useEducation({ enabled: inView });
+  const { education, loading, error } = useEducation({
+    enabled: inView && !initialData,
+    initialData,
+  });
 
   // Fallback data if no education is found
   const fallbackEducation = [
@@ -80,7 +87,7 @@ const Education = () => {
         >
           Academic foundation
         </motion.p>
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: -32 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -88,7 +95,7 @@ const Education = () => {
           className="section-heading mb-16"
         >
           Education & Academics
-        </motion.h1>
+        </motion.h2>
 
       <div className="mx-auto w-full max-w-6xl">
         <ol className="relative grid gap-8 lg:grid-cols-2">
@@ -124,8 +131,9 @@ const Education = () => {
                       >
                         <Image
                           src={edu.logo}
-                          alt={`${edu.institution} Logo`}
+                          alt={`${edu.institution} logo`}
                           fill
+                          sizes="64px"
                           className="object-contain p-1"
                         />
                       </motion.div>
