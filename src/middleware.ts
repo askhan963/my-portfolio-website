@@ -51,6 +51,9 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    // Skip Next internals, static assets, and crawl/SEO files Google must fetch freely
+    "/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|opengraph-image|twitter-image|google[^/]+\\.html).*)",
+  ],
 };
 
