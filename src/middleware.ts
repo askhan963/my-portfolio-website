@@ -52,8 +52,11 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    // Skip Next internals, static assets, and crawl/SEO files Google must fetch freely
-    "/((?!_next/static|_next/image|favicon.ico|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|opengraph-image|twitter-image|google[^/]+\\.html).*)",
+    /*
+     * Match all paths except Next internals, static assets, and crawl files.
+     * Google Search Console must fetch these without auth middleware.
+     */
+    "/((?!_next/static|_next/image|favicon\\.ico|robots\\.txt|sitemap\\.xml|manifest\\.webmanifest|opengraph-image|twitter-image|google[^/]+\\.html).*)",
   ],
 };
 
