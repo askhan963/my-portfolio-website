@@ -47,9 +47,15 @@ const toExperiencePayload = (data: ExperienceFormData) => ({
   })),
 })
 
-export const useExperience = ({ enabled = true } = {}) => {
-  const [experiences, setExperiences] = useState<Experience[]>([])
-  const [loading, setLoading] = useState(true)
+export const useExperience = ({
+  enabled = true,
+  initialData,
+}: {
+  enabled?: boolean
+  initialData?: Experience[]
+} = {}) => {
+  const [experiences, setExperiences] = useState<Experience[]>(initialData ?? [])
+  const [loading, setLoading] = useState(!initialData)
   const [error, setError] = useState<string | null>(null)
 
   const fetchExperiences = useCallback(async () => {
@@ -118,10 +124,10 @@ export const useExperience = ({ enabled = true } = {}) => {
   }, [])
 
   useEffect(() => {
-    if (enabled) {
+    if (enabled && !initialData) {
       fetchExperiences()
     }
-  }, [fetchExperiences, enabled])
+  }, [fetchExperiences, enabled, initialData])
 
   return {
     experiences,

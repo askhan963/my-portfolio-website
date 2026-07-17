@@ -30,9 +30,15 @@ export interface CVFormData {
 }
 
 // Custom hook for CVs management
-export function useCVs({ enabled = true } = {}) {
-  const [cvs, setCVs] = useState<CV[]>([])
-  const [loading, setLoading] = useState(true)
+export function useCVs({
+  enabled = true,
+  initialData,
+}: {
+  enabled?: boolean
+  initialData?: CV[]
+} = {}) {
+  const [cvs, setCVs] = useState<CV[]>(initialData ?? [])
+  const [loading, setLoading] = useState(!initialData)
   const [error, setError] = useState<string | null>(null)
 
   const fetchCVs = useCallback(async () => {
@@ -105,10 +111,10 @@ export function useCVs({ enabled = true } = {}) {
   }, [])
 
   useEffect(() => {
-    if (enabled) {
+    if (enabled && !initialData) {
       fetchCVs()
     }
-  }, [fetchCVs, enabled])
+  }, [fetchCVs, enabled, initialData])
 
   return {
     cvs,

@@ -38,6 +38,7 @@ export default function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
       className="fixed left-0 top-0 z-50 w-full px-4 pt-4 sm:px-6 lg:px-8"
+      aria-label="Primary"
     >
       <div
         className={`mx-auto flex h-16 max-w-7xl items-center justify-between border px-3 transition-all duration-300 sm:px-4 ${
@@ -53,9 +54,10 @@ export default function Navbar() {
           >
             <Image
               src="/Logos/ASKHAN_LOGO.png"
-              alt="Logo"
+              alt="ASKHAN portfolio logo"
               width={42}
               height={42}
+              sizes="42px"
               className="opacity-95 transition-opacity hover:opacity-100 dark:invert dark:brightness-0 dark:contrast-125"
             />
             <span className="hidden sm:block">ASKHAN</span>

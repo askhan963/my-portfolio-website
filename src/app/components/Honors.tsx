@@ -3,14 +3,21 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiAward } from "react-icons/fi";
-import { useHonors } from "@/hooks/useHonors";
+import { useHonors, type Honor } from "@/hooks/useHonors";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 import { useInView } from "react-intersection-observer";
 
-export default function Honors() {
+export default function Honors({
+  initialData,
+}: {
+  initialData?: Honor[];
+}) {
   const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
-  const { honors, loading, error } = useHonors({ enabled: inView });
+  const { honors, loading, error } = useHonors({
+    enabled: inView && !initialData,
+    initialData,
+  });
 
   // Loading state
   if (loading) {
@@ -20,7 +27,7 @@ export default function Honors() {
         ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -28,7 +35,7 @@ export default function Honors() {
           className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
         >
           Honors & Certifications
-        </motion.h1>
+        </motion.h2>
         <div className="flex flex-col items-center justify-center">
           <LoadingSpinner size="lg" />
           <p className="mt-4 text-foreground/60">Loading honors...</p>
@@ -45,7 +52,7 @@ export default function Honors() {
         ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -53,7 +60,7 @@ export default function Honors() {
           className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
         >
           Honors & Certifications
-        </motion.h1>
+        </motion.h2>
         <div className="flex flex-col items-center justify-center text-center">
           <div className="text-red-500 text-xl mb-4">⚠️</div>
           <p className="text-foreground/60 mb-4">Failed to load honors</p>
@@ -71,7 +78,7 @@ export default function Honors() {
         ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -79,7 +86,7 @@ export default function Honors() {
           className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center"
         >
           Honors & Certifications
-        </motion.h1>
+        </motion.h2>
         <div className="flex flex-col items-center justify-center text-center">
           <div className="text-foreground/40 text-xl mb-4">🏆</div>
           <p className="text-foreground/60">No honors available at the moment</p>
@@ -105,7 +112,7 @@ export default function Honors() {
       >
         Recognition wall
       </motion.p>
-      <motion.h1
+      <motion.h2
         initial={{ opacity: 0, y: -50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -113,7 +120,7 @@ export default function Honors() {
         className="section-heading mb-16"
       >
         Honors & Certifications
-      </motion.h1>
+      </motion.h2>
 
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
         {honors.map((honor, index) => (

@@ -22,9 +22,15 @@ export interface HonorFormData {
   issuedAt: string
 }
 
-export const useHonors = ({ enabled = true } = {}) => {
-  const [honors, setHonors] = useState<Honor[]>([])
-  const [loading, setLoading] = useState(true)
+export const useHonors = ({
+  enabled = true,
+  initialData,
+}: {
+  enabled?: boolean
+  initialData?: Honor[]
+} = {}) => {
+  const [honors, setHonors] = useState<Honor[]>(initialData ?? [])
+  const [loading, setLoading] = useState(!initialData)
   const [error, setError] = useState<string | null>(null)
 
   const fetchHonors = useCallback(async () => {
@@ -93,10 +99,10 @@ export const useHonors = ({ enabled = true } = {}) => {
   }, [])
 
   useEffect(() => {
-    if (enabled) {
+    if (enabled && !initialData) {
       fetchHonors()
     }
-  }, [fetchHonors, enabled])
+  }, [fetchHonors, enabled, initialData])
 
   return {
     honors,

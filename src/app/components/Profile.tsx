@@ -2,14 +2,21 @@
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
-import { usePublicProfile } from "@/hooks/usePublicProfile";
+import { usePublicProfile, type PublicProfile } from "@/hooks/usePublicProfile";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 import { useInView } from "react-intersection-observer";
 
-export default function Profile() {
-  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '0px' });
-  const { profile, loading, error } = usePublicProfile({ enabled: inView });
+export default function Profile({
+  initialData = null,
+}: {
+  initialData?: PublicProfile | null;
+}) {
+  const { ref, inView } = useInView({ triggerOnce: true, rootMargin: "0px" });
+  const { profile, loading, error } = usePublicProfile({
+    enabled: inView && !initialData,
+    initialData,
+  });
 
   // Fallback data if no profile is found
   const fallbackProfile = {
@@ -85,10 +92,12 @@ export default function Profile() {
           <div className="relative h-full overflow-hidden rounded-t-full border border-white/10 bg-white/[0.04] shadow-[0_0_80px_rgba(194,164,255,0.24)]">
             <Image
               src={displayProfile.image}
-              alt="Profile Picture"
+              alt={`${displayProfile.name} — portfolio profile photo`}
               fill
+              sizes="(max-width: 768px) 90vw, 390px"
               className="object-cover object-top saturate-110"
               priority
+              fetchPriority="high"
             />
             <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent" />
           </div>

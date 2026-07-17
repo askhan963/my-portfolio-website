@@ -35,7 +35,7 @@ const Footer = () => {
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-foreground/45">
               Navigate
             </p>
-            <div className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-3" aria-label="Footer">
               {links.map((link) => (
                 <a
                   key={link.href}
@@ -45,7 +45,7 @@ const Footer = () => {
                   {link.label}
                 </a>
               ))}
-            </div>
+            </nav>
           </div>
 
           <div>

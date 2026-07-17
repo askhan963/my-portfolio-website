@@ -3,13 +3,20 @@
 import { FaDownload, FaFilePdf, FaFileWord } from "react-icons/fa"
 import { FiFileText, FiClock } from "react-icons/fi"
 import { motion } from "framer-motion"
-import { useCVs } from "@/hooks/useCVs"
+import { useCVs, type CV } from "@/hooks/useCVs"
 
 import { useInView } from "react-intersection-observer";
 
-export default function MyCVs() {
+export default function MyCVs({
+  initialData,
+}: {
+  initialData?: CV[];
+}) {
   const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' });
-  const { cvs, loading, error } = useCVs({ enabled: inView });
+  const { cvs, loading, error } = useCVs({
+    enabled: inView && !initialData,
+    initialData,
+  });
 
   const getFileIcon = (fileType?: string) => {
     if (fileType?.includes('pdf')) {
@@ -42,9 +49,9 @@ export default function MyCVs() {
         ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
-        <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
+        <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
           My Resume
-        </h1>
+        </h2>
         <div className="max-w-2xl w-full">
           <div className="bg-card text-card-foreground rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row items-center p-8 border border-border animate-pulse">
             <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-8">
@@ -70,9 +77,9 @@ export default function MyCVs() {
         ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
-        <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
+        <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
           My Resume
-        </h1>
+        </h2>
         <div className="max-w-2xl w-full text-center">
           <div className="bg-card text-card-foreground rounded-xl shadow-lg p-8 border border-border">
             <p className="text-foreground/70">{error}</p>
@@ -89,9 +96,9 @@ export default function MyCVs() {
         ref={ref}
         className="min-h-screen flex flex-col items-center justify-center bg-background p-6"
       >
-        <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
+        <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-12 text-center">
           My Resume
-        </h1>
+        </h2>
         <div className="max-w-2xl w-full text-center">
           <div className="bg-card text-card-foreground rounded-xl shadow-lg p-8 border border-border">
             <FiFileText className="text-primary mx-auto mb-4" size={48} />
@@ -119,7 +126,7 @@ export default function MyCVs() {
       >
         Downloadable profile
       </motion.p>
-      <motion.h1
+      <motion.h2
         initial={{ opacity: 0, y: -32 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -127,7 +134,7 @@ export default function MyCVs() {
         className="section-heading mb-16"
       >
         My Resume
-      </motion.h1>
+      </motion.h2>
 
       <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[0.85fr_1.15fr]">
         <motion.div

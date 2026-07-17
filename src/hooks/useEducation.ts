@@ -32,9 +32,15 @@ export interface EducationFormData {
   displayOrder: number
 }
 
-export const useEducation = ({ enabled = true } = {}) => {
-  const [education, setEducation] = useState<Education[]>([])
-  const [loading, setLoading] = useState(true)
+export const useEducation = ({
+  enabled = true,
+  initialData,
+}: {
+  enabled?: boolean
+  initialData?: Education[]
+} = {}) => {
+  const [education, setEducation] = useState<Education[]>(initialData ?? [])
+  const [loading, setLoading] = useState(!initialData)
   const [error, setError] = useState<string | null>(null)
 
   // Fetch all education entries
@@ -118,12 +124,12 @@ export const useEducation = ({ enabled = true } = {}) => {
     }
   }, [])
 
-  // Load education on mount
+  // Load education on mount when no SSR data was provided
   useEffect(() => {
-    if (enabled) {
+    if (enabled && !initialData) {
       fetchEducation()
     }
-  }, [fetchEducation, enabled])
+  }, [fetchEducation, enabled, initialData])
 
   return {
     education,

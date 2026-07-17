@@ -41,8 +41,8 @@ interface ProjectDetailsProps {
 
 export default function ProjectDetails({ project }: ProjectDetailsProps) {
   return (
-    <div className="min-h-screen bg-background text-foreground py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <main className="min-h-screen bg-background text-foreground py-20 px-4 sm:px-6 lg:px-8">
+      <article className="max-w-7xl mx-auto">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -108,10 +108,12 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                     <div className="relative w-full h-full">
                       <Image
                         src={img}
-                        alt={`${project.title} - Image ${idx + 1}`}
+                        alt={`${project.title} screenshot ${idx + 1}`}
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover"
                         priority={idx === 0}
+                        fetchPriority={idx === 0 ? "high" : "auto"}
                       />
                     </div>
                   </SwiperSlide>
@@ -263,7 +265,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 </a>
               )}
             </div>
-      </div>
-    </div>
+      </article>
+    </main>
   );
 }
