@@ -38,6 +38,7 @@ export async function GET() {
 
   const entries = [
     urlEntry(SITE_URL, new Date(), "weekly", "1.0"),
+    urlEntry(`${SITE_URL}/projects`, new Date(), "weekly", "0.8"),
     ...projects.map((project) =>
       urlEntry(
         `${SITE_URL}/projects/${project.slug}`,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -30,7 +30,7 @@ export default function AnalyticsDashboard() {
   const [loading, setLoading] = useState(true);
   const [range, setRange] = useState("7d");
 
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/analytics/stats?range=${range}`);
@@ -43,11 +43,11 @@ export default function AnalyticsDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [range]);
 
   useEffect(() => {
     fetchStats();
-  }, [range]);
+  }, [fetchStats]);
 
   if (loading && !stats) {
     return (

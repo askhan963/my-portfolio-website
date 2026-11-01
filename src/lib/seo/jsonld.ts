@@ -150,7 +150,7 @@ export function buildProjectJsonLd(project: {
         "@type": "ListItem",
         position: 2,
         name: "Projects",
-        item: `${SITE_URL}/#projects`,
+        item: `${SITE_URL}/projects`,
       },
       {
         "@type": "ListItem",

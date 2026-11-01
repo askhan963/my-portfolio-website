@@ -9,9 +9,8 @@ const prisma = new PrismaClient()
 async function main() {
   console.log('🔗 Backfilling project slugs...')
 
-  const projects = await prisma.project.findMany({
-    where: { slug: null },
-  })
+  const allProjects = await prisma.project.findMany()
+  const projects = allProjects.filter((project) => !project.slug)
 
   console.log(`Found ${projects.length} project(s) without a slug.`)
 

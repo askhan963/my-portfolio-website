@@ -1,4 +1,4 @@
-import { notFound, redirect } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import ProjectDetails from './ProjectDetails';
 import { Metadata } from 'next';
@@ -18,7 +18,7 @@ const OBJECT_ID_RE = /^[0-9a-fA-F]{24}$/;
 // Legacy project URLs used the raw Mongo id; resolve those by id too so old,
 // already-indexed links can be 308-redirected to the canonical slug URL.
 async function resolveProject(slugOrId: string) {
-  const bySlug = await prisma.project.findUnique({ where: { slug: slugOrId } });
+  const bySlug = await prisma.project.findFirst({ where: { slug: slugOrId } });
   if (bySlug) {
     return { project: bySlug, legacy: false };
   }
@@ -108,7 +108,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   if (legacy) {
-    redirect(`/projects/${project.slug}`);
+    permanentRedirect(`/projects/${project.slug}`);
   }
 
   const serializedProject = {

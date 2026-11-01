@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaReact,
@@ -158,7 +158,10 @@ export default function Skills({
     Object.keys(skillsByCategory).length > 0 ? skillsByCategory : fallbackSkills
   ) as Record<SkillCategory, SkillItem[]>;
   const categoryNames = Object.keys(skillCategories) as SkillCategory[];
-  const filterNames: Category[] = ["All", ...categoryNames];
+  const filterNames: Category[] = useMemo(
+    () => ["All", ...categoryNames],
+    [categoryNames]
+  );
   const allSkills = categoryNames.flatMap((category) => skillCategories[category]);
   const activeSkills = (
     activeCategory === "All" ? allSkills : skillCategories[activeCategory]

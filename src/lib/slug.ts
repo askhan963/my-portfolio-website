@@ -18,7 +18,7 @@ export async function generateUniqueProjectSlug(
   let suffix = 2
 
   while (true) {
-    const existing = await prisma.project.findUnique({ where: { slug } })
+    const existing = await prisma.project.findFirst({ where: { slug } })
     if (!existing || existing.id === excludeId) {
       return slug
     }

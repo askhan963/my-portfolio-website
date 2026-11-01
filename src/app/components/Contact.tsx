@@ -115,7 +115,7 @@ const Contact = () => {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(194,164,255,0.16),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent_45%)]" />
               <div className="relative">
                 <p className="text-sm font-semibold uppercase tracking-[0.35em] text-primary">Start a conversation</p>
-                <h2 className="mt-4 text-3xl font-semibold text-foreground">Tell me what you want to build.</h2>
+                <h3 className="mt-4 text-3xl font-semibold text-foreground">Tell me what you want to build.</h3>
               </div>
               {[
                 { id: "name", label: "Name", type: "text", placeholder: "Your name" },
