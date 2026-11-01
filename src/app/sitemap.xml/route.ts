@@ -31,15 +31,17 @@ function urlEntry(
 
 export async function GET() {
   const projects = await prisma.project.findMany({
-    select: { id: true, updatedAt: true },
+    where: { slug: { not: null } },
+    select: { slug: true, updatedAt: true },
     orderBy: { updatedAt: "desc" },
   });
 
   const entries = [
     urlEntry(SITE_URL, new Date(), "weekly", "1.0"),
+    urlEntry(`${SITE_URL}/projects`, new Date(), "weekly", "0.8"),
     ...projects.map((project) =>
       urlEntry(
-        `${SITE_URL}/projects/${project.id}`,
+        `${SITE_URL}/projects/${project.slug}`,
         project.updatedAt,
         "monthly",
         "0.7"

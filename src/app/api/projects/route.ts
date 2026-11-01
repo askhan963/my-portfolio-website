@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { projectSchema } from '@/lib/validations'
+import { generateUniqueProjectSlug } from '@/lib/slug'
 
 // GET /api/projects - Get all projects
 export async function GET() {
@@ -32,9 +33,10 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
     const validatedData = projectSchema.parse(body)
+    const slug = await generateUniqueProjectSlug(validatedData.title)
 
     const project = await prisma.project.create({
-      data: validatedData,
+      data: { ...validatedData, slug },
     })
 
     return NextResponse.json(project, { status: 201 })
