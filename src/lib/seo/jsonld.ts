@@ -87,7 +87,7 @@ export function buildHomeJsonLd(profile?: {
 }
 
 export function buildProjectJsonLd(project: {
-  id: string;
+  slug: string;
   title: string;
   description: string;
   images?: string[];
@@ -97,7 +97,7 @@ export function buildProjectJsonLd(project: {
   createdAt?: string;
   updatedAt?: string;
 }): JsonLd[] {
-  const url = absoluteUrl(`/projects/${project.id}`);
+  const url = absoluteUrl(`/projects/${project.slug}`);
   const image =
     project.images && project.images.length > 0
       ? project.images[0]

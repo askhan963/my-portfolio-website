@@ -10,6 +10,7 @@
     "postinstall": "prisma generate",
     "db:generate": "prisma generate",
     "db:seed": "tsx scripts/seed.ts",
+    "db:backfill-slugs": "tsx scripts/backfill-project-slugs.ts",
     "db:studio": "prisma studio"
   },
   "dependencies": {
@@ -25,7 +26,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^17.2.2",
     "framer-motion": "^11.3.28",
-    "next": "15.5.9",
+    "next": "15.5.28",
     "next-auth": "^4.24.11",
     "prisma": "^6.16.1",
     "react": "^19.1.1",

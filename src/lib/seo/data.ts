@@ -41,6 +41,7 @@ export async function getAllProjects(): Promise<Project[]> {
 
   return projects.map((project) => ({
     id: project.id,
+    slug: project.slug ?? project.id,
     title: project.title,
     description: project.description,
     techStack: project.techStack,

@@ -179,7 +179,7 @@ export default function Projects({
                     </a>
                   )}
                   <Link
-                    href={`/projects/${project.id}`}
+                    href={`/projects/${project.slug}`}
                     className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors duration-300 hover:bg-primary/90"
                   >
                     View Details

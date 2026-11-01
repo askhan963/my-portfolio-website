@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 
 export interface Project {
   id: string
+  slug: string
   title: string
   description: string
   techStack: string[]
