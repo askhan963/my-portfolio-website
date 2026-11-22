@@ -24,7 +24,7 @@ export function buildPersonJsonLd(profile?: {
   const description = profile?.tagline || SITE_DESCRIPTION;
   const jobTitle =
     profile?.headlines?.find((h) => h.trim().length > 0) ||
-    "Full-Stack Developer";
+    "Full-Stack & Applied AI Engineer";
 
   return {
     "@context": "https://schema.org",

@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Navbar from "@/app/components/Navbar";
 import Profile from "@/app/components/Profile";
+import About from "@/app/components/About";
 import Experience from "@/app/components/Experience";
 import Projects from "@/app/components/Projects";
+import AppliedAI from "@/app/components/AppliedAI";
 import Skills from "@/app/components/Skills";
 import Education from "@/app/components/Education";
 import Honors from "@/app/components/Honors";
 import Contact from "@/app/components/Contact";
 import Footer from "./components/Footer";
-import ContactMe from "./components/ContactMe";
 import MyCVs from "./components/MyCVs";
 import { getHomepageData } from "@/lib/seo/data";
 import { buildHomeJsonLd, serializeJsonLd } from "@/lib/seo/jsonld";
@@ -23,7 +24,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: {
-    absolute: `${SITE_CREATOR} — Full-Stack Developer | ${SITE_NAME}`,
+    absolute: `${SITE_CREATOR} — Full-Stack & Applied AI Engineer | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   alternates: {
@@ -32,13 +33,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title: `${SITE_CREATOR} — Full-Stack Developer | ${SITE_NAME}`,
+    title: `${SITE_CREATOR} — Full-Stack & Applied AI Engineer | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_CREATOR} — Full-Stack Developer | ${SITE_NAME}`,
+    title: `${SITE_CREATOR} — Full-Stack & Applied AI Engineer | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
   },
 };
@@ -57,17 +58,18 @@ export default async function Home() {
         <Navbar />
       </header>
       <main>
-        <Profile initialData={data.profile} />
+        <Profile initialData={data.profile} projects={data.projects} />
+        <About />
+        <Skills initialData={data.skills} />
         <Experience initialData={data.experiences} />
         <Projects initialData={data.projects} />
-        <Skills initialData={data.skills} />
-        <Education initialData={data.education} />
+        <AppliedAI initialData={data.projects} />
         <Honors initialData={data.honors} />
+        <Education initialData={data.education} />
         <MyCVs initialData={data.cvs} />
         <Contact />
       </main>
       <Footer />
-      <ContactMe />
     </div>
   );
 }

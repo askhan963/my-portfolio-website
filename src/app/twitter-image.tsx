@@ -16,8 +16,8 @@ export default function TwitterImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #0a0a0a 0%, #1a1025 45%, #0f172a 100%)",
-          color: "#f8fafc",
+          background: "#10140f",
+          color: "#eef1ea",
           padding: "64px",
           fontFamily: "sans-serif",
         }}
@@ -25,23 +25,23 @@ export default function TwitterImage() {
         <div
           style={{
             display: "flex",
-            fontSize: 28,
-            letterSpacing: "0.28em",
+            fontSize: 24,
+            letterSpacing: "0.22em",
             textTransform: "uppercase",
-            color: "#c4b5fd",
+            color: "#37b67c",
           }}
         >
-          ASKHAN
+          Awais Khan
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
           <div style={{ fontSize: 64, fontWeight: 700, lineHeight: 1.1 }}>
             {SITE_CREATOR}
           </div>
-          <div style={{ fontSize: 30, color: "#cbd5e1", maxWidth: 900 }}>
-            MERN Stack & Full-Stack Developer — Portfolio
+          <div style={{ fontSize: 30, color: "rgba(238,241,234,0.72)", maxWidth: 900 }}>
+            Full-Stack Engineer shipping production Applied AI — Portfolio
           </div>
         </div>
-        <div style={{ fontSize: 22, color: "#94a3b8" }}>
+        <div style={{ fontSize: 22, color: "rgba(238,241,234,0.5)" }}>
           awaiskhanniazi.vercel.app
         </div>
       </div>

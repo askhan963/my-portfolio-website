@@ -19,9 +19,12 @@ module.exports = {
         },
         border: "var(--border-color)",
         ring: "var(--ring)",
+        surface: "var(--surface)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        serif: ["var(--font-spectral)", "Georgia", "serif"],
+        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
         card: "0 1px 2px rgb(15 23 42 / 0.04), 0 10px 30px -12px rgb(15 23 42 / 0.08)",

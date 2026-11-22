@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { Poppins, Inter, Space_Grotesk } from "next/font/google";
+import { Spectral, Inter, JetBrains_Mono } from "next/font/google";
 import Providers from "@/components/Providers";
 import {
   SITE_CREATOR,
@@ -11,10 +11,11 @@ import {
   THEME_COLOR,
 } from "@/lib/seo/site";
 
-const poppins = Poppins({
+const spectral = Spectral({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
+  style: ["normal", "italic"],
+  variable: "--font-spectral",
   display: "swap",
 });
 
@@ -25,17 +26,17 @@ const inter = Inter({
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  weight: ["400", "500", "600"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_CREATOR} — Full-Stack Developer | ${SITE_NAME}`,
+    default: `${SITE_CREATOR} — Full-Stack & Applied AI Engineer | ${SITE_NAME}`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -66,12 +67,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_CREATOR} — Full-Stack Developer | ${SITE_NAME}`,
+    title: `${SITE_CREATOR} — Full-Stack & Applied AI Engineer | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_CREATOR} — Full-Stack Developer | ${SITE_NAME}`,
+    title: `${SITE_CREATOR} — Full-Stack & Applied AI Engineer | ${SITE_NAME}`,
     description: SITE_DESCRIPTION,
     creator: "@askhan963",
   },
@@ -106,7 +107,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${inter.variable} ${spaceGrotesk.variable}`}
+      className={`${spectral.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />

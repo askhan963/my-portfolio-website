@@ -40,41 +40,33 @@ export default async function ProjectsIndexPage() {
         <Navbar />
       </header>
       <main className="section-shell py-28">
-        <p className="section-kicker">Portfolio</p>
-        <h1 className="section-heading mb-14">
-          All <span className="text-primary">Projects</span>
-        </h1>
+        <h1 className="section-heading mb-14">All projects</h1>
 
         {projects.length === 0 ? (
           <p className="text-foreground/60">No projects available at the moment.</p>
         ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="divide-y divide-border border-t border-border">
             {projects.map((project) => (
               <Link
                 key={project.id}
                 href={`/projects/${project.slug}`}
-                className="group flex flex-col justify-between gap-4 rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-[0_18px_60px_rgba(0,0,0,0.3)] transition-colors duration-300 hover:border-primary/60 hover:bg-white/[0.06]"
+                className="group grid gap-3 py-8 transition-colors sm:grid-cols-[180px_1fr]"
               >
-                <div className="space-y-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
-                    {project.category}
-                  </span>
-                  <h2 className="text-2xl font-semibold leading-tight text-foreground group-hover:text-primary">
+                <span className="section-figure">{project.category}</span>
+                <div>
+                  <h2 className="font-serif text-2xl font-semibold leading-tight text-foreground group-hover:text-primary">
                     {project.title}
                   </h2>
-                  <p className="line-clamp-3 text-sm leading-6 text-foreground/70">
+                  <p className="mt-2 line-clamp-2 max-w-[64ch] text-sm leading-6 text-foreground/70">
                     {project.description}
                   </p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {project.techStack.slice(0, 4).map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-foreground/80"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.techStack.slice(0, 4).map((tech) => (
+                      <span key={tech} className="tag-chip">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </Link>
             ))}

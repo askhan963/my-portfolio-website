@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-22T09:31:39.665Z",
+        "reason": "Inter used only as body/UI workhorse text per direction contract; display headings use Spectral (font-serif), so this is not the banned Inter-as-display pattern"
+      }
+    ]
+  }
+}

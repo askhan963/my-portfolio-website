@@ -16,16 +16,16 @@ export default function NotFound() {
         <header>
           <Navbar />
         </header>
-        <main className="h-screen flex flex-col justify-center items-center text-center px-4">
-          <h1 className="text-5xl font-bold text-primary">404</h1>
-          <p className="text-xl mt-4 text-foreground/70">
-            This page could not be found.
+        <main className="flex h-screen flex-col items-center justify-center px-4 text-center">
+          <h1 className="section-heading">404 — Page not found</h1>
+          <p className="mt-4 max-w-md text-foreground/70">
+            The page you're looking for doesn't exist or has moved.
           </p>
           <Link
             href="/"
-            className="mt-6 px-5 py-2 rounded-full font-medium text-primary border border-primary hover:bg-primary hover:text-white transition-colors"
+            className="mt-8 inline-flex items-center border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
           >
-            ⬅ Back to Home
+            Back to home
           </Link>
         </main>
         <Footer />
